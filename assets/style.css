@@ -58,14 +58,14 @@ ul {
 }
 
 code {
-  background: #020617;
+  background: var(--bg);
   padding: 0.2rem 0.4rem;
   border-radius: 4px;
   font-size: 0.9em;
 }
 
 pre {
-  background: #020617;
+  background: var(--bg);
   border: 1px solid var(--border);
   padding: 1rem;
   border-radius: 8px;
@@ -78,11 +78,14 @@ pre code {
 
 .title {
   padding: 1rem;
-  border-bottom: 1px solid var(--border);}
+  border-bottom: 1px solid var(--border);
+  background: var(--panel);
+}
+
 
 
 .info {
-  background: gray;
+  background: var(--muted);
   border-left: 4px solid #fbbf24;
   padding: 1rem;
   border-radius: 6px;
