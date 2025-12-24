@@ -1,3 +1,4 @@
 title: Homelab
 description: Homelab projects and infrastructure documentation
 markdown: kramdown
+baseurl: /jpprojects
