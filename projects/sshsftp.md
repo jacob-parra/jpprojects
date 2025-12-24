@@ -28,7 +28,6 @@ SSH should be good to go. It can be tested by using this command from another ma
 
 <div class="info">
 Find your machineIp using `ipconfig`. Locate the IPv4 section of the output, the IP will probably look like `192.168.x.x`
-{.is-info}
 </div>
 
 The ssh command will ask to receive a fingerprint and confirm connection. Type "yes" and enter, and enter your Username password when prompted. The terminal should show something like `username@machineName C:\Users\username>`, indicating that ssh was successful. You are now interacting with the terminal of the hosting machine.

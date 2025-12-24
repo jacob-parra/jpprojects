@@ -14,7 +14,6 @@ The following steps detail Tailscale configuration:
 
 <div class="info">
 Note that the account used to login here will be the same account used to login to Tailscale on all future connected devices. Your network is tied to this account. I signed with my gmail.
-{.is-info}
 <div>
 
 3. **Enusre that Tailscale is running**
