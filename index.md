@@ -8,8 +8,8 @@ layout: default
 This site documents my homelab experiments, infrastructure, and lessons learned.
 
 ## Projects
-- [Tailscale VPN](/jpprojects/_projects/tailscale)
-- [TrueNAS](/jpprojects/_projects/truenas)
-- [KeePass Password Manager](/jpprojects/_projects/keepass)
-- [Scripting](/jpprojects/_projects/scripting)
-- [SSH & SFTP](/jpprojects/_projects/sshsftp)
+- [Tailscale VPN](/jpprojects/projects/tailscale)
+- [TrueNAS](/jpprojects/projects/truenas)
+- [KeePass Password Manager](/jpprojects/projects/keepass)
+- [Scripting](/jpprojects/projects/scripting)
+- [SSH & SFTP](/jpprojects/projects/sshsftp)
