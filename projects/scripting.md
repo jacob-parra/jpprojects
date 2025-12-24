@@ -1,5 +1,5 @@
 ---
-title: Tailscale VPN
+title: Scripting
 layout: default
 ---
 

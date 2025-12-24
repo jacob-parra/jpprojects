@@ -1,5 +1,5 @@
 ---
-title: Homelab
+title: Projects
 layout: default
 ---
 

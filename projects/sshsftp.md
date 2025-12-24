@@ -1,5 +1,5 @@
 ---
-title: Tailscale VPN
+title: SSH & SFTP
 layout: default
 ---
 
