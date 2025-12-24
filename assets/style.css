@@ -74,3 +74,10 @@ pre {
 pre code {
   padding: 0;
 }
+
+.info {
+  background: gray;
+  border-left: 4px solid #fbbf24;
+  padding: 1rem;
+  border-radius: 6px;
+}
