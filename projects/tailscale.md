@@ -14,7 +14,7 @@ The following steps detail Tailscale configuration:
 
 <div class="info">
 Note that the account used to login here will be the same account used to login to Tailscale on all future connected devices. Your network is tied to this account. I signed with my gmail.
-<div>
+</div>
 
 3. **Enusre that Tailscale is running**
 This can be done by checking the active processes: Press Windows+R and type "services.msc" This pulls up the Services menu. Find Tailscale and confirm that its Status is "Running" and its Startup Type is "Automatic. Right click the process and go to Properties to change those values on the General tab if needed.
