@@ -13,3 +13,4 @@ This site documents my homelab projects, infrastructure, and lessons learned. It
 - [KeePass Password Manager](/jpprojects/projects/keepass)
 - [Scripting](/jpprojects/projects/scripting)
 - [SSH & SFTP](/jpprojects/projects/sshsftp)
+- [Pages](/jpprojects/projects/pages)
