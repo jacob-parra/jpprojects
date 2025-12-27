@@ -9,6 +9,8 @@ KeePassXC is a free, open source and self hostable password manager database sof
 
 The following steps detail KeePassXC configuration:
 
+<hr>
+
 1. **Install KeePassXC**
 (https://keepassxc.org) Do not use the old KeePass 2.x; KeePassXC is modern and cross-platform.
 2. **Create Password Database**

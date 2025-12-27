@@ -9,6 +9,8 @@ The Tailscale VPN allows all connected devices to behave as if they were on the 
 
 The following steps detail Tailscale configuration:
 
+<hr>
+
 **1. On the main/hosting desktop, download tailscale**
 (https://tailscale.com/download)
 

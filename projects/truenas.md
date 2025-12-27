@@ -12,6 +12,8 @@ A NAS (Network-Attached Service) is a kind of server that provides storage for m
 
 The following steps detail NAS configuration:
 
+<hr>
+
 **1. Install a VM Platform**
 
 VirtualBox is the easiest option, though hypervisors like Proxmox are also great, especially for managing multiple VMs. Download VirtualBox here (https://www.virtualbox.org/wiki/Downloads). Select the Windows hosts option.
@@ -29,7 +31,6 @@ This is the image of the TrueNAS OS our VM will run.  (https://www.truenas.com/d
 - Click "Next"
 - In the RAM tab, allocate (at least) 8GB of RAM
 - In the CPU tab, allocate 2 cores (the minimum required, but won't be enough to run Docker nor apps)
-
 - In the System tab, Motherboard section, set "Boot Order" to "Optical Disk First". Make sure the Boot Order is "1. Optical" and "2. Hard Disk". Uncheck "Enable EFI" (TrueNAS works best with BIOS boost)
 - In the System tab, Processor section, set 2 CPUs and enable "PAE/NX"
 - Where it says "Create a virtual hard disk now?" Choose "Yes", 16 GB size, "Type" set to "VDI". This is the OS disk.
@@ -52,10 +53,9 @@ Once it finishes navigate to VirtualBox, then Devices,Optical Drives and finally
 
 The TrueNAS VM Console should display an IP address:
 
-The web interface is at:
-http://192.168.x.x
+`The web interface is at: http://192.168.x.x`
 
-Open a browser and visit http://<that-ip>. Log in with Username: root and the root password set in step 5.
+Open a browser and visit `http://<that-ip>`. Log in with Username: root and the root password set in step 5.
 
 **7. Create a Storage Pool**
 
@@ -71,5 +71,5 @@ In the left sidebar, navigate to "Shares". In the SMB section, click "Add". Make
 
 **10. Connect to the NAS**
 
-On Windows, press Win + R. Type \\<TrueNAS-ip> and hit enter. NASshare should display and can be mapped as a drive by right clicking and selecting "Map Network Drive".
+On Windows, press Win + R. Type `\\<TrueNAS-ip>` and hit enter. NASshare should display and can be mapped as a drive by right clicking and selecting "Map Network Drive".
 

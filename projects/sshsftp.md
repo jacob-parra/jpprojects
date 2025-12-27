@@ -9,6 +9,8 @@ SSH (Secure Shell) is a protocol that allows secure remote console connection in
 
 These commands and instructions detail SSH & SFTP configuration.
 
+<hr>
+
 **1. Install the SSH Server**
 Run PowerShell as an admin, and run this command `dism /online /Add-Capability /CapabilityName:OpenSSH.Server~~~~0.0.1.0`
 
