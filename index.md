@@ -5,7 +5,7 @@ layout: default
 
 # Homelab Projects
 
-This site documents my homelab experiments, infrastructure, and lessons learned.
+This site documents my homelab projects, infrastructure, and lessons learned. It shares the culmination of my research, practice and troubleshooting.
 
 ## Projects
 - [Tailscale VPN](/jpprojects/projects/tailscale)

@@ -76,6 +76,10 @@ pre code {
   padding: 0;
 }
 
+a:visited {
+  color: var(--accent);
+}
+
 .title {
   padding: 1rem;
   background: var(--panel);
@@ -88,4 +92,8 @@ pre code {
   border-left: 4px solid #fbbf24;
   padding: 1rem;
   border-radius: 6px;
+}
+
+.Default_Header {
+  background-color: var(--panel)
 }
