@@ -5,9 +5,9 @@ layout: default
 
 ## Downtime Batch Scripting
 
-A limit of self hosting solutions is downtime : with cloud service providers your applications/servers can stay up at all times with minimal costs/resources, as cloud services have extremely optimized scaling. In order for self hosted solutions to be available the server or virtualizing machine must remain on. To minimize costs, scripts can routinely and safely turn off servers and virtual machines at night (when downtime is acceptable) and turn back on in the morning. 
+A limit of self hosting solutions is downtime: with cloud service providers your applications/servers can stay up at all times with minimal costs/resources, as cloud services have extremely optimized scaling. In order for self hosted solutions to be available, the server or virtualized machine must remain on. To minimize costs, scripts can routinely and safely turn off servers and virtual machines at night (when downtime is acceptable) and turn back on in the morning. 
 
-On windows, these scripts are written in batch (the windows terminal language) and routinely exect via Task Schedular. The following steps detail the scripts and the Schedule
+On windows, these scripts are written in batch (the windows terminal language) and routinely executed via Task Schedular. The following steps explain how to schedule safe on/off scripts for the NAS.
 
 <hr>
 

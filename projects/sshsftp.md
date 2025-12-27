@@ -12,21 +12,26 @@ These commands and instructions detail SSH & SFTP configuration.
 <hr>
 
 **1. Install the SSH Server**
+
 Run PowerShell as an admin, and run this command `dism /online /Add-Capability /CapabilityName:OpenSSH.Server~~~~0.0.1.0`
 
 **2. Start the SSH Server**
+
 `Start-Service sshd`
 
 **3. Make SSH start automnatically on boot**
+
 `Set-Service -Name sshd -StartupType Automatic`
 
 **4. Confirm SSH is running**
+
 `Get-Service sshd`
 You should see
 `Status: Running`
 `StartType: Automatic`
 
 **5. Configure the Firewall**
+
 This command allows TCP traffic through port 22 (the default SSH port)
 `New-NetFirewallRule -Name sshd -DisplayName "OpenSSH Server" -Enabled True -Direction Inbound -Protocol TCP -Action Allow -LocalPort 22`
 

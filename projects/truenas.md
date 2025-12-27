@@ -16,11 +16,11 @@ The following steps detail NAS configuration:
 
 **1. Install a VM Platform**
 
-VirtualBox is the easiest option, though hypervisors like Proxmox are also great, especially for managing multiple VMs. Download VirtualBox here (https://www.virtualbox.org/wiki/Downloads). Select the Windows hosts option.
+VirtualBox is the easiest option, though hypervisors like Proxmox are also great, especially for managing multiple VMs. Download VirtualBox <a href="[url](https://www.virtualbox.org/wiki/Downloads)">here</a>. Select the "Windows hosts" option.
 
 **2. Download TrueNAS SCALE ISO**
 
-This is the image of the TrueNAS OS our VM will run.  (https://www.truenas.com/download-truenas-community-edition/) Download the current version and check that it has the .iso extension.
+<a href="https://www.truenas.com/download-truenas-community-edition/">This</a> is the image of the TrueNAS OS our VM will run. Download the current version and check that it has the .iso extension.
 
 **3. Create the Virtual Machine**
 
