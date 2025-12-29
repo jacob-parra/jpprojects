@@ -1,11 +1,11 @@
 
 
 :root {
-  --light_tan: #f0ead2;
+  --light_tan: hsl(48, 50%, 88%);
   --light_brown: #a98467;
   --brown: #6c584c;
-  --light_green: #dde5b6;
-  --green: #adc178;
+  --light_green: #d0d9a0;
+  --green: #879d4c;
   
 }
 
@@ -90,6 +90,7 @@ a:visited {
 .title {
   padding: 1rem;
   padding-left: 2rem;
+  background-color: var(--light_green);
 }
 
 
