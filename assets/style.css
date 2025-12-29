@@ -1,3 +1,5 @@
+/*
+
 :root {
   --bg: #0f172a;
   --panel: #020617;
@@ -6,6 +8,17 @@
   --accent: #38bdf8;
   --border: #1e293b;
 }
+*/
+
+:root {
+  --bg: #f0ead2;
+  --panel: #dde5b6;
+  --text: #6c584c;
+  --muted: #a98467;
+  --accent: #adc178;
+  --border: #adc178;
+}
+
 
 * {
   box-sizing: border-box;
