@@ -43,7 +43,49 @@ markdown: kramdown
 
 This file will be applied to every page in the site to place a top navbar and provide metadata.
 
+```
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>{{ page.title }} | {{ site.title }}</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="/homelab/assets/style.css">
+</head>
+<body>
+  <div class="Default_Header">
+    <h1 class="title">Homelab</h1>
+    <nav>
+      <a href="{{ site.baseurl }}/">Home</a>
+      <a href="/insertsite">Personal Site</a>
+    </nav>
+  </div>
 
+  <main>
+    {{ content }}
+  </main>
+
+<footer class="site-footer">
+  <div class="footer-content">
+    <hr>
+    <p>
+      © <span id="year"></span> Name ·
+      jpprojects ·
+      <a href="link" target="_blank" rel="noopener">LinkText</a>
+    </p>
+    <p class="footer-subtext">
+    Built with Markdown · Hosted on GitHub Pages
+
+  </div>
+</footer>
+
+<script>
+  document.getElementById("year").textContent = new Date().getFullYear();
+</script>
+
+</body>
+</html>
+```
 
 **index.md**
 

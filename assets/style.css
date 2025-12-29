@@ -105,11 +105,10 @@ th {
 }
 
 
-
-
 .title {
   padding: 1rem;
   padding-left: 2rem;
+  background: var(--light_tan);
 }
 
 
