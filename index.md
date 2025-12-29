@@ -3,11 +3,11 @@ title: Projects
 layout: default
 ---
 
-# Homelab Projects
+# Home
 
 This site documents my homelab projects, infrastructure, and lessons learned. It shares the culmination of my research, practice and troubleshooting to provide simple to follow tutorials and documentation of my progress. I plan to update the site with more content as I continue to explore new projects and areas of system administration and cybersecurity.
 
-For questions or comments, feel free to reach out to `jacobbparra@gmail.com`.
+I continue to learn and I'm looking for feedback. For questions or comments, please reach me at `jacobbparra@gmail.com`.
 
 
 | <em> Projects </em>                                        |<em> Pending Documentation </em>|<em> Future Projects </em>|
