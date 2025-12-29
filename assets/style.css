@@ -1,22 +1,11 @@
-/*
+
 
 :root {
-  --bg: #0f172a;
-  --panel: #020617;
-  --text: #e5e7eb;
-  --muted: #9ca3af;
-  --accent: #38bdf8;
-  --border: #1e293b;
-}
-*/
-
-:root {
-  --bg: #f0ead2;
-  --panel: #dde5b6;
-  --muted: #a98467;
-  --text: #6c584c;
-  --border: #dde5b6;
-  --accent: #adc178;
+  --light_tan: #f0ead2;
+  --light_brown: #a98467;
+  --brown: #6c584c;
+  --light_green: #dde5b6;
+  --green: #adc178;
   
 }
 
@@ -28,19 +17,19 @@
 body {
   margin: 0;
   font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Ubuntu;
-  background: var(--bg);
-  color: var(--text);
+  background: var(--light_tan);
+  color: var(--brown);
   line-height: 1.65;
 }
 
 nav {
   padding: 1rem;
-  border-bottom: 1px solid var(--border);
-  background: var(--accent)
+  border-bottom: 1px solid var(--green);
+  background: var(--light_green)
 }
 
 nav a {
-  color: var(--accent);
+  color: var(--green);
   margin-right: 1rem;
   text-decoration: none;
   font-weight: 500;
@@ -59,12 +48,12 @@ h1, h2, h3 {
 
 h2 {
   margin-top: 3rem;
-  border-bottom: 1px solid var(--border);
+  border-bottom: 1px solid var(--light_green);
   padding-bottom: 0.4rem;
 }
 
 p {
-  color: var(--text);
+  color: var(--brown);
 }
 
 ul {
@@ -72,15 +61,15 @@ ul {
 }
 
 code {
-  background: var(--bg);
+  background: var(--light_tan);
   padding: 0.2rem 0.4rem;
   border-radius: 4px;
   font-size: 0.9em;
 }
 
 pre {
-  background: var(--bg);
-  border: 1px solid var(--border);
+  background: var(--light_tan);
+  border: 1px solid var(--light_green);
   padding: 1rem;
   border-radius: 8px;
   overflow-x: auto;
@@ -91,28 +80,27 @@ pre code {
 }
 
 a {
-  color: var(--accent)
+  color: var(--green)
 }
 
 a:visited {
-  color: var(--muted);
+  color: var(--light_brown);
 }
 
 .title {
   padding: 1rem;
   padding-left: 2rem;
-  background: var(--accent);
 }
 
 
 
 .info {
-  background: var(--border);
-  border-left: 4px solid var(--accent);
+  background: var(--light_green);
+  border-left: 4px solid var(--green);
   padding: 1rem;
   border-radius: 6px;
 }
 
 .Default_Header {
-  background-color: var(--panel)
+  background-color: var(light_green)
 }
