@@ -79,7 +79,9 @@ pre code {
   padding: 0;
 }
 
-
+hr {
+  color : var(--green);
+}
 
 a, a:visited {
   color: var(--light_brown);

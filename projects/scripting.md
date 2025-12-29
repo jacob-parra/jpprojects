@@ -15,9 +15,11 @@ On windows, these scripts are written in batch (the windows terminal language) a
 For peak reliability use 4 scripts: 
 
 - a. PC wake up script 
-- b. VM start script
-- c. VM stop script 
-- d. PC sleep script.
+- b. [VM start script](/jpprojects/downloads/start_truenas.bat)
+- c. [VM stop script](/jpprojects/downloads/shutdown_truenas.bat)
+- d. [PC sleep script](/jpprojects/downloads/sleep_pc.bat)
+
+Note : Be sure to change variables to match the name of your VM and details of your PC.
 
 **2. Schedule the Scripts as Tasks**
 Each script will be routinely executed via Windows Task Scheduler as Tasks. On the left folder menu, select the Task Scheduler Library folder as the destination for the Tasks. 3 tasks will be created, 1 for scripts a and b each,  and 1 task that executes both of scritps c and d. Select Action > Create Task.

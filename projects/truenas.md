@@ -73,3 +73,6 @@ In the left sidebar, navigate to "Shares". In the SMB section, click "Add". Make
 
 On Windows, press Win + R. Type `\\<TrueNAS-ip>` and hit enter. NASshare should display and can be mapped as a drive by right clicking and selecting "Map Network Drive".
 
+<hr>
+
+Note : This project benefits from downtime scripting, found on [Scripting](/jpprojects/projects/scripting) project page.
