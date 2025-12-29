@@ -85,11 +85,32 @@ a, a:visited {
   color: var(--light_brown);
 }
 
+table {
+  width: 100%;
+  border-collapse: collapse; 
+  margin: 1.5rem 0;
+}
+
+th, td {
+  border: 1px solid var(--green);
+  padding: 0.6rem 0.75rem;
+}
+
+th {
+  background: var(--light_tan);
+  font-weight: 600;
+  text-align: left;
+}
+
+tr:nth-child(even) td {
+  background: #020617;
+}
+
+
 .title {
   padding: 1rem;
   padding-left: 2rem;
 }
-
 
 
 .info {
@@ -100,5 +121,34 @@ a, a:visited {
 }
 
 .Default_Header {
-  background-color: var(light_green)
+  background-color: var(--light_green)
+}
+
+.site-footer {
+  margin-top: 4rem;
+  padding: 2rem 1rem;
+  border-top: 1px solid var(--border);
+  color: var(--muted);
+  font-size: 0.9rem;
+}
+
+.footer-content {
+  max-width: 900px;
+  margin: 0 auto;
+  text-align: center;
+}
+
+.site-footer a {
+  color: var(--link);
+  text-decoration: none;
+}
+
+.site-footer a:hover {
+  text-decoration: underline;
+}
+
+.footer-subtext {
+  margin-top: 0.5rem;
+  font-size: 0.8rem;
+  opacity: 0.7;
 }
