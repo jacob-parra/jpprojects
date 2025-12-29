@@ -64,7 +64,7 @@ code {
   background: var(--light_tan);
   padding: 0.2rem 0.4rem;
   border-radius: 4px;
-  font-size: 0.9em;
+  
 }
 
 pre {
@@ -102,9 +102,7 @@ th {
   text-align: left;
 }
 
-tr:nth-child(even) td {
-  background: #020617;
-}
+
 
 
 .title {
