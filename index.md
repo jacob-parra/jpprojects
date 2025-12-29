@@ -9,19 +9,12 @@ This site documents my homelab projects, infrastructure, and lessons learned. It
 
 
 
-## Projects
-- [Tailscale VPN](/jpprojects/projects/tailscale)
-- [TrueNAS](/jpprojects/projects/truenas)
-- [KeePass Password Manager](/jpprojects/projects/keepass)
-- [Scripting](/jpprojects/projects/scripting)
-- [SSH & SFTP](/jpprojects/projects/sshsftp)
-- [Pages](/jpprojects/projects/pages)
 
 | <em> Projects </em>                                        |<em> Pending Documentation </em>|<em> Future Projects </em>|
 |------------------------------------------------------------|--------------------------------|--------------------------|
-| - [Tailscale VPN](/jpprojects/projects/tailscale)          |                                |                          |
-| - [TrueNAS](/jpprojects/projects/truenas)                  |                                |                          |
-| - [KeePass Password Manager](/jpprojects/projects/keepass) |                                |                          |
-| - [Scripting](/jpprojects/projects/scripting)              |                                |                          |
+| - [Tailscale VPN](/jpprojects/projects/tailscale)          | - [Wiki.js Hosting](/jpprojects/projects/wikijs) | - [PiHole](/jpprojects/projects/pihole) |
+| - [TrueNAS](/jpprojects/projects/truenas)                  |                                | - [JellyFin Server](/jpprojects/projects/jellyfin) |
+| - [KeePass Password Manager](/jpprojects/projects/keepass) |                                | - [AI Hosting](/jpprojects/projects/ai)|
+| - [Scripting](/jpprojects/projects/scripting)              |                                | - [NextCloud CloudSuite](/jpprojects/projects/cloudsuite) |
 | - [SSH & SFTP](/jpprojects/projects/sshsftp)               |                                |                          |
 | - [Pages](/jpprojects/projects/pages)                      |                                |                          |

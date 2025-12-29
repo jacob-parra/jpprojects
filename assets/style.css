@@ -79,18 +79,15 @@ pre code {
   padding: 0;
 }
 
-a {
-  color: var(--green)
-}
 
-a:visited {
+
+a, a:visited {
   color: var(--light_brown);
 }
 
 .title {
   padding: 1rem;
   padding-left: 2rem;
-  background-color: var(--light_green);
 }
 
 
