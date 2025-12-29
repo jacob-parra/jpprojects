@@ -13,10 +13,11 @@
 :root {
   --bg: #f0ead2;
   --panel: #dde5b6;
-  --text: #6c584c;
   --muted: #a98467;
+  --text: #6c584c;
+  --border: #dde5b6;
   --accent: #adc178;
-  --border: #adc178;
+  
 }
 
 
@@ -35,7 +36,7 @@ body {
 nav {
   padding: 1rem;
   border-bottom: 1px solid var(--border);
-  background: var(--panel);
+  background: var(--bg);
 }
 
 nav a {
@@ -89,8 +90,12 @@ pre code {
   padding: 0;
 }
 
+a {
+  color: var(--accent)
+}
+
 a:visited {
-  color: var(--accent);
+  color: var(--muted);
 }
 
 .title {
@@ -101,8 +106,8 @@ a:visited {
 
 
 .info {
-  background: var(--muted);
-  border-left: 4px solid #fbbf24;
+  background: var(--border);
+  border-left: 4px solid var(--accent);
   padding: 1rem;
   border-radius: 6px;
 }
