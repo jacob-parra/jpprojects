@@ -91,9 +91,19 @@ Navigate to the Settings tab in the top of the Repo menu, and click "Pages" in t
 
 Follow the index.md template to add more pages of content in markdown syntax. Link to each page in the index.md file.
 
+<hr>
+
+The following steps are optional to further sophisticate a Pages site.
+
 **5 Add Styling**
 
 Create an "assets" folder in root, and add a "style.css" file in it. Add a link to the file in the `<head>` tag of the default.html template file so that all pages can share the same styling: `<link rel="stylesheet" href="/homelab/assets/style.css">`.
 
 Jekyll "translates" markdown into normal html syntax, tags and all. CSS can then be applied to those html tags like normal. Div tags with ids and classes can also be added directly among markdown syntax to further refine styling.
+
+**6 Add File Downloads**
+
+The easiest way to support downloadable files is to keep them in a "downloads" folder in the root of the repository. Then link to them with this syntax: `[script](/homelab/downloads/script.txt)`. Upon clicking the link, the file will be opened in the browser or immediately download (depends on the browser). 
+
+Alternatively, use this html syntax: `<a href="/homelab/downloads/script.txt" download>Download</a>`
 
