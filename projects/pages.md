@@ -19,6 +19,7 @@ Leave all the default settings, but provide a good name (like homelab) and descr
 
 This is the file structure:
 
+```
 homelab/
 ├── index.md
 ├── _config.yml
@@ -26,6 +27,7 @@ homelab/
 │   └── default.html
 ├── projects/
 │   └── project.md
+```
 
 These are basic templates for index.md, _config.yml and default.html:
 
@@ -93,4 +95,5 @@ Follow the index.md template to add more pages of content in markdown syntax. Li
 
 Create an "assets" folder in root, and add a "style.css" file in it. Add a link to the file in the `<head>` tag of the default.html template file so that all pages can share the same styling: `<link rel="stylesheet" href="/homelab/assets/style.css">`.
 
-Jekyll "translates" markdown into normal html syntax, tags and all. CSS can then be applied to those html tags like normal. Div tags with ids and classes can also be added directly among markdown syntax to further refine styling. 
+Jekyll "translates" markdown into normal html syntax, tags and all. CSS can then be applied to those html tags like normal. Div tags with ids and classes can also be added directly among markdown syntax to further refine styling.
+
