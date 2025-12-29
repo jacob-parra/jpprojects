@@ -43,26 +43,7 @@ markdown: kramdown
 
 This file will be applied to every page in the site to place a top navbar and provide metadata.
 
-```
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <title>{{ page.title }} | {{ site.title }}</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-</head>
-<body>
-  <nav>
-    <a href="/homelab">Homelab</a> |
-    <a href="/">Personal Site</a>
-  </nav>
 
-  <main>
-    {{ content }}
-  </main>
-</body>
-</html>
-```
 
 **index.md**
 
