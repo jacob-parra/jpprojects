@@ -37,4 +37,6 @@ Follow steps 1 and 2 to Install Tailscale on any other device to join the networ
 
 **6. Test connectivity**
 
-Confirmed that desired devices are properly connected by checking for the green circle next to the device on the Admin Console Machines tab. Test the connection by pinging other connected devices by their Tailscale IPs found next to the device on the Admin Console Machines tab.
+Confirme that desired devices are properly connected by checking for the green circle next to the device on the Admin Console Machines tab. Test the connection by pinging other connected devices by their Tailscale IPs found next to the device on the Admin Console Machines tab.
+
+

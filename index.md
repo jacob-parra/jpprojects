@@ -13,8 +13,9 @@ I continue to learn and I'm looking for feedback. For questions or comments, ple
 | <em> Projects </em>                                        |<em> Pending Documentation </em>|<em> Future Projects </em>|
 |------------------------------------------------------------|--------------------------------|--------------------------|
 | - [Tailscale VPN](/jpprojects/projects/tailscale)          | - [Wiki.js Hosting](/jpprojects/projects/wikijs) | - [PiHole](/jpprojects/projects/pihole) |
-| - [TrueNAS](/jpprojects/projects/truenas)                  |                                | - [JellyFin Server](/jpprojects/projects/jellyfin) |
+| - [TrueNAS](/jpprojects/projects/truenas)                  |                                | - [NextCloud CloudSuite](/jpprojects/projects/cloudsuite)|
 | - [KeePass Password Manager](/jpprojects/projects/keepass) |                                | - [AI Hosting](/jpprojects/projects/ai)|
-| - [Scripting](/jpprojects/projects/scripting)              |                                | - [NextCloud CloudSuite](/jpprojects/projects/cloudsuite) |
+| - [Scripting](/jpprojects/projects/scripting)              |                                | |
 | - [SSH & SFTP](/jpprojects/projects/sshsftp)               |                                |                          |
 | - [Pages](/jpprojects/projects/pages)                      |                                |                          |
+| - [JellyFin Server](/jpprojects/projects/jellyfin)         |                                |                          |
