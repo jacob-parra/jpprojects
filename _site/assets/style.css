@@ -74,7 +74,7 @@ pre {
   border: 1px solid var(--light_green);
   padding: 1rem;
   border-radius: 8px;
-  overflow-x: auto;
+  overflow-x: visible;
 }
 
 pre code {
@@ -106,12 +106,42 @@ th {
   text-align: left;
 }
 
+/*Topper Styling*/
 
-.title {
+#Default_Nav_Bar {
+  position: sticky;
+  top: 90px; 
+  z-index: 1000;
+
+  background-color: var(--light_green);
+  display: flex;
+}
+
+
+#Default_Title_Bar {
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+
+  display: flex;
+  align-items: center;
+  
+
+  background: var(--light_tan);
+}
+
+#ProfilePic {
+  margin-left: auto;
+  height: 55px;
+  padding-right: 2.5rem;
+}
+
+#title {
   padding: 1rem;
   padding-left: 2rem;
   background: var(--light_tan);
 }
+
 
 
 .info {
@@ -121,9 +151,6 @@ th {
   border-radius: 6px;
 }
 
-.Default_Header {
-  background-color: var(--light_green)
-}
 
 .site-footer {
   margin-top: 4rem;
@@ -154,9 +181,5 @@ th {
   opacity: 0.7;
 }
 
-#ProfilePic{
-  float: right;
-  height: 70px;
-  padding: 0.5rem;
-  padding-right: 2rem;
-}
+
+

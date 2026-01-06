@@ -56,15 +56,15 @@ Not software, but an external USB disc drive is also, obviously, needed.
 
 With the disc in the drive, start MakeMKV. The software will recognize the disc, and when recognized, click the drive icon to scan the disk. 
 
-The disk scan will divide each "Title" and its metadata, audio and subtitles. There may be multiple "Titles" or copies of the actual movie, and several Titles may be extras or other, unecessary content. Select one of the large Title copies (It should be 10-20 GB larger than the rest) and deselect the rest. In that Title's dropdown menu, select an audio version and a subtitle option, probably in English. Look out for "Director's Commentary" versions of the audio and subtitles, listed in details of in right partition of the software.
+The disk scan will divide each "Title" and its metadata, audio and subtitles. There may be multiple "Titles" or copies of the actual movie, and several Titles may be extras or other, unecessary content. Select one of the large Title copies (It should be 10-20 GB larger than the rest) and deselect the rest. In that Title's dropdown menu, select an audio version and a subtitle option, probably in English. Look out for "Director's Commentary" and "For visually impaired" versions of the audio and subtitles, listed in details of in right partition of the software.
 
 When the desired media is selected, specify a destination location. Then click the Make MKV button on the right. Ripping can take between 15 and 40 minutes depending on drive speed and media quality and size. 
 
 **3. Compress**
 
-Moderate compression, especially of DVDs, can save nearly all of the quality of the original media and reduce up to 50% file size. 
+Moderate compression, especially of DVDs, can save nearly all the quality of the original media and reduce up to 50% file size. 
 
-In Handbreak, open the ".mkv" created in the previous step. Then select the following options to optimize for quality and space:
+In Handbreak, open ("Open Source" button on the top menu) the ".mkv" created in the previous step. Then select the following options to optimize for quality and space:
 
 - Summary Tab:
     - Format: MKV
@@ -100,7 +100,7 @@ In Handbreak, open the ".mkv" created in the previous step. Then select the foll
     - Create chapter markers
 
 
-If desired, these options can be set as a Preset. Click "Preset" in the top right, then click "New Preset". Name it and save. Select the preset for every future file.
+If desired, these options can be set as a Preset. Click "Presets" in the top menu, then click "Add Preset". Name it and save. The preset will be saved under "Custom Presets" in the "Presets" list. Select the preset for every future file.
 
 Upon proper configuration, click the green "Begin Transcoding" in the topmost menu. 
 

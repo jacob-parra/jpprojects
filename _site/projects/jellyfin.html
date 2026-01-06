@@ -6,15 +6,19 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="stylesheet" href="/jpprojects/assets/style.css">
 </head>
+
 <body>
-  <div class="Default_Header">
-    <img src="/jpprojects/images/PorcoRosso.png" id="ProfilePic"alt="My Github Profile Picture">
-    <h1 class="title">jpprojects</h1>
+  <div id="Default_Title_Bar">
+    <h1 id="title">jpprojects</h1>
+    <img src="/jpprojects/images/PorcoRosso.png" id="ProfilePic" alt="My Github Profile Picture">
+  </div>
+
+  <div id="Default_Nav_Bar">
     <nav>
       <a href="/jpprojects/">↩︎ Home</a>
-
     </nav>
   </div>
+
 
   <main>
     <p>Jellyfin is a free, open-source media system that manages digital movie, tv show and music libraries streaming. Its a self-hosted Plex alternative. The server softeware is easy to configure with a web UI, and clients can connect and stream over the LAN or a VPN.</p>
@@ -72,15 +76,15 @@ A movie media folder can be easily ammassed by ripping content from DVDs. With a
 
 <p>With the disc in the drive, start MakeMKV. The software will recognize the disc, and when recognized, click the drive icon to scan the disk.</p>
 
-<p>The disk scan will divide each “Title” and its metadata, audio and subtitles. There may be multiple “Titles” or copies of the actual movie, and several Titles may be extras or other, unecessary content. Select one of the large Title copies (It should be 10-20 GB larger than the rest) and deselect the rest. In that Title’s dropdown menu, select an audio version and a subtitle option, probably in English. Look out for “Director’s Commentary” versions of the audio and subtitles, listed in details of in right partition of the software.</p>
+<p>The disk scan will divide each “Title” and its metadata, audio and subtitles. There may be multiple “Titles” or copies of the actual movie, and several Titles may be extras or other, unecessary content. Select one of the large Title copies (It should be 10-20 GB larger than the rest) and deselect the rest. In that Title’s dropdown menu, select an audio version and a subtitle option, probably in English. Look out for “Director’s Commentary” and “For visually impaired” versions of the audio and subtitles, listed in details of in right partition of the software.</p>
 
 <p>When the desired media is selected, specify a destination location. Then click the Make MKV button on the right. Ripping can take between 15 and 40 minutes depending on drive speed and media quality and size.</p>
 
 <p><strong>3. Compress</strong></p>
 
-<p>Moderate compression, especially of DVDs, can save nearly all of the quality of the original media and reduce up to 50% file size.</p>
+<p>Moderate compression, especially of DVDs, can save nearly all the quality of the original media and reduce up to 50% file size.</p>
 
-<p>In Handbreak, open the “.mkv” created in the previous step. Then select the following options to optimize for quality and space:</p>
+<p>In Handbreak, open (“Open Source” button on the top menu) the “.mkv” created in the previous step. Then select the following options to optimize for quality and space:</p>
 
 <ul>
   <li>Summary Tab:
@@ -130,7 +134,7 @@ A movie media folder can be easily ammassed by ripping content from DVDs. With a
   </li>
 </ul>
 
-<p>If desired, these options can be set as a Preset. Click “Preset” in the top right, then click “New Preset”. Name it and save. Select the preset for every future file.</p>
+<p>If desired, these options can be set as a Preset. Click “Presets” in the top menu, then click “Add Preset”. Name it and save. The preset will be saved under “Custom Presets” in the “Presets” list. Select the preset for every future file.</p>
 
 <p>Upon proper configuration, click the green “Begin Transcoding” in the topmost menu.</p>
 
@@ -143,6 +147,7 @@ A movie media folder can be easily ammassed by ripping content from DVDs. With a
 <p><a href="https://www.filebot.net/">FileBot</a> is a tool that facilitates proper name formatting and metadata retrieval for movies and tv shows. It is optional, as all naming can be done manually and certain metadata is not strictly necessary. It requires a license to use, but can be a valuable tool especially for large digitizing projects or tv shows.</p>
 
   </main>
+
 
 <footer class="site-footer">
   <div class="footer-content">
