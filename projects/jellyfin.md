@@ -9,9 +9,10 @@ The following steps detail Jellyfin configuration, specifically for a movie stre
 
 **1. Install the server**
 
-Download <a href="https://repo.jellyfin.org/?path=/server/windows/latest-stable">here.</a>Run the .exe installer. Keep all the default options, except select the "Service" version, which is not the default.
+Download <a href="https://repo.jellyfin.org/?path=/server/windows/latest-stable">here. </a>Run the .exe installer. Keep all the default options, except select the "Service" version, which is not the default.
 
 **2. Configure the server and add your media**
+
 Once Jellyfin is installed, access the UI at <a href="http://localhost:8096">http://localhost:8096</a>. 
 
 - Create an admin account
@@ -66,37 +67,37 @@ Moderate compression, especially of DVDs, can save nearly all of the quality of 
 In Handbreak, open the ".mkv" created in the previous step. Then select the following options to optimize for quality and space:
 
 - Summary Tab:
-    Format: MKV
-    Web Optimized: Off
-    Align A/V Start: On
-    Select a destination location at the bottom of the page 
+    - Format: MKV
+    - Web Optimized: Off
+    - Align A/V Start: On
+    - Select a destination location at the bottom of the page 
 
 - Video Tab:
-    Video Encoder: H.264 (Or a version that corrosponds to the Server Hardware Acceleration GPU transcoder version)
-    Framerate: Same as Source
-    Framerate mode: Constant
-    RF: 18
-    Encoder PReset: Slow
-    Profile/Level: Auto
+    - Video Encoder: H.264 (Or a version that corrosponds to the Server Hardware Acceleration GPU transcoder version)
+    - Framerate: Same as Source
+    - Framerate mode: Constant
+    - RF: 18
+    - Encoder PReset: Slow
+    - Profile/Level: Auto
 
 - Filters Tab:
-    Decomb: Default (unless movie is an animation, then Off)
-    Every other option: Off
+    - Decomb: Default (unless movie is an animation, then Off)
+    - Every other option: Off
 
 - Audio Tab
-    Codec: AC3 Passthru
-    Mixdown: Auto
-    Samplerate: Auto
-    Bitrate: Should be grayed out
-    Track Name: Surround 5.1
+    - Codec: AC3 Passthru
+    - Mixdown: Auto
+    - Samplerate: Auto
+    - Bitrate: Should be grayed out
+    - Track Name: Surround 5.1
 
 - Subtitles Tab
-    Source : English option (probably)
-    Forced Only: On
-    Burn in: Off
+    - Source : English option (probably)
+    - Forced Only: On
+    - Burn in: Off
 
 - Chapters Tab
-    Create chapter markers
+    - Create chapter markers
 
 
 If desired, these options can be set as a Preset. Click "Preset" in the top right, then click "New Preset". Name it and save. Select the preset for every future file.
