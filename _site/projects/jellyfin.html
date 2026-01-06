@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Jellyfin | Homelab</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="/jpprojects/assets/style.css">
+</head>
+<body>
+  <div class="Default_Header">
+    <img src="/jpprojects/images/PorcoRosso.png" id="ProfilePic"alt="My Github Profile Picture">
+    <h1 class="title">jpprojects</h1>
+    <nav>
+      <a href="/jpprojects/">↩︎ Home</a>
+
+    </nav>
+  </div>
+
+  <main>
+    <p>Jellyfin is a free, open-source media system that manages digital movie, tv show and music libraries streaming. Its a self-hosted Plex alternative. The server softeware is easy to configure with a web UI, and clients can connect and stream over the LAN or a VPN.</p>
+
+<p>The following steps detail Jellyfin configuration, specifically for a movie streaming service:</p>
+
+<p><strong>1. Install the server</strong></p>
+
+<p>Download <a href="https://repo.jellyfin.org/?path=/server/windows/latest-stable">here. </a>Run the .exe installer. Keep all the default options, except select the “Service” version, which is not the default.</p>
+
+<p><strong>2. Configure the server and add your media</strong></p>
+
+<p>Once Jellyfin is installed, access the UI at <a href="http://localhost:8096">http://localhost:8096</a>.</p>
+
+<ul>
+  <li>Create an admin account</li>
+  <li>Add a folder of media and configure the collection with desired settings (defaults are fine)</li>
+</ul>
+
+<div class="info">
+A movie media folder can be easily ammassed by ripping content from DVDs. With an external optical drive, movies can be copied from DVDs via <a href="https://www.makemkv.com/">MakeMKV</a>, a ripper (transcoder) software. Movie `.mkv` files can then be compressed with <a href="https://handbrake.fr/">HandBrake</a> to optimize for space. The workflow can even be automatted. Further details can be found below.
+</div>
+
+<p><strong>3. Connect your clients</strong></p>
+
+<p>Upon finishing setup, access Jellyfin from another device on the same LAN via a web browser : <code class="language-plaintext highlighter-rouge">http://&lt;server_ip&gt;:8096</code></p>
+
+<p>Login and begin streaming!</p>
+
+<hr />
+
+<p>The following steps are optional to further optimize a Jellyfin Server.</p>
+
+<p><strong>4. Enable Hardware Transcoding</strong></p>
+
+<p>Hardware Encoding refers to optimization streaming capabilities of a media server by converting media files (video/audio) with a dedicated chip (GPU) rather than a CPU. It dramatically improves streaming quality, but can decrease stability.</p>
+
+<p>While logged in as admin, navigate to the admin dashboard with the three line menu on the top. From the admin dashboard, navigate to the “Playback” &gt; “Transcoding” section on from side-bar. Enable “Hardware Acceleration” and select the transcoding method that corrosponds with the machine’s GPU (AMD, NVIDIA, Intel).</p>
+
+<p><strong>5. Add additional users</strong></p>
+
+<p>While logged in as admin, navigate to the admin dashboard with the three line menu on the top. From the admin dashboard, navigate to the “Users” section on from side-bar. Use the “+” button to add a User. Upon setting a Name and Password, configure permissions (best-practice is to follow principles of zero-trust, which the defaults do). Ensure that “Allow remote connections to this server” to allow a user to log in over a VPN.</p>
+
+<hr />
+
+<p>The following instructions detail the process of digitizing via the aforementioned method. NOTE: This workflow is optimized for DVDs. Digitizing BlueRays is fundamentally different and requires different hardware and different software and configuration.</p>
+
+<p><strong>1. Download the Necessary Software</strong></p>
+
+<p>As described, this method relies on <a href="https://www.makemkv.com/">MakeMKV</a> for ripping and <a href="https://handbrake.fr/">HandBrake</a> for compression. Download both (they are free).</p>
+
+<p>Not software, but an external USB disc drive is also, obviously, needed.</p>
+
+<p><strong>2. Rip</strong></p>
+
+<p>With the disc in the drive, start MakeMKV. The software will recognize the disc, and when recognized, click the drive icon to scan the disk.</p>
+
+<p>The disk scan will divide each “Title” and its metadata, audio and subtitles. There may be multiple “Titles” or copies of the actual movie, and several Titles may be extras or other, unecessary content. Select one of the large Title copies (It should be 10-20 GB larger than the rest) and deselect the rest. In that Title’s dropdown menu, select an audio version and a subtitle option, probably in English. Look out for “Director’s Commentary” versions of the audio and subtitles, listed in details of in right partition of the software.</p>
+
+<p>When the desired media is selected, specify a destination location. Then click the Make MKV button on the right. Ripping can take between 15 and 40 minutes depending on drive speed and media quality and size.</p>
+
+<p><strong>3. Compress</strong></p>
+
+<p>Moderate compression, especially of DVDs, can save nearly all of the quality of the original media and reduce up to 50% file size.</p>
+
+<p>In Handbreak, open the “.mkv” created in the previous step. Then select the following options to optimize for quality and space:</p>
+
+<ul>
+  <li>Summary Tab:
+    <ul>
+      <li>Format: MKV</li>
+      <li>Web Optimized: Off</li>
+      <li>Align A/V Start: On</li>
+      <li>Select a destination location at the bottom of the page</li>
+    </ul>
+  </li>
+  <li>Video Tab:
+    <ul>
+      <li>Video Encoder: H.264 (Or a version that corrosponds to the Server Hardware Acceleration GPU transcoder version)</li>
+      <li>Framerate: Same as Source</li>
+      <li>Framerate mode: Constant</li>
+      <li>RF: 18</li>
+      <li>Encoder PReset: Slow</li>
+      <li>Profile/Level: Auto</li>
+    </ul>
+  </li>
+  <li>Filters Tab:
+    <ul>
+      <li>Decomb: Default (unless movie is an animation, then Off)</li>
+      <li>Every other option: Off</li>
+    </ul>
+  </li>
+  <li>Audio Tab
+    <ul>
+      <li>Codec: AC3 Passthru</li>
+      <li>Mixdown: Auto</li>
+      <li>Samplerate: Auto</li>
+      <li>Bitrate: Should be grayed out</li>
+      <li>Track Name: Surround 5.1</li>
+    </ul>
+  </li>
+  <li>Subtitles Tab
+    <ul>
+      <li>Source : English option (probably)</li>
+      <li>Forced Only: On</li>
+      <li>Burn in: Off</li>
+    </ul>
+  </li>
+  <li>Chapters Tab
+    <ul>
+      <li>Create chapter markers</li>
+    </ul>
+  </li>
+</ul>
+
+<p>If desired, these options can be set as a Preset. Click “Preset” in the top right, then click “New Preset”. Name it and save. Select the preset for every future file.</p>
+
+<p>Upon proper configuration, click the green “Begin Transcoding” in the topmost menu.</p>
+
+<p><strong>4. Add to Jellyfin</strong></p>
+
+<p>Add the resulting .mkv file to Library folder listed in Jellyfin. Then on the Admin Dashboard, click “Scan all Libraries” to refresh listed media and make added files available for streaming. A few minutes may be needed to properly find and add all files and metadata.</p>
+
+<p><strong>Note on FileBot</strong></p>
+
+<p><a href="https://www.filebot.net/">FileBot</a> is a tool that facilitates proper name formatting and metadata retrieval for movies and tv shows. It is optional, as all naming can be done manually and certain metadata is not strictly necessary. It requires a license to use, but can be a valuable tool especially for large digitizing projects or tv shows.</p>
+
+  </main>
+
+<footer class="site-footer">
+  <div class="footer-content">
+    <hr>
+    <p>
+      © <span id="year"></span> Jacob Parra ·
+      jpprojects ·
+      <a href="https://github.com/jacob-parra" target="_blank" rel="noopener">GitHub</a>
+    </p>
+    <p class="footer-subtext">
+    Project documentation, walkthroughs and notes | Built with Markdown · Hosted on GitHub Pages
+
+  </div>
+</footer>
+
+<script>
+  document.getElementById("year").textContent = new Date().getFullYear();
+</script>
+
+</body>
+</html>

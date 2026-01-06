@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>SSH & SFTP | Homelab</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="/jpprojects/assets/style.css">
+</head>
+<body>
+  <div class="Default_Header">
+    <img src="/jpprojects/images/PorcoRosso.png" id="ProfilePic"alt="My Github Profile Picture">
+    <h1 class="title">jpprojects</h1>
+    <nav>
+      <a href="/jpprojects/">↩︎ Home</a>
+
+    </nav>
+  </div>
+
+  <main>
+    <h2 id="ssh--sftp">SSH &amp; SFTP</h2>
+
+<p>SSH (Secure Shell) is a protocol that allows secure remote console connection into another machine. SFTP (Safe File Transfer Protocol) is a protocol that securely move files between machines remotely.</p>
+
+<p>These commands and instructions detail SSH &amp; SFTP configuration.</p>
+
+<hr />
+
+<p><strong>1. Install the SSH Server</strong></p>
+
+<p>Run PowerShell as an admin, and run this command <code class="language-plaintext highlighter-rouge">dism /online /Add-Capability /CapabilityName:OpenSSH.Server~~~~0.0.1.0</code></p>
+
+<p><strong>2. Start the SSH Server</strong></p>
+
+<p><code class="language-plaintext highlighter-rouge">Start-Service sshd</code></p>
+
+<p><strong>3. Make SSH start automnatically on boot</strong></p>
+
+<p><code class="language-plaintext highlighter-rouge">Set-Service -Name sshd -StartupType Automatic</code></p>
+
+<p><strong>4. Confirm SSH is running</strong></p>
+
+<p><code class="language-plaintext highlighter-rouge">Get-Service sshd</code>
+You should see
+<code class="language-plaintext highlighter-rouge">Status: Running</code>
+<code class="language-plaintext highlighter-rouge">StartType: Automatic</code></p>
+
+<p><strong>5. Configure the Firewall</strong></p>
+
+<p>This command allows TCP traffic through port 22 (the default SSH port)
+<code class="language-plaintext highlighter-rouge">New-NetFirewallRule -Name sshd -DisplayName "OpenSSH Server" -Enabled True -Direction Inbound -Protocol TCP -Action Allow -LocalPort 22</code></p>
+
+<p>SSH should be good to go. It can be tested by using this command from another machine on the same LAN (or Tailscale network) <code class="language-plaintext highlighter-rouge">ssh username@machineIp</code></p>
+
+<div class="info">
+Find your machineIp using `ipconfig`. Locate the IPv4 section of the output, the IP will probably look like `192.168.x.x`
+</div>
+
+<p>The ssh command will ask to receive a fingerprint and confirm connection. Type “yes” and enter, and enter your Username password when prompted. The terminal should show something like <code class="language-plaintext highlighter-rouge">username@machineName C:\Users\username&gt;</code>, indicating that ssh was successful. You are now interacting with the terminal of the hosting machine.</p>
+
+<p>Conveniently, the OpenSSH server used for SSH also supports SFTP. The connection is very similar: <code class="language-plaintext highlighter-rouge">sftp username@machineIp</code>. Once the connection is established, files can be safely transferred between a remote machine and the server machine with the following commands:</p>
+
+<p><strong>put</strong></p>
+
+<p>The <code class="language-plaintext highlighter-rouge">put</code> command is used to transfer a file from the remote (connecting) machine to the server machine. This is the command template:
+<code class="language-plaintext highlighter-rouge">put remote/file/path [server/path]</code> 
+Note that the first file path is the path of the file on the remote machine, and the (optional) destination path is on the server machine.</p>
+
+<p><strong>get</strong></p>
+
+<p>The <code class="language-plaintext highlighter-rouge">get</code> command is used to transfer a file from the server machine to the remote machine. This is the command template:
+<code class="language-plaintext highlighter-rouge">get server/file/path [remote/path]</code>
+Note that the first file path is the path of the file on the server machine, and the (optional) destination path is on the remote machine.</p>
+
+  </main>
+
+<footer class="site-footer">
+  <div class="footer-content">
+    <hr>
+    <p>
+      © <span id="year"></span> Jacob Parra ·
+      jpprojects ·
+      <a href="https://github.com/jacob-parra" target="_blank" rel="noopener">GitHub</a>
+    </p>
+    <p class="footer-subtext">
+    Project documentation, walkthroughs and notes | Built with Markdown · Hosted on GitHub Pages
+
+  </div>
+</footer>
+
+<script>
+  document.getElementById("year").textContent = new Date().getFullYear();
+</script>
+
+</body>
+</html>

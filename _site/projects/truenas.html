@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>TrueNAS | Homelab</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="/jpprojects/assets/style.css">
+</head>
+<body>
+  <div class="Default_Header">
+    <img src="/jpprojects/images/PorcoRosso.png" id="ProfilePic"alt="My Github Profile Picture">
+    <h1 class="title">jpprojects</h1>
+    <nav>
+      <a href="/jpprojects/">↩︎ Home</a>
+
+    </nav>
+  </div>
+
+  <main>
+    <h2 id="truenas">TrueNAS</h2>
+<p>A NAS (Network-Attached Service) is a kind of server that provides storage for machines on the same network (LAN). This allows multiple machines to share the files and storage. TrueNAS is a Debian-based NAS Operating System that can be locally hosted. It is simple to configure with a browser GUI. TrueNAS can be flashed to dedicated hardware or virutalized. For convenience, this method uses virtualization from Windows 11 (also works on 10). Because of the nature of a NAS, this project has certain hardware requirments:</p>
+
+<ul>
+  <li>At least 8GB of available Ram (16+ recommended, but 8 is fine)</li>
+  <li>At least 50-100GB of available storage</li>
+  <li>Virtualization enabled</li>
+</ul>
+
+<p>The following steps detail NAS configuration:</p>
+
+<hr />
+
+<p><strong>1. Install a VM Platform</strong></p>
+
+<p>VirtualBox is the easiest option, though hypervisors like Proxmox are also great, especially for managing multiple VMs. Download VirtualBox <a href="[url](https://www.virtualbox.org/wiki/Downloads)">here</a>. Select the “Windows hosts” option.</p>
+
+<p><strong>2. Download TrueNAS SCALE ISO</strong></p>
+
+<p><a href="https://www.truenas.com/download-truenas-community-edition/">This</a> is the image of the TrueNAS OS our VM will run. Download the current version and check that it has the .iso extension.</p>
+
+<p><strong>3. Create the Virtual Machine</strong></p>
+
+<ul>
+  <li>In VirtualBox, select “New” in the top menu.</li>
+  <li>Set “Name” to “TrueNAS”.</li>
+  <li>Set “Type” to “Linux”</li>
+  <li>Set “Version” to “Debian (64-bit)”</li>
+  <li>Click “Next”</li>
+  <li>In the RAM tab, allocate (at least) 8GB of RAM</li>
+  <li>In the CPU tab, allocate 2 cores (the minimum required, but won’t be enough to run Docker nor apps)</li>
+  <li>In the System tab, Motherboard section, set “Boot Order” to “Optical Disk First”. Make sure the Boot Order is “1. Optical” and “2. Hard Disk”. Uncheck “Enable EFI” (TrueNAS works best with BIOS boost)</li>
+  <li>In the System tab, Processor section, set 2 CPUs and enable “PAE/NX”</li>
+  <li>Where it says “Create a virtual hard disk now?” Choose “Yes”, 16 GB size, “Type” set to “VDI”. This is the OS disk.</li>
+  <li>In the Storage tab, create a second disk for the NAS storage itself: Under “SATA Controller” click the icon with a plus and a hard drive icon; Click “Create New Disk”; Set “Disk Size” to at least 100 GB (Closer to 250GB is most ideal); Check that “Type” is “VDI”.</li>
+  <li>In the Network tab, navigate to and enable “Adapter 1”. Set Attached to” to “Bridged Adapter”. Then set “Promiscuous Mode” to “Allow All”. Check the “Cable Connected option”. This allows the NAS to appear on the LAN.</li>
+</ul>
+
+<p><strong>4. Attach the TrueNAS ISO</strong></p>
+
+<p>While still in the settings, go to the Storage tab. Click the empty optical drive, then click the vlue CD Icon. Select the TrueNAS ISO downloaded in step 2.</p>
+
+<p><strong>5. Start the VM and Install TrueNAS</strong></p>
+
+<p>Start the VM with the Green Go Arrow in the top menu.</p>
+
+<p>The VM console should boot into the TrueNAS installer. Choose the Install/Upgrade option, and select the small OS disk option (not the 100 GB option). Allow the machine to wipe and install, and then set a root password. When it asks about the boot environment choose “BIOS”.</p>
+
+<p>Once it finishes navigate to VirtualBox, then Devices,Optical Drives and finally Remove the ISO. Then, reboot the VM.</p>
+
+<p><strong>6. Access the TrueNAS from your Browser</strong></p>
+
+<p>The TrueNAS VM Console should display an IP address:</p>
+
+<p><code class="language-plaintext highlighter-rouge">The web interface is at: http://192.168.x.x</code></p>
+
+<p>Open a browser and visit <code class="language-plaintext highlighter-rouge">http://&lt;that-ip&gt;</code>. Log in with Username: root and the root password set in step 5.</p>
+
+<p><strong>7. Create a Storage Pool</strong></p>
+
+<p>In the TrueNAS UI, navigate to the Storage page on the left sidebar and click “Pools”. Click “Create Pool” and name it “tank”. Select the big (100 GB) disk. Click Add VDev. Set “Layout” to “Single Disk” and click “Create”. The storage is now ready</p>
+
+<p><strong>8. Create shared folder/dataset</strong></p>
+
+<p>Navigate to Storage, then Pools, then tank. Click “Add Dataset” and name it NASshare. Click “Save”</p>
+
+<p><strong>9. Create SMB Share</strong></p>
+
+<p>In the left sidebar, navigate to “Shares”. In the SMB section, click “Add”. Make sure the path is <code class="language-plaintext highlighter-rouge">/mnt/tank/NASshare</code>. Set the name to NASshare. Set “Enable SMB service?” to “Yes”.</p>
+
+<p><strong>10. Connect to the NAS</strong></p>
+
+<p>On Windows, press Win + R. Type <code class="language-plaintext highlighter-rouge">\\&lt;TrueNAS-ip&gt;</code> and hit enter. NASshare should display and can be mapped as a drive by right clicking and selecting “Map Network Drive”.</p>
+
+<hr />
+
+<p>Note : This project benefits from downtime scripting, found on <a href="/jpprojects/projects/scripting">Scripting</a> project page.</p>
+
+  </main>
+
+<footer class="site-footer">
+  <div class="footer-content">
+    <hr>
+    <p>
+      © <span id="year"></span> Jacob Parra ·
+      jpprojects ·
+      <a href="https://github.com/jacob-parra" target="_blank" rel="noopener">GitHub</a>
+    </p>
+    <p class="footer-subtext">
+    Project documentation, walkthroughs and notes | Built with Markdown · Hosted on GitHub Pages
+
+  </div>
+</footer>
+
+<script>
+  document.getElementById("year").textContent = new Date().getFullYear();
+</script>
+
+</body>
+</html>

@@ -130,3 +130,20 @@ The easiest way to support downloadable files is to keep them in a "downloads" f
 
 Alternatively, use this html syntax: `<a href="/homelab/downloads/script.txt" download>Download</a>`
 
+**7. Build Locally**
+
+Rather than commiting to see every change, build with Jekyll locally first:
+
+- Download <a href="https://rubyinstaller.org/">RubyInstaller<a>
+  - Choose Ruby 3.3.x (x64) WITH DevKit (Jekyll doens't support Ruby 4 at the time of writing)
+  - When running the installer, select both “Add Ruby executables to PATH” and “Install MSYS2 and development toolchain”
+  - Verify proper installation with `ruby -v` and `gem -v`. Output should be `Ruby 3.3.x`.
+- Install Jekyll
+  - `gem install jekyll bundler`
+  - Verify proper installation with `jekyll -v`.
+- Build
+  - cd into the repo folder
+  - Build with `jekyll serve`
+- The site will be available at `localhost:4000/repo_name` (127.0.0.1)
+
+Note: the site refreshes on project saves, simplifing editing and reducing the number of commits on the repo.

@@ -13,7 +13,7 @@ The following steps detail KeePassXC configuration:
 
 **1. Install KeePassXC**
 
-(https://keepassxc.org) Do not use the old KeePass 2.x; KeePassXC is modern and cross-platform.
+Do not use the old KeePass 2.x; <a href="https://keepassxc.org">KeePassXC</a> is modern and cross-platform.
 
 **2.Create Password Database**
 
@@ -21,7 +21,6 @@ After opening KeePassXC, click Database in the top left corner and select New Da
 
 **3. Populate**
 
-Add all your passwords to the database. Add folders to organize your passwords by clicking Groups (top menu bar), then New Group. Click Entries (top menu bar) and New Entry to add a Title, Username and Password. They should be saved automatically.
+Add all your passwords to the database. Add folders to organize your passwords by clicking Groups (top menu bar), then New Group. Click Entries (top menu bar) and New Entry to add a Title, Username and Password. They should be saved automatically upon closing.
 
 To access your passwords, find and open the database file. Then enter your master password to decrypt the file.
-Powered by Wiki.js

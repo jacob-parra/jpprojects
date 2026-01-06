@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Github Pages | Homelab</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="/jpprojects/assets/style.css">
+</head>
+<body>
+  <div class="Default_Header">
+    <img src="/jpprojects/images/PorcoRosso.png" id="ProfilePic"alt="My Github Profile Picture">
+    <h1 class="title">jpprojects</h1>
+    <nav>
+      <a href="/jpprojects/">↩︎ Home</a>
+
+    </nav>
+  </div>
+
+  <main>
+    <h2 id="github-pages">Github Pages</h2>
+
+<p>Github Pages is a simple way to host simple static websites, like this one, directly from a Github Repo. It supports markdown natively via Jekyll, a static site generator perfect for sites focused on content over interactability. It’s fast, secure and simple, perfect for the free hosting Github Pages provides.</p>
+
+<p>The following instructions detail my process of creating this very site.</p>
+
+<hr />
+
+<p><strong>1 Create the Github Repo</strong></p>
+
+<p>Leave all the default settings, but provide a good name (like homelab) and description.</p>
+
+<p><strong>2 Add the initial files</strong></p>
+
+<p>This is the file structure:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>homelab/
+├── index.md
+├── _config.yml
+├── _layouts/
+│   └── default.html
+├── projects/
+│   └── project.md
+</code></pre></div></div>
+
+<p>These are basic templates for index.md, _config.yml and default.html:</p>
+
+<p><strong>_config.yml</strong></p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>title: Homelab
+description: Homelab projects and infrastructure documentation
+markdown: kramdown
+</code></pre></div></div>
+
+<p><strong>_layouts/defualt.html</strong></p>
+
+<p>This file will be applied to every page in the site to place a top navbar and provide metadata.</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&lt;!DOCTYPE html&gt;
+&lt;html lang="en"&gt;
+&lt;head&gt;
+  &lt;meta charset="UTF-8"&gt;
+  &lt;title&gt;Github Pages | Homelab&lt;/title&gt;
+  &lt;meta name="viewport" content="width=device-width, initial-scale=1"&gt;
+  &lt;link rel="stylesheet" href="/homelab/assets/style.css"&gt;
+&lt;/head&gt;
+&lt;body&gt;
+  &lt;div class="Default_Header"&gt;
+    &lt;h1 class="title"&gt;Homelab&lt;/h1&gt;
+    &lt;nav&gt;
+      &lt;a href="/jpprojects/"&gt;Home&lt;/a&gt;
+      &lt;a href="/insertsite"&gt;Personal Site&lt;/a&gt;
+    &lt;/nav&gt;
+  &lt;/div&gt;
+
+  &lt;main&gt;
+    &lt;h2 id="keepass-password-manager"&gt;KeePass Password Manager&lt;/h2&gt;
+
+&lt;p&gt;KeePassXC is a free, open source and self hostable password manager database software. Passwords are kept in an encrypted file. The file is navigated with a UI and supports folders for greater organization.&lt;/p&gt;
+
+&lt;p&gt;The following steps detail KeePassXC configuration:&lt;/p&gt;
+
+&lt;hr /&gt;
+
+&lt;p&gt;&lt;strong&gt;1. Install KeePassXC&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;Do not use the old KeePass 2.x; &lt;a href="https://keepassxc.org"&gt;KeePassXC&lt;/a&gt; is modern and cross-platform.&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;2.Create Password Database&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;After opening KeePassXC, click Database in the top left corner and select New Database. A strong Master Password will be required, used to unlock/decrypt the encrypted database file every time it is accessed. Best practice is to save the file in a dedicated folder in the NAS: nasshare/passwords/passwords.kdbx&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;3. Populate&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;Add all your passwords to the database. Add folders to organize your passwords by clicking Groups (top menu bar), then New Group. Click Entries (top menu bar) and New Entry to add a Title, Username and Password. They should be saved automatically upon closing.&lt;/p&gt;
+
+&lt;p&gt;To access your passwords, find and open the database file. Then enter your master password to decrypt the file.&lt;/p&gt;
+
+  &lt;/main&gt;
+
+&lt;footer class="site-footer"&gt;
+  &lt;div class="footer-content"&gt;
+    &lt;hr&gt;
+    &lt;p&gt;
+      © &lt;span id="year"&gt;&lt;/span&gt; Name ·
+      jpprojects ·
+      &lt;a href="link" target="_blank" rel="noopener"&gt;LinkText&lt;/a&gt;
+    &lt;/p&gt;
+    &lt;p class="footer-subtext"&gt;
+    Built with Markdown · Hosted on GitHub Pages
+
+  &lt;/div&gt;
+&lt;/footer&gt;
+
+&lt;script&gt;
+  document.getElementById("year").textContent = new Date().getFullYear();
+&lt;/script&gt;
+
+&lt;/body&gt;
+&lt;/html&gt;
+</code></pre></div></div>
+
+<p><strong>index.md</strong></p>
+
+<p>Note the markdown syntax in this file, as well as the application of the layout template file. The index page acts as the hub for the rest of the link pages. Note also the lack of file extension in the markdown link.</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>---
+title: Homelab
+layout: default
+---
+
+# Homelab Projects
+
+This site documents my homelab experiments, infrastructure, and lessons learned.
+
+## Projects
+- [Example Text](/homelab/projects/example)
+
+</code></pre></div></div>
+
+<p><strong>3 Enable Pages</strong></p>
+
+<p>Navigate to the Settings tab in the top of the Repo menu, and click “Pages” in the left sidebar under “Code and automation”. Make sure “Source” is set to “Deploy from a brach”, and set the branch to “main” and the folder to “root”. Click save and wait about a minute or so</p>
+
+<p><strong>4 Add content and additional pages</strong></p>
+
+<p>Follow the index.md template to add more pages of content in markdown syntax. Link to each page in the index.md file.</p>
+
+<hr />
+
+<p>The following steps are optional to further sophisticate a Pages site.</p>
+
+<p><strong>5 Add Styling</strong></p>
+
+<p>Create an “assets” folder in root, and add a “style.css” file in it. Add a link to the file in the <code class="language-plaintext highlighter-rouge">&lt;head&gt;</code> tag of the default.html template file so that all pages can share the same styling: <code class="language-plaintext highlighter-rouge">&lt;link rel="stylesheet" href="/homelab/assets/style.css"&gt;</code>.</p>
+
+<p>Jekyll “translates” markdown into normal html syntax, tags and all. CSS can then be applied to those html tags like normal. Div tags with ids and classes can also be added directly among markdown syntax to further refine styling.</p>
+
+<p><strong>6 Add File Downloads</strong></p>
+
+<p>The easiest way to support downloadable files is to keep them in a “downloads” folder in the root of the repository. Then link to them with this syntax: <code class="language-plaintext highlighter-rouge">[script](/homelab/downloads/script.txt)</code>. Upon clicking the link, the file will be opened in the browser or immediately download (depends on the browser).</p>
+
+<p>Alternatively, use this html syntax: <code class="language-plaintext highlighter-rouge">&lt;a href="/homelab/downloads/script.txt" download&gt;Download&lt;/a&gt;</code></p>
+
+<p><strong>7. Build Locally</strong></p>
+
+<p>Rather than commiting to see every change, build with Jekyll locally first:</p>
+
+<ul>
+  <li>Download <a href="https://rubyinstaller.org/">RubyInstaller<a>
+</a></a>    <ul>
+      <li>Choose Ruby 3.3.x (x64) WITH DevKit (Jekyll doens’t support Ruby 4 at the time of writing)</li>
+      <li>When running the installer, select both “Add Ruby executables to PATH” and “Install MSYS2 and development toolchain”</li>
+      <li>Verify proper installation with <code class="language-plaintext highlighter-rouge">ruby -v</code> and <code class="language-plaintext highlighter-rouge">gem -v</code>. Output should be <code class="language-plaintext highlighter-rouge">Ruby 3.3.x</code>.</li>
+    </ul>
+  </li>
+  <li>Install Jekyll
+    <ul>
+      <li><code class="language-plaintext highlighter-rouge">gem install jekyll bundler</code></li>
+      <li>Verify proper installation with <code class="language-plaintext highlighter-rouge">jekyll -v</code>.</li>
+    </ul>
+  </li>
+  <li>Build
+    <ul>
+      <li>cd into the repo folder</li>
+      <li>Build with <code class="language-plaintext highlighter-rouge">jekyll serve</code></li>
+    </ul>
+  </li>
+  <li>The site will be available at <code class="language-plaintext highlighter-rouge">localhost:4000/repo_name</code> (127.0.0.1)</li>
+</ul>
+
+<p>Note: the site refreshes on project saves, simplifing editing and reducing the number of commits on the repo.</p>
+
+  </main>
+
+<footer class="site-footer">
+  <div class="footer-content">
+    <hr>
+    <p>
+      © <span id="year"></span> Jacob Parra ·
+      jpprojects ·
+      <a href="https://github.com/jacob-parra" target="_blank" rel="noopener">GitHub</a>
+    </p>
+    <p class="footer-subtext">
+    Project documentation, walkthroughs and notes | Built with Markdown · Hosted on GitHub Pages
+
+  </div>
+</footer>
+
+<script>
+  document.getElementById("year").textContent = new Date().getFullYear();
+</script>
+
+</body>
+</html>

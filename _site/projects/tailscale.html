@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Tailscale VPN | Homelab</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="/jpprojects/assets/style.css">
+</head>
+<body>
+  <div class="Default_Header">
+    <img src="/jpprojects/images/PorcoRosso.png" id="ProfilePic"alt="My Github Profile Picture">
+    <h1 class="title">jpprojects</h1>
+    <nav>
+      <a href="/jpprojects/">↩︎ Home</a>
+
+    </nav>
+  </div>
+
+  <main>
+    <h2 id="tailscale-vpn">Tailscale VPN</h2>
+
+<p>The Tailscale VPN allows all connected devices to behave as if they were on the same LAN. This enables access to services hosted on the Desktop from any VPN-connected device from anywhere and on any WiFi.</p>
+
+<p>The following steps detail Tailscale configuration:</p>
+
+<hr />
+
+<p><strong>1. On the main/hosting desktop, download tailscale</strong></p>
+
+<p><a href="https://tailscale.com/download">Download Here</a></p>
+
+<p><strong>2. Login</strong></p>
+
+<div class="info">
+Note that the account used to login here will be the same account used to login to Tailscale on all future connected devices. Your network is tied to this account. I signed with my gmail.
+</div>
+
+<p><strong>3. Enusre that Tailscale is running</strong></p>
+
+<p>This can be done by checking the active processes: Press Windows+R and type “services.msc” This pulls up the Services menu. Find Tailscale and confirm that its Status is “Running” and its Startup Type is “Automatic. Right click the process and go to Properties to change those values on the General tab if needed.</p>
+
+<p><strong>4. Enable the desktop to be a “Subnetwork Router”</strong></p>
+
+<p>Open Powershell as an Admin. Enable Tailscale subnet routing with this command: <code class="language-plaintext highlighter-rouge">tailscale up --advertise-routes=192.168.0.0/24</code>.</p>
+
+<p>Approve this route in the <a href="https://login.tailscale.com/admin/machines">Tailscale Admin Console</a> by clicking “Approve” next to the “Subnet routes available” popup banner.</p>
+
+<p><strong>5. Install Tailscale on connecting devices</strong></p>
+
+<p>Follow steps 1 and 2 to Install Tailscale on any other device to join the network. Android and IOS apps are also available.</p>
+
+<p><strong>6. Test connectivity</strong></p>
+
+<p>Confirme that desired devices are properly connected by checking for the green circle next to the device on the Admin Console Machines tab. Test the connection by pinging other connected devices by their Tailscale IPs found next to the device on the Admin Console Machines tab.</p>
+
+
+  </main>
+
+<footer class="site-footer">
+  <div class="footer-content">
+    <hr>
+    <p>
+      © <span id="year"></span> Jacob Parra ·
+      jpprojects ·
+      <a href="https://github.com/jacob-parra" target="_blank" rel="noopener">GitHub</a>
+    </p>
+    <p class="footer-subtext">
+    Project documentation, walkthroughs and notes | Built with Markdown · Hosted on GitHub Pages
+
+  </div>
+</footer>
+
+<script>
+  document.getElementById("year").textContent = new Date().getFullYear();
+</script>
+
+</body>
+</html>
