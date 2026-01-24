@@ -18,4 +18,4 @@ I continue to learn and I'm looking for feedback. For questions or comments, ple
 | - [SSH & SFTP](/jpprojects/projects/sshsftp)               |                                |                          |
 | - [Pages](/jpprojects/projects/pages)                      |                                |                          |
 | - [JellyFin Server](/jpprojects/projects/jellyfin)         |                                |                          |
-| - [Dedicated Proxmox Server](/jpprojects/projects/Proxmox) |                        |                          |
+| - [Dedicated Proxmox Server](/jpprojects/projects/proxmox) |                        |                          |
