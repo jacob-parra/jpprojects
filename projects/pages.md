@@ -50,31 +50,37 @@ This file will be applied to every page in the site to place a top navbar and pr
   <meta charset="UTF-8">
   <title>{{ page.title }} | {{ site.title }}</title>
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link rel="stylesheet" href="/homelab/assets/style.css">
+  <link rel="stylesheet" href="/jpprojects/assets/style.css">
 </head>
+
 <body>
-  <div class="Default_Header">
-    <h1 class="title">Homelab</h1>
+  <div id="Default_Title_Bar">
+    <h1 id="title">jpprojects</h1>
+    <img src="/jpprojects/images/PorcoRosso.png" id="ProfilePic" alt="My Github Profile Picture">
+  </div>
+
+  <div id="Default_Nav_Bar">
     <nav>
-      <a href="{{ site.baseurl }}/">Home</a>
-      <a href="/insertsite">Personal Site</a>
+      <a href="{{ site.baseurl }}/">↩︎ Home</a>
     </nav>
   </div>
+
 
   <main>
     {{ content }}
   </main>
 
+
 <footer class="site-footer">
   <div class="footer-content">
     <hr>
     <p>
-      © <span id="year"></span> Name ·
+      © <span id="year"></span> Jacob Parra ·
       jpprojects ·
-      <a href="link" target="_blank" rel="noopener">LinkText</a>
+      <a href="https://github.com/jacob-parra" target="_blank" rel="noopener">GitHub</a>
     </p>
     <p class="footer-subtext">
-    Built with Markdown · Hosted on GitHub Pages
+    Project documentation, walkthroughs and notes | Built with Markdown · Hosted on GitHub Pages
 
   </div>
 </footer>
