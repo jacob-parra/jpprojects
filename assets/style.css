@@ -35,6 +35,7 @@ nav a {
   text-decoration: none;
   font-weight: 500;
   font-size: 1.5rem;
+  text-decoration: underline
 }
 
 main {
@@ -96,23 +97,25 @@ table {
 }
 
 th, td {
-  border: 1px solid var(--green);
+  border: 1px solid var(--light_green);
   padding: 0.6rem 0.75rem;
+  border-width: 2px;
+
 }
 
 th {
   background: var(--light_tan);
   font-weight: 600;
   text-align: left;
+  text-align: center
 }
 
 /*Topper Styling*/
 
 #Default_Nav_Bar {
   position: sticky;
-  top: 90px; 
+  top: 116px; /*Magic number for keeping the nav bar right where it needs to be*/
   z-index: 1000;
-
   background-color: var(--light_green);
   display: flex;
 }
@@ -181,5 +184,7 @@ th {
   opacity: 0.7;
 }
 
-
+#center_text {
+  text-align: left;
+}
 

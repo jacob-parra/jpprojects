@@ -92,6 +92,8 @@ This is necessary before updating or installing apps. The exact steps vary betwe
 
 **9. Create VMs**
 
+Visit the [Proxmox Hub](/jpprojects/proxmoxhub) to see documentation for a variety of VMs.
+
 <hr>
 
 The following steps are optional to make your server more practical and accessible.
