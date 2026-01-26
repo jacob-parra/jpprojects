@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>Github Pages | Homelab</title>
+  <title>Proxmox | Homelab</title>
   <link rel="icon" type="image/png" href="/jpprojects/images/PorcoRosso.png">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="stylesheet" href="/jpprojects/assets/style.css">
@@ -18,7 +18,7 @@
     <nav>
       <a href="/jpprojects/">↩︎ Home</a>
       <a href="https://github.com/jacob-parra">My Github</a>
-      <a href="https://jacob-parra.github.io/jpprojects/proxmoxhub">Proxmox Hub</a>
+      <a href="https://jacob-parra.github.io/jpprojects/proxmox/proxmoxhub">Proxmox Hub</a>
     </nav>
   </div>
 
@@ -132,29 +132,7 @@ Note: THE SELECTED DRIVE WILL BE WIPED
 
 <p><strong>9. Create VMs</strong></p>
 
-<p>Visit the <a href="/jpprojects/proxmoxhub">Proxmox Hub</a> to see documentation for a variety of VMs.</p>
-
-<hr />
-
-<p>The following steps are optional to make your server more practical and accessible.</p>
-
-<p><strong>10. Make your server accessible over Tailscale</strong></p>
-
-<p>Your entire proxmox server, and the VMs it manages, can be made accessible over Tailscale.</p>
-
-<div class="info">
-See [Tailscale VPN](/jpprojects/projects/tailscale) to see how to create a Tailscale VPN
-</div>
-
-<p>SSH into the proxmox machine, or run the following commands locally. Follow step 7 to do so.</p>
-
-<ul>
-  <li>First, run <code class="language-plaintext highlighter-rouge">apt update</code> (sudo not needed as we only have the root user).</li>
-  <li>Install Tailscale with <code class="language-plaintext highlighter-rouge">curl -fsSL https://tailscale.com/install.sh | sh</code>. Ensure that it installs correctly. If it doesnt, make sure you did step 8 correctly.</li>
-  <li>Run <code class="language-plaintext highlighter-rouge">sudo tailscale up --advertise-routes=192.168.0.0/24</code> to turn on Tailscale. Tailscale will return a link to sign in to with your Tailscale account on another browser. After signing in, go to the Tailscale Admin Console to approve the route and rename the machine if desired.</li>
-</ul>
-
-<p>The Proxmox server will now be accesible from anywhere via its Tailscale IP address and port 8006.</p>
+<p>Visit the <a href="/jpprojects/proxmox/proxmoxhub">Proxmox Hub</a> to see documentation for a variety of VMs.</p>
 
   </main>
 

@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Proxmox Tailscale | Homelab</title>
+  <link rel="icon" type="image/png" href="/jpprojects/images/PorcoRosso.png">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="/jpprojects/assets/style.css">
+</head>
+
+<body>
+  <div id="Default_Title_Bar">
+    <h1 id="title">jpprojects</h1>
+    <img src="/jpprojects/images/PorcoRosso.png" id="ProfilePic" alt="My Github Profile Picture">
+  </div>
+
+  <div id="Default_Nav_Bar">
+    <nav>
+      <a href="/jpprojects/">↩︎ Home</a>
+      <a href="https://github.com/jacob-parra">My Github</a>
+      <a href="https://jacob-parra.github.io/jpprojects/proxmox/proxmoxhub">Proxmox Hub</a>
+    </nav>
+  </div>
+
+
+  <main>
+    <h2 id="tailscale-on-proxmox">Tailscale on Proxmox</h2>
+
+<p>Your entire proxmox server, and the VMs it manages, can be made accessible over Tailscale.</p>
+
+<div class="info">
+See the <a href="https://jacob-parra.github.io/jpprojects/projects/tailscale">Tailscale project page</a> to see how to create a Tailscale VPN.
+</div>
+
+<p><strong>1. Accessing the Terminal</strong></p>
+
+<p>SSH into the proxmox machine, or run the following commands locally. Follow step 7 to do so.</p>
+
+<p><strong>2. Install and Configure Tailscale</strong></p>
+
+<ul>
+  <li>First, run <code class="language-plaintext highlighter-rouge">apt update</code> (sudo not needed as we only have the root user).</li>
+  <li>Install Tailscale with <code class="language-plaintext highlighter-rouge">curl -fsSL https://tailscale.com/install.sh | sh</code>. Ensure that it installs correctly. If it doesnt, make sure you did step 8 correctly.</li>
+  <li>Run <code class="language-plaintext highlighter-rouge">sudo tailscale up --advertise-routes=192.168.0.0/24</code> to turn on Tailscale . Tailscale will return a link to sign in to with your Tailscale account on another browser. After signing in, go to the Tailscale Admin Console to approve the route and rename the machine if desired.</li>
+</ul>
+
+<div class="info">
+The exact route in this last command may differ. Double check your Tailscale configurations.
+</div>
+
+<p>The Proxmox server will now be accesible from anywhere via its Tailscale IP address and port 8006.</p>
+
+  </main>
+
+
+<footer class="site-footer">
+  <div class="footer-content">
+    <hr>
+    <p>
+      © <span id="year"></span> Jacob Parra ·
+      jpprojects ·
+      <a href="https://github.com/jacob-parra" target="_blank" rel="noopener">GitHub</a>
+    </p>
+    <p class="footer-subtext">
+    Project documentation, walkthroughs and notes | Built with Markdown · Hosted on GitHub Pages
+
+  </div>
+</footer>
+
+<script>
+  document.getElementById("year").textContent = new Date().getFullYear();
+</script>
+
+</body>
+</html>

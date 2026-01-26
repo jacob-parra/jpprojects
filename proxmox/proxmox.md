@@ -1,5 +1,5 @@
 ---
-title: Github Pages
+title: Proxmox
 layout: default
 ---
 
@@ -92,24 +92,4 @@ This is necessary before updating or installing apps. The exact steps vary betwe
 
 **9. Create VMs**
 
-Visit the [Proxmox Hub](/jpprojects/proxmoxhub) to see documentation for a variety of VMs.
-
-<hr>
-
-The following steps are optional to make your server more practical and accessible.
-
-**10. Make your server accessible over Tailscale**
-
-Your entire proxmox server, and the VMs it manages, can be made accessible over Tailscale.
-
-<div class="info">
-See [Tailscale VPN](/jpprojects/projects/tailscale) to see how to create a Tailscale VPN
-</div>
-
-SSH into the proxmox machine, or run the following commands locally. Follow step 7 to do so.
-
-- First, run `apt update` (sudo not needed as we only have the root user). 
-- Install Tailscale with `curl -fsSL https://tailscale.com/install.sh | sh`. Ensure that it installs correctly. If it doesnt, make sure you did step 8 correctly. 
-- Run `sudo tailscale up --advertise-routes=192.168.0.0/24` to turn on Tailscale. Tailscale will return a link to sign in to with your Tailscale account on another browser. After signing in, go to the Tailscale Admin Console to approve the route and rename the machine if desired.
-
-The Proxmox server will now be accesible from anywhere via its Tailscale IP address and port 8006.
+Visit the [Proxmox Hub](/jpprojects/proxmox/proxmoxhub) to see documentation for a variety of VMs.

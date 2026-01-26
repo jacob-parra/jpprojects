@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Proxmox Scripting | Homelab</title>
+  <link rel="icon" type="image/png" href="/jpprojects/images/PorcoRosso.png">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="/jpprojects/assets/style.css">
+</head>
+
+<body>
+  <div id="Default_Title_Bar">
+    <h1 id="title">jpprojects</h1>
+    <img src="/jpprojects/images/PorcoRosso.png" id="ProfilePic" alt="My Github Profile Picture">
+  </div>
+
+  <div id="Default_Nav_Bar">
+    <nav>
+      <a href="/jpprojects/">↩︎ Home</a>
+      <a href="https://github.com/jacob-parra">My Github</a>
+      <a href="https://jacob-parra.github.io/jpprojects/proxmox/proxmoxhub">Proxmox Hub</a>
+    </nav>
+  </div>
+
+
+  <main>
+    <h2 id="proxmox-downtime-scripting">Proxmox Downtime Scripting</h2>
+
+<p>Personal servers (probably) do not need to be on all the time. By scripting downtime at night the server uses less electricity and other resources. This page details configurations for automated down-scrits and up-scripts.</p>
+
+<p><strong>Down Scripting</strong></p>
+
+<p>A script executed regularly via cron allows for logs to track the down-timing. Some configurations in the Proxmox UI, as well as in individual VMs.</p>
+
+<p><strong>1. Enable QEMU Guest Agent</strong></p>
+
+<p>QEMU gues agent is a lightweight service inside a VM that (among other things) allows the hypervisor (in our case, Proxmox) to communicate directly with the guest OS. It’s a safe way to interact with a VM, particularly for powering on and off.</p>
+
+<p>By defauly, Proxmox disables Qemu guest agent for each VM and must be enabled per VM.</p>
+
+<ul>
+  <li>Select the VM on the left bar, then click Options and then “QEMU Guest Agent”.</li>
+  <li>Click “Edit” in the top bar, and check the “Use QEMU Guest Agent” box. Proxmox will automatically remind you to install the QEMU Guest Agent in the VM itself. That’s the next step.</li>
+</ul>
+
+<p><strong>2. Install the QEMU Guest Agent</strong></p>
+
+<p>Enter the terminal of the VM itself. Follow these commands to install.</p>
+
+<ul>
+  <li>Run <code class="language-plaintext highlighter-rouge">systemctl start qemu-guest-agent</code></li>
+  <li>Then <code class="language-plaintext highlighter-rouge">systemctl is-active qemu-guest-agent</code>. It should return <code class="language-plaintext highlighter-rouge">active</code>.</li>
+  <li>
+    <p>Optionally, check the status verbosely with <code class="language-plaintext highlighter-rouge">systemctl status qemu-guest-agent</code>. You should see <code class="language-plaintext highlighter-rouge">running</code>.</p>
+  </li>
+  <li>Additionally, in</li>
+</ul>
+
+<p><strong>3. Create the script</strong></p>
+
+<p>In the terminal of the Proxmox host, create the script with <code class="language-plaintext highlighter-rouge">nano safe-shutdown.sh</code>:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>#!/bin/bash
+
+LOGFILE="/var/log/proxmox-safe-shutdown.log"
+DATE="$(date '+%Y-%m-%d %H:%M:%S')"
+
+echo "========================================" &gt;&gt; "$LOGFILE"
+echo "$DATE : Starting safe Proxmox shutdown" &gt;&gt; "$LOGFILE"
+
+# Get list of running VMs
+RUNNING_VMS=$(qm list | awk 'NR&gt;1 &amp;&amp; $3=="running" {print $1}')
+
+if [ -z "$RUNNING_VMS" ]; then
+    echo "$DATE : No running VMs found" &gt;&gt; "$LOGFILE"
+else
+    for VMID in $RUNNING_VMS; do
+        VMNAME=$(qm config "$VMID" | grep '^name:' | awk '{print $2}')
+        echo "$DATE : Sending shutdown to VM $VMID ($VMNAME)" &gt;&gt; "$LOGFILE"
+        qm shutdown "$VMID"
+    done
+fi
+
+# Wait for VMs to stop
+echo "$DATE : Waiting for VMs to shut down..." &gt;&gt; "$LOGFILE"
+
+while true; do
+    STILL_RUNNING=$(qm list | awk 'NR&gt;1 &amp;&amp; $3=="running" {print $1}')
+    if [ -z "$STILL_RUNNING" ]; then
+        echo "$(date '+%Y-%m-%d %H:%M:%S') : All VMs are stopped" &gt;&gt; "$LOGFILE"
+        break
+    fi
+    sleep 10
+done
+
+echo "$(date '+%Y-%m-%d %H:%M:%S') : Powering off host" &gt;&gt; "$LOGFILE"
+/sbin/poweroff
+
+</code></pre></div></div>
+
+<div class="info">
+If you ssh into the Proxmox host you can copy and paste this whole script in. I have not had luck doing that in the Proxmox UI terminal.
+</div>
+
+<p>This script sends a safe ACPI shutdown signal to each active VM, then turns off the Proxmox host itself, and logs the whole process. The log is accessible at <code class="language-plaintext highlighter-rouge">/var/log/proxmox-safe-shutdown.log</code>.</p>
+
+<p><strong>4. Set up the cronjob</strong></p>
+
+<ul>
+  <li>Access the root user crontab with <code class="language-plaintext highlighter-rouge">crontab -e</code></li>
+  <li>You may be asked to select a text editor to create the crontab file with. Enter 1 for Nano or 2 for Vim.</li>
+  <li>Add the following cronjob at the bottom of the file: <code class="language-plaintext highlighter-rouge">0 23 * * * /root/safe-shutdown.sh</code> (The first number is the minute, the second is the hour, in military time, obviously. Each following ‘*’ represents every day of the month, every month, every day of the week, respectively. Change the hour as needed.)</li>
+  <li>Test that the cronjob is set with <code class="language-plaintext highlighter-rouge">crontab -l</code>. The job should be listed.</li>
+</ul>
+
+<p><strong>5. Test the Job</strong></p>
+
+<ul>
+  <li>Run <code class="language-plaintext highlighter-rouge">sh safe-shutdown.sh</code> to test the script.</li>
+  <li>After powering on the Proxmox host again, check the log to make sure everything worked.</li>
+</ul>
+
+  </main>
+
+
+<footer class="site-footer">
+  <div class="footer-content">
+    <hr>
+    <p>
+      © <span id="year"></span> Jacob Parra ·
+      jpprojects ·
+      <a href="https://github.com/jacob-parra" target="_blank" rel="noopener">GitHub</a>
+    </p>
+    <p class="footer-subtext">
+    Project documentation, walkthroughs and notes | Built with Markdown · Hosted on GitHub Pages
+
+  </div>
+</footer>
+
+<script>
+  document.getElementById("year").textContent = new Date().getFullYear();
+</script>
+
+</body>
+</html>

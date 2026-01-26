@@ -1,5 +1,5 @@
 ---
-title: Github Pages
+title: Ubuntu
 layout: default
 ---
 

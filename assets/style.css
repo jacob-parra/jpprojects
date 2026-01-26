@@ -64,7 +64,7 @@ ul {
 }
 
 code {
-  background: var(--light_tan);
+  background: white;
   padding: 0.2rem 0.4rem;
   border-radius: 4px;
   color: var(--light_brown);
@@ -188,8 +188,13 @@ th {
   text-align: left;
 }
 
-#pmh_logo{
+.pmh_logo{
   height:75px;
   width:75px;
 }
 
+.pmh_logo_cell{
+  display: flex;
+  justify-content: center; /* horizontal */
+  align-items: center;     /* vertical */
+}
