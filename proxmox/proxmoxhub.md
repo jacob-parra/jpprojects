@@ -8,7 +8,7 @@ This page serves as the a landing page for a dedicated Proxmox server and a vari
 1. [Dedicated Proxmox Server](/jpprojects/proxmox/proxmox) Project Page
 2. [Tailscale on Proxmox](/jpprojects/proxmox/tailscale)
 3. [Proxmox Server Downtime Scripting](/jpprojects/proxmox/scripting)
-4. 
+4. [OpenSSH on VMs](/jpprojects/proxmox/openssh)
 
 <table>
   <tr>
@@ -22,5 +22,9 @@ This page serves as the a landing page for a dedicated Proxmox server and a vari
   <tr>
     <td class="pmh_logo_cell"><img src="/jpprojects/images/images/Mint.png" class="pmh_logo" alt="Mint"></td>
     <td><a href="https://jacob-parra.github.io/jpprojects/proxmox/proxmoxvms/mint">Mint</a></td>
+  </tr>
+  <tr>
+    <td class="pmh_logo_cell"><img src="/jpprojects/images/images/Kali.png" class="pmh_logo" alt="Kali"></td>
+    <td><a href="https://jacob-parra.github.io/jpprojects/proxmox/proxmoxvms/kali">Kali</a></td>
   </tr>
 </table>
