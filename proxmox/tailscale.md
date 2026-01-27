@@ -5,7 +5,7 @@ layout: default
 
 ## Tailscale on Proxmox
 
-Your entire proxmox server, and the VMs it manages, can be made accessible over Tailscale.
+Your entire proxmox server, and the VMs it manages, can be made accessible over Tailscale. Tailscale is installed on the Proxmox host machine, the server itself, NOT on individual VMs.
 
 <div class="info">
 See the <a href="https://jacob-parra.github.io/jpprojects/projects/tailscale">Tailscale project page</a> to see how to create a Tailscale VPN.

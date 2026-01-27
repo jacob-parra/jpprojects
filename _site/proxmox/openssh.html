@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>Proxmox Hub | Homelab</title>
+  <title>OpenSSH | Homelab</title>
   <link rel="icon" type="image/png" href="/jpprojects/images/PorcoRosso.png">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="stylesheet" href="/jpprojects/assets/style.css">
@@ -24,29 +24,17 @@
 
 
   <main>
-    <p>This page serves as the a landing page for a dedicated Proxmox server and a variety of Virtual Machine configurations.</p>
+    <h2 id="openssh">OpenSSH</h2>
 
-<ol>
-  <li><a href="/jpprojects/proxmox/proxmox">Dedicated Proxmox Server</a> Project Page</li>
-  <li><a href="/jpprojects/proxmox/tailscale">Tailscale on Proxmox</a></li>
-  <li><a href="/jpprojects/proxmox/scripting">Proxmox Server Downtime Scripting</a></li>
-  <li></li>
-</ol>
+<p>OpenSSH is a free, open source SSH server that can be installed on individual VM’s to allow for remote, direct terminal connection. It’s simple to install and lightweight.</p>
 
-<table>
-  <tr>
-    <th>Logos</th>
-    <th>Virtual Machines</th>
-  </tr>
-  <tr>
-    <td class="pmh_logo_cell"><img src="/jpprojects/images/images/Ubuntu.png" class="pmh_logo" alt="Ubuntu" /></td>
-    <td><a href="https://jacob-parra.github.io/jpprojects/proxmox/proxmoxvms/ubuntu">Ubuntu</a></td>
-  </tr>
-  <tr>
-    <td class="pmh_logo_cell"><img src="/jpprojects/images/images/Mint.png" class="pmh_logo" alt="Mint" /></td>
-    <td><a href="https://jacob-parra.github.io/jpprojects/proxmox/proxmoxvms/mint">Mint</a></td>
-  </tr>
-</table>
+<p><strong>1. Install OpenSSH</strong></p>
+
+<ul>
+  <li>Run <code class="language-plaintext highlighter-rouge">sudo apt update</code> to make sure everything is up to date</li>
+  <li>Install with <code class="language-plaintext highlighter-rouge">sudo apt install -y openssh-server</code></li>
+  <li>Check the status with <code class="language-plaintext highlighter-rouge">sudo systemctl status ssh</code>. It should already be running. If not, do <code class="language-plaintext highlighter-rouge">sudo systemctl enable --now ssh</code>.</li>
+</ul>
 
   </main>
 

@@ -45,15 +45,15 @@
 
 <p><strong>2. Install the QEMU Guest Agent</strong></p>
 
+<p>These steps need to be run on every VM.</p>
+
 <p>Enter the terminal of the VM itself. Follow these commands to install.</p>
 
 <ul>
-  <li>Run <code class="language-plaintext highlighter-rouge">systemctl start qemu-guest-agent</code></li>
-  <li>Then <code class="language-plaintext highlighter-rouge">systemctl is-active qemu-guest-agent</code>. It should return <code class="language-plaintext highlighter-rouge">active</code>.</li>
-  <li>
-    <p>Optionally, check the status verbosely with <code class="language-plaintext highlighter-rouge">systemctl status qemu-guest-agent</code>. You should see <code class="language-plaintext highlighter-rouge">running</code>.</p>
-  </li>
-  <li>Additionally, in</li>
+  <li>Install Quemu Guest Agent with <code class="language-plaintext highlighter-rouge">sudo apt update</code> and <code class="language-plaintext highlighter-rouge">sudo apt install qemu-guest-agent</code></li>
+  <li>Start with <code class="language-plaintext highlighter-rouge">sudo systemctl start qemu-guest-agent</code></li>
+  <li>Then check it’s working with <code class="language-plaintext highlighter-rouge">sudo systemctl is-active qemu-guest-agent</code>. It should return <code class="language-plaintext highlighter-rouge">active</code>.</li>
+  <li>Optionally, check the status verbosely with <code class="language-plaintext highlighter-rouge">sudo systemctl status qemu-guest-agent</code>. You should see <code class="language-plaintext highlighter-rouge">running</code>.</li>
 </ul>
 
 <p><strong>3. Create the script</strong></p>

@@ -85,9 +85,17 @@ markdown: kramdown
 
 
   &lt;main&gt;
-    &lt;h2 id="mint"&gt;Mint&lt;/h2&gt;
+    &lt;h2 id="openssh"&gt;OpenSSH&lt;/h2&gt;
 
-&lt;p&gt;Project coming soon!&lt;/p&gt;
+&lt;p&gt;OpenSSH is a free, open source SSH server that can be installed on individual VM’s to allow for remote, direct terminal connection. It’s simple to install and lightweight.&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;1. Install OpenSSH&lt;/strong&gt;&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;Run &lt;code class="language-plaintext highlighter-rouge"&gt;sudo apt update&lt;/code&gt; to make sure everything is up to date&lt;/li&gt;
+  &lt;li&gt;Install with &lt;code class="language-plaintext highlighter-rouge"&gt;sudo apt install -y openssh-server&lt;/code&gt;&lt;/li&gt;
+  &lt;li&gt;Check the status with &lt;code class="language-plaintext highlighter-rouge"&gt;sudo systemctl status ssh&lt;/code&gt;. It should already be running. If not, do &lt;code class="language-plaintext highlighter-rouge"&gt;sudo systemctl enable --now ssh&lt;/code&gt;.&lt;/li&gt;
+&lt;/ul&gt;
 
   &lt;/main&gt;
 

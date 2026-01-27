@@ -22,13 +22,15 @@ By defauly, Proxmox disables Qemu guest agent for each VM and must be enabled pe
 
 **2. Install the QEMU Guest Agent**
 
+These steps need to be run on every VM.
+
 Enter the terminal of the VM itself. Follow these commands to install.
 
-- Run `systemctl start qemu-guest-agent`
-- Then `systemctl is-active qemu-guest-agent`. It should return `active`.
-- Optionally, check the status verbosely with `systemctl status qemu-guest-agent`. You should see `running`.
+- Install Quemu Guest Agent with `sudo apt update` and `sudo apt install qemu-guest-agent`
+- Start with `sudo systemctl start qemu-guest-agent`
+- Then check it's working with `sudo systemctl is-active qemu-guest-agent`. It should return `active`.
+- Optionally, check the status verbosely with `sudo systemctl status qemu-guest-agent`. You should see `running`.
 
-- Additionally, in 
 
 **3. Create the script**
 

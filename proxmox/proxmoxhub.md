@@ -17,10 +17,10 @@ This page serves as the a landing page for a dedicated Proxmox server and a vari
   </tr>
   <tr>
     <td class="pmh_logo_cell"><img src="/jpprojects/images/images/Ubuntu.png" class="pmh_logo" alt="Ubuntu"></td>
-    <td><a href="https://jacob-parra.github.io/jpprojects/proxmox/proxmoxvms/ubuntu.md">Ubuntu</a></td>
+    <td><a href="https://jacob-parra.github.io/jpprojects/proxmox/proxmoxvms/ubuntu">Ubuntu</a></td>
   </tr>
   <tr>
     <td class="pmh_logo_cell"><img src="/jpprojects/images/images/Mint.png" class="pmh_logo" alt="Mint"></td>
-    <td><a href="https://jacob-parra.github.io/jpprojects/proxmox/proxmoxvms/mint.md">Mint</a></td>
+    <td><a href="https://jacob-parra.github.io/jpprojects/proxmox/proxmoxvms/mint">Mint</a></td>
   </tr>
 </table>

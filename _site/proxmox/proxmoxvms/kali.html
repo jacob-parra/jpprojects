@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>Ubuntu | Homelab</title>
+  <title>Kali | Homelab</title>
   <link rel="icon" type="image/png" href="/jpprojects/images/PorcoRosso.png">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="stylesheet" href="/jpprojects/assets/style.css">
@@ -24,13 +24,11 @@
 
 
   <main>
-    <h2 id="ubuntu">Ubuntu</h2>
+    <h2 id="kali">Kali</h2>
 
-<p>Ubuntu is one of the friendliest distros for people new to Linux. It’s widely supported with a large community. It boeasts a slick GUI and reliable stability.</p>
+<p>These are the steps for configuring a Kali Virtual Machine</p>
 
-<p>These are the steps for configuring an Ubuntu Virtual Machine</p>
-
-<p><strong>1. Download the Ubuntu ISO</strong></p>
+<p><strong>1. Download the Kali ISO</strong></p>
 
 <p>Download <a href="https://ubuntu.com/download/server">here</a>.</p>
 
@@ -63,23 +61,26 @@ This has a lot of steps, but there is <em>some</em> room for error. These config
     <ul>
       <li>ISO Image: select the Ubuntu ISO</li>
       <li>Keep “Guest OS” as “Linux”</li>
-      <li>Version: Ubuntu (or “other” if listed. Niether option appeared for me, so I left the default)</li>
+      <li>Version: 6.x - 2.6 Kernel</li>
       <li>Click “Next”</li>
     </ul>
   </li>
   <li>System
     <ul>
-      <li>BIOS : OVMF (UEFI)</li>
-      <li>Machine : q35</li>
+      <li>BIOS : SeaBIOS (Kali does not need UEFI and it caused issues for me)</li>
+      <li>Add EFI disk : Checked</li>
+      <li>SCSI Controller: VirtIO SCSI single</li>
+      <li>QEMU Agent: Checked</li>
+      <li>TPM : Not checked (don’t need it)</li>
       <li>Keep the other defaults</li>
       <li>Click “Next”</li>
     </ul>
   </li>
   <li>Disks
     <ul>
-      <li>Bus/Device : VirtIO Block</li>
+      <li>Bus/Device : SCSI</li>
       <li>Storage : local-lvm (or whatever is available)</li>
-      <li>Disk size : 32 GB</li>
+      <li>Disk size : 32 GB (Minimum 20 GB, 40 GB recommended)</li>
       <li>Cache : Default</li>
       <li>Discard : Check the box</li>
       <li>Click “Next”</li>
@@ -107,46 +108,49 @@ This has a lot of steps, but there is <em>some</em> room for error. These config
   <li>Confirm
     <ul>
       <li>Make sure everything is right</li>
-      <li>Check the “Start after created” box</li>
+      <li>Check the “Start after created” box if you want</li>
       <li>Click Finish</li>
     </ul>
   </li>
 </ul>
 
-<p><strong>4. Install Ubuntu</strong></p>
+<p><strong>4. Install Kali</strong></p>
 
 <p>Click on the VM (listed by id) on the left bar, then click “Console”. Click the “Start Now” power button in the middle.</p>
 
 <p>As it boots up, it will send you through an installation process. Follow these configuration steps and then restart the VM</p>
 
 <ul>
-  <li>Press “Enter” on first available option</li>
-  <li>Install Ubuntu</li>
-  <li>Set language and keyboard</li>
-  <li>Select “Minimal installation” and “Download updates while installing Ubuntu”</li>
-  <li>Select “Erase disk and install ubuntu”</li>
-  <li>Select your time zone</li>
-  <li>Set the name, computer name, username and password for the machine</li>
-  <li>Wait for the installation to complete</li>
+  <li>Select your language</li>
+  <li>Select your country</li>
+  <li>Select your keyboard</li>
+  <li>Machine name (something like <code class="language-plaintext highlighter-rouge">kalivm</code>)</li>
+  <li>Domain : Probably leave blank, unless you know what you are doing with that</li>
+  <li>Set user name, and username.</li>
+  <li>Set password</li>
+  <li>Set time zone</li>
+  <li>Select “Guided - Use entire disk”</li>
+  <li>Select default disk</li>
+  <li>Then “All files in one partition”</li>
+  <li>Review disk partitions and continue</li>
+  <li>Partition disks –&gt; Write changes to disk –&gt; yes</li>
+  <li>Leave Desktop kali, xfce, and install top tools (should all be default) enabled.</li>
+  <li>Install the GRUB boot loader</li>
 </ul>
+
+<p>Let the VM reboot, and quickly move to step 5</p>
 
 <p><strong>5. Remove the ISO</strong></p>
 
-<p>When the installation finishes and restarts, it will show a black screen instructing you to remove the ISO. To do so, click on “Hardware” on the left menu of the VM. Click “CD/DVD” in the list, and click “Remove” on the top. Select “Confirm”.</p>
-
-<p>This keeps the machine from reinstalling Ubuntu over and over again. Navigate back to the 
-“Console” section of the VM and press “Enter” as instructed.</p>
+<ul>
+  <li>If the VM has already finished rebooting, shut off the VM</li>
+  <li>Go to Hardware, click the CD/DVD Drive and click “Remove” on the top menu</li>
+  <li>Restart the VM and wait for it to boot</li>
+</ul>
 
 <p><strong>6. Login and finish configurations</strong></p>
 
-<p>Login with the name and password set in step 4. Make the following selections when prompted:</p>
-
-<ul>
-  <li>Skip ubuntu pro</li>
-  <li>Dont send system info</li>
-  <li>Keep location services off</li>
-  <li>upgrade if asked. Ubuntu may need to restart.</li>
-</ul>
+<p>Login with the name and password set in step 4.</p>
 
 <p><br /></p>
 

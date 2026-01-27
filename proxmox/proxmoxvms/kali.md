@@ -1,15 +1,15 @@
 ---
-title: Ubuntu
+title: Kali
 layout: default
 ---
 
-## Ubuntu
+## Kali
 
-Ubuntu is one of the friendliest distros for people new to Linux. It's widely supported with a large community. It boeasts a slick GUI and reliable stability.
 
-These are the steps for configuring an Ubuntu Virtual Machine
 
-**1. Download the Ubuntu ISO**
+These are the steps for configuring a Kali Virtual Machine
+
+**1. Download the Kali ISO**
 
 Download <a href="https://ubuntu.com/download/server">here</a>.
 
@@ -35,17 +35,20 @@ This has a lot of steps, but there is *some* room for error. These configuration
 - OS
     - ISO Image: select the Ubuntu ISO
     - Keep "Guest OS" as "Linux"
-    - Version: Ubuntu (or "other" if listed. Niether option appeared for me, so I left the default)
+    - Version: 6.x - 2.6 Kernel
     - Click "Next"
 - System
-    - BIOS : OVMF (UEFI)
-    - Machine : q35
+    - BIOS : SeaBIOS (Kali does not need UEFI and it caused issues for me)
+    - Add EFI disk : Checked
+    - SCSI Controller: VirtIO SCSI single
+    - QEMU Agent: Checked
+    - TPM : Not checked (don't need it)
     - Keep the other defaults
     - Click "Next"
 - Disks
-    - Bus/Device : VirtIO Block
+    - Bus/Device : SCSI
     - Storage : local-lvm (or whatever is available)
-    - Disk size : 32 GB
+    - Disk size : 32 GB (Minimum 20 GB, 40 GB recommended)
     - Cache : Default
     - Discard : Check the box
     - Click "Next"
@@ -61,39 +64,42 @@ This has a lot of steps, but there is *some* room for error. These configuration
     - Click "Next"
 - Confirm
     - Make sure everything is right
-    - Check the "Start after created" box
+    - Check the "Start after created" box if you want
     - Click Finish
 
-**4. Install Ubuntu**
+**4. Install Kali**
 
 Click on the VM (listed by id) on the left bar, then click "Console". Click the "Start Now" power button in the middle. 
 
 As it boots up, it will send you through an installation process. Follow these configuration steps and then restart the VM
 
-- Press "Enter" on first available option
-- Install Ubuntu
-- Set language and keyboard
-- Select "Minimal installation" and "Download updates while installing Ubuntu"
-- Select "Erase disk and install ubuntu"
-- Select your time zone
-- Set the name, computer name, username and password for the machine
-- Wait for the installation to complete
+- Select your language
+- Select your country
+- Select your keyboard
+- Machine name (something like `kalivm`)
+- Domain : Probably leave blank, unless you know what you are doing with that
+- Set user name, and username.
+- Set password
+- Set time zone
+- Select "Guided - Use entire disk"
+- Select default disk
+- Then "All files in one partition"
+- Review disk partitions and continue
+- Partition disks --> Write changes to disk --> yes
+- Leave Desktop kali, xfce, and install top tools (should all be default) enabled.
+- Install the GRUB boot loader
+
+Let the VM reboot, and quickly move to step 5
 
 **5. Remove the ISO**
 
-When the installation finishes and restarts, it will show a black screen instructing you to remove the ISO. To do so, click on "Hardware" on the left menu of the VM. Click "CD/DVD" in the list, and click "Remove" on the top. Select "Confirm".
-
-This keeps the machine from reinstalling Ubuntu over and over again. Navigate back to the 
-"Console" section of the VM and press "Enter" as instructed.
+- If the VM has already finished rebooting, shut off the VM
+- Go to Hardware, click the CD/DVD Drive and click "Remove" on the top menu
+- Restart the VM and wait for it to boot
 
 **6. Login and finish configurations**
 
-Login with the name and password set in step 4. Make the following selections when prompted:
-
-- Skip ubuntu pro
-- Dont send system info
-- Keep location services off
-- upgrade if asked. Ubuntu may need to restart.
+Login with the name and password set in step 4.
 
 <br>
 
