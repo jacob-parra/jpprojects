@@ -101,7 +101,7 @@ Let the VM reboot, and quickly move to step 5
 
 Login with the name and password set in step 4.
 
-<br>
+<hr>
 
 **7. Install the QEMU Guest Agent**
 

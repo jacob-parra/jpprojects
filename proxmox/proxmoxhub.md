@@ -3,6 +3,8 @@ title: Proxmox Hub
 layout: default
 ---
 
+## Proxmox Hub
+
 This page serves as the a landing page for a dedicated Proxmox server and a variety of Virtual Machine configurations.
 
 1. [Dedicated Proxmox Server](/jpprojects/proxmox/proxmox) Project Page

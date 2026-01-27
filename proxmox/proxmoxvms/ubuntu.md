@@ -95,7 +95,7 @@ Login with the name and password set in step 4. Make the following selections wh
 - Keep location services off
 - upgrade if asked. Ubuntu may need to restart.
 
-<br>
+<hr>
 
 **7. Install the QEMU Guest Agent**
 
