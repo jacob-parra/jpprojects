@@ -117,7 +117,7 @@ See [OpenSSH project page](/jpprojects/proxmox/openssh) for instructions on how 
 SSH in, as these steps require lots of copy and pasting, easiest done from SSH rather than directly in the Proxmox Web GUI. Log in as root, or a user with root priviledge, or as a normal user and then `su` to a user with `sudo`.
 
 <div class="info">
-Remeber, this is done with `ssh <username>@<ip>`. Find the Debian VM's IP address with `ip a`, it will likely be the last one listed.
+Remeber, this is done with `ssh username@ip`. Find the Debian VM's IP address with `ip a`, it will likely be the last one listed.
 </div>
 
 **2. Install Docker**
@@ -171,11 +171,9 @@ It isn't totally intuitive, but it isn't too tricky either.
 - Pull a downloaded image :                     `docker pull <image>`
 - Remove a container :                          `docker rm <container>`
 - Read a containers logs :                      `docker logs <container>`
-
 - Run a container :                             `docker run <container>`
 - Start container :                             `docker start <container>`
 - Restart container :                           `docker restart <container>`
 - Stop container :                              `docker stop <container>`
-
 - Start a docker-compose.yml :                  `docker compose up -d`
 - Stop a docker-compose.yml :                   `docker compose down`
