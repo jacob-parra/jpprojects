@@ -14,7 +14,7 @@ I continue to learn and I'm looking for feedback. For questions or comments, ple
 | - [Tailscale VPN](/jpprojects/projects/tailscale)    | - [Wiki.js Hosting](/jpprojects/projects/wikijs) | - [PiHole](/jpprojects/projects/pihole) |
 | - [TrueNAS](/jpprojects/projects/truenas)                  |     | - [NextCloud CloudSuite](/jpprojects/projects/cloudsuite)|
 | - [KeePass Password Manager](/jpprojects/projects/keepass) |                     | - [AI Hosting](/jpprojects/projects/ai)|
-| - [Scripting](/jpprojects/projects/scripting)              |                                | |
+| - [Scripting](/jpprojects/projects/scripting)              |                                | - [SIEM](/jpprojects/projects/siem) |
 | - [SSH & SFTP](/jpprojects/projects/sshsftp)               |                                |                          |
 | - [Pages](/jpprojects/projects/pages)                      |                                |                          |
 | - [JellyFin Server](/jpprojects/projects/jellyfin)         |                                |                          |

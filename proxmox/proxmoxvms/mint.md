@@ -23,7 +23,7 @@ Download <a href="https://ubuntu.com/download/server">here</a>.
 - Select the Ubuntu ISO from the last step
 - Wait for the upload to complete, then close the upload window
 
-Make sure you see the iso listed 
+Make sure you see the iso listed.
 
 **3. Create the VM**
 This has a lot of steps, but there is *some* room for error. These configurations are organized by section/tab:

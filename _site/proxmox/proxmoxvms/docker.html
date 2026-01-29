@@ -1,0 +1,256 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Proxmox Hub | Homelab</title>
+  <link rel="icon" type="image/png" href="/jpprojects/images/PorcoRosso.png">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="/jpprojects/assets/style.css">
+</head>
+
+<body>
+  <div id="Default_Title_Bar">
+    <h1 id="title">jpprojects</h1>
+    <img src="/jpprojects/images/PorcoRosso.png" id="ProfilePic" alt="My Github Profile Picture">
+  </div>
+
+  <div id="Default_Nav_Bar">
+    <nav>
+      <a href="/jpprojects/">↩︎ Home</a>
+      <a href="https://github.com/jacob-parra">My Github</a>
+      <a href="https://jacob-parra.github.io/jpprojects/proxmox/proxmoxhub">Proxmox Hub</a>
+    </nav>
+  </div>
+
+
+  <main>
+    <h2 id="docker-vm">Docker VM</h2>
+
+<p>Docker is one of, if not the most popular containerization platform. It’s open source and free to use, used to create and manage containers (low resource, lightweight, very fast “VMs”). Thing is, Docker is not, itself, an operating system. So for this machine, a lightweight, CLI only install of Debian is used as the host environmnet for Docker. This adds a dimension of complication and locks the machine to CLI only in exchange for being very lightweight and fast.</p>
+
+<p>This page is in 2 parts: first for creating the Debian VM and then installing and using Docker.</p>
+
+<hr />
+
+<h2 id="part-1--debian-cli-vm">Part 1 : Debian CLI VM</h2>
+
+<p><strong>1. Download the Debian ISO</strong></p>
+
+<p>We will be using Debian 12 <a href="https://cdimage.debian.org/cdimage/archive/12.0.0/amd64/iso-cd/">(debian-12.0.0-amd64-netinst.iso)</a></p>
+
+<p><strong>2. Upload the ISO</strong></p>
+
+<ul>
+  <li>Access the Proxmox Web UI</li>
+  <li>Click on your node (on the left side, under “Datacenter”)</li>
+  <li>Select the “local” storage option</li>
+  <li>Go to “ISO Images”</li>
+  <li>Click “Upload” on the top left</li>
+  <li>Select the Ubuntu ISO from the last step</li>
+  <li>Wait for the upload to complete, then close the upload window. It will be very fast as the ISO is only about half a Gigabite.</li>
+</ul>
+
+<p>Make sure you see the iso listed.</p>
+
+<p><strong>3. Create the VM</strong></p>
+
+<p>This has a lot of steps, but there is <em>some</em> room for error. These configurations are organized by section/tab:</p>
+
+<ul>
+  <li>General
+    <ul>
+      <li>Leave the default VM ID</li>
+      <li>Set a name (something like docker-01, or debian-01.)</li>
+      <li>Click “Next”</li>
+    </ul>
+  </li>
+  <li>OS
+    <ul>
+      <li>ISO Image: select the Debian ISO</li>
+      <li>Keep “Guest OS” as “Linux”</li>
+      <li>Version: 6.x - 2.6 Kernal</li>
+      <li>Click “Next”</li>
+    </ul>
+  </li>
+  <li>System
+    <ul>
+      <li>BIOS : OVMF (UEFI)</li>
+      <li>Machine : q35</li>
+      <li>SCSI Controller: VirtIO SCSI</li>
+      <li>QEMU Guest Agent: Checked</li>
+      <li>Click “Next”</li>
+    </ul>
+  </li>
+  <li>Disks
+    <ul>
+      <li>Bus/Device : VirtIO Block</li>
+      <li>Storage : local-lvm (or whatever is available)</li>
+      <li>Disk size : 32 GB minimum, suggested 45 GB +</li>
+      <li>Discard : Check the box</li>
+      <li>Click “Next”</li>
+    </ul>
+  </li>
+  <li>CPU
+    <ul>
+      <li>Cores : 2</li>
+      <li>Type : host (scroll down, it’s probably on the bottom)</li>
+    </ul>
+  </li>
+  <li>Memory
+    <ul>
+      <li>Set 4096 (it’s listed in MiB)</li>
+      <li>Click “Next”</li>
+    </ul>
+  </li>
+  <li>Network
+    <ul>
+      <li>Bridge: vmbr0</li>
+      <li>Model: VirtIO (paravirtualized)</li>
+      <li>Click “Next”</li>
+    </ul>
+  </li>
+  <li>Confirm
+    <ul>
+      <li>Make sure everything is right</li>
+      <li>Check the “Start after created” box</li>
+      <li>Click Finish</li>
+    </ul>
+  </li>
+</ul>
+
+<p><strong>4. Finish the Installation</strong></p>
+
+<p>Follow these steps for post-creation installation options. Most are pretty predictable, but some are not. Safest to just follow along.</p>
+
+<ul>
+  <li>Enter on first “Graphical Install” option</li>
+  <li>Set language</li>
+  <li>Set region</li>
+  <li>Set Keyboard</li>
+  <li>Set host name (like <code class="language-plaintext highlighter-rouge">debianvm</code>) debiandockervm</li>
+  <li>Leave domain blank, unless you know what you are doing</li>
+  <li>Set user name</li>
+  <li>Set username</li>
+  <li>Set user password</li>
+  <li>Set time zone</li>
+  <li>Press enter on default “Guided - use entire disk”</li>
+  <li>Keep the default disk and continue</li>
+  <li>Keep the default “All files in one partition”</li>
+  <li>Review the partition configurations and continue</li>
+  <li>Click “Yes” for “Write the changes to disks”</li>
+  <li>Wait for the installation to finish</li>
+  <li>Keep the default no and continue</li>
+  <li>Set your mirror region</li>
+  <li>Keep the default deb.debian.org archive mirror and continue</li>
+  <li>Keep no for “Participate in the package usage survey” and continue</li>
+  <li>Uncheck both Debian desktop envirnoment AND GNOME, and check SSH server, and keep standard system utilities checked</li>
+  <li>Wait for the system to finish installing, it can take a while</li>
+  <li>Hit continue to reboot, and then sign in</li>
+</ul>
+
+<p>All done! Finally.</p>
+
+<p><strong>5. Install the QEMU Guest Agent</strong></p>
+
+<p>See the <a href="/jpprojects/proxmox/scripting">Proxmox Scripting project page</a>, step 2, for instructions on how to do this.</p>
+
+<p><strong>6. Install OpenSSH</strong></p>
+
+<p>See <a href="/jpprojects/proxmox/openssh">OpenSSH project page</a> for instructions on how to do this.</p>
+
+<hr />
+
+<h2 id="part-2--docker-cli">Part 2 : Docker CLI</h2>
+
+<p><strong>1. SSH in</strong></p>
+
+<p>SSH in, as these steps require lots of copy and pasting, easiest done from SSH rather than directly in the Proxmox Web GUI. Log in as root, or a user with root priviledge, or as a normal user and then <code class="language-plaintext highlighter-rouge">su</code> to a user with <code class="language-plaintext highlighter-rouge">sudo</code>.</p>
+
+<div class="info">
+Remeber, this is done with `ssh <username>@<ip>`. Find the Debian VM's IP address with `ip a`, it will likely be the last one listed.
+&lt;/div&gt;
+
+**2. Install Docker**
+
+This is where the copy and pasting is going to be very handy.
+
+- Update : 
+    - `sudo apt update`
+    - `sudo apt install ca-certificates curl gnupg -y`
+- Add Docker's GPG key:
+    - `sudo install -m 0755 -d /etc/apt/keyrings curl -fsSL https://download.docker.com/linux/debian/gpg | \`
+    - `sudo gpg --dearmor -o /etc/apt/keyrings/docker.gpg`
+    - `sudo chmod a+r /etc/apt/keyrings/docker.gpg`
+- Add the Docker Repo:
+    - `echo \ "deb [arch=$(dpkg --print-architecture) \ signed-by=/etc/apt keyrings/docker.gpg] \ https://download.docker.com/linux/debian \ $(. /etc/os-release &amp;&amp; echo "$VERSION_CODENAME") stable" | \`
+    - `sudo tee /etc/apt/sources.list.d/docker.list &gt; /dev/null`
+
+<div class="info">
+The VM may come without `tee`. Run `apt install coreutils sudo -y` to install it.
+</div>
+
+- Install Docker:
+    - Update again : `sudo apt update`
+    - `sudo apt install docker-ce docker-ce-cli containerd.io \docker-buildx-plugin docker-compose-plugin -y`
+
+**3. Allow user to run Docker**
+
+This allows the current user to run Docker without `sudo`. Run `newgrp docker`, then `sudo usermod -aG docker $USER`.
+
+Test that everything is working by running `docker run hello-world`. Output should be see a message that says `Hello from Docker!`.
+
+**4. Finishing touches**
+
+First, check that auto-start is enabled (which is the default, but good to check).
+    - `sudo systemctl enable docker`
+    - `sudo systemctl enable containerd`
+
+Second, organize the Docker stuff for a clean layout:
+    - Make a Docker directory : `sudo mkdir -p /opt/docker`
+    - Switch owner of the directory : `sudo chown -R $USER:$USER /opt/docker`
+
+<hr />
+
+## How to Docker CLI
+
+It isn't totally intuitive, but it isn't too tricky either.
+
+- List running containers :                     `docker ps`
+- List all containers (including stopped) :     `docker ps -a`
+- List downloaded images :                      `docker images`
+- Pull a downloaded image :                     `docker pull <image>`
+- Remove a container :                          `docker rm <container>`
+- Read a containers logs :                      `docker logs <container>`
+
+- Run a container :                             `docker run <container>`
+- Start container :                             `docker start <container>`
+- Restart container :                           `docker restart <container>`
+- Stop container :                              `docker stop <container>`
+
+- Start a docker-compose.yml :                  `docker compose up -d`
+- Stop a docker-compose.yml :                   `docker compose down`
+</container></container></container></container></container></container></image></ip></username></div>
+
+  </main>
+
+
+<footer class="site-footer">
+  <div class="footer-content">
+    <hr>
+    <p>
+      © <span id="year"></span> Jacob Parra ·
+      jpprojects ·
+      <a href="https://github.com/jacob-parra" target="_blank" rel="noopener">GitHub</a>
+    </p>
+    <p class="footer-subtext">
+    Project documentation, walkthroughs and notes | Built with Markdown · Hosted on GitHub Pages
+
+  </div>
+</footer>
+
+<script>
+  document.getElementById("year").textContent = new Date().getFullYear();
+</script>
+
+</body>
+</html>
