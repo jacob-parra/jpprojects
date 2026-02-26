@@ -11,6 +11,7 @@ This page serves as the a landing page for a dedicated Proxmox server and a vari
 2. [Tailscale on Proxmox](/jpprojects/proxmox/tailscale)
 3. [Proxmox Server Downtime Scripting](/jpprojects/proxmox/scripting)
 4. [OpenSSH on VMs](/jpprojects/proxmox/openssh)
+5. [Migration](/jpprojects/proxmox/migration) between servers
 
 <table>
   <tr>
@@ -33,5 +34,9 @@ This page serves as the a landing page for a dedicated Proxmox server and a vari
   <tr>
     <td class="pmh_logo_cell"><img src="/jpprojects/images/images/Docker.png" class="pmh_logo" alt="Docker"></td>
     <td><a href="https://jacob-parra.github.io/jpprojects/proxmox/proxmoxvms/docker">Docker</a></td>
+  </tr>
+  <tr>
+    <td class="pmh_logo_cell"><img src="/jpprojects/images/images/opnsense.png" class="pmh_logo" alt="OPNsense"></td>
+    <td><a href="https://jacob-parra.github.io/jpprojects/proxmox/proxmoxvms/opnsense">Docker</a></td>
   </tr>
 </table>
