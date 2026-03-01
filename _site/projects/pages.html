@@ -103,7 +103,7 @@ This is a very networking heavy project. One way to reduce headaches later is to
 
 &lt;p&gt;Download &lt;a href="https://opnsense.org/download/"&gt;here&lt;/a&gt;. Be sure to download the AMD64, VGA installer.&lt;/p&gt;
 
-&lt;p&gt;It will probably download as very specific &lt;code class="language-plaintext highlighter-rouge"&gt;.iso.bz2&lt;/code&gt; format (compressed). I used 7-zip on Windows to export it properly. You can download 7-zip &lt;a href="https://www.7-zip.org/download.html"&gt;here&lt;/a&gt;. Just grab the .exe version. When extracted properly, the file will have a .iso extension.&lt;/p&gt;
+&lt;p&gt;It will probably download as a very specific &lt;code class="language-plaintext highlighter-rouge"&gt;.iso.bz2&lt;/code&gt; format (compressed). I used &lt;strong&gt;7-Zip&lt;/strong&gt; on Windows to export it properly. You can download 7-Zip &lt;a href="https://www.7-zip.org/download.html"&gt;here&lt;/a&gt;. Just grab the .exe version. When extracted properly, the file will have a .iso extension.&lt;/p&gt;
 
 &lt;p&gt;&lt;strong&gt;2. Upload the ISO to Proxmox&lt;/strong&gt;&lt;/p&gt;
 
@@ -113,15 +113,15 @@ This is a very networking heavy project. One way to reduce headaches later is to
   &lt;li&gt;Select the “local” storage option&lt;/li&gt;
   &lt;li&gt;Go to “ISO Images”&lt;/li&gt;
   &lt;li&gt;Click “Upload” on the top left&lt;/li&gt;
-  &lt;li&gt;Select the Ubuntu ISO from the last step&lt;/li&gt;
+  &lt;li&gt;Select the OPNsense ISO from the last step&lt;/li&gt;
   &lt;li&gt;Wait for the upload to complete, then close the upload window&lt;/li&gt;
 &lt;/ul&gt;
 
-&lt;p&gt;Make sure you see the iso listed&lt;/p&gt;
+&lt;p&gt;Make sure you see the iso listed.&lt;/p&gt;
 
 &lt;p&gt;&lt;strong&gt;3. Create the VM&lt;/strong&gt;&lt;/p&gt;
 
-&lt;p&gt;This are the settings I used, organized by section/tab:&lt;/p&gt;
+&lt;p&gt;This are the settings I used for creating the VM, organized by section/tab:&lt;/p&gt;
 
 &lt;ul&gt;
   &lt;li&gt;General
@@ -201,7 +201,7 @@ This is a very networking heavy project. One way to reduce headaches later is to
 &lt;p&gt;This is the configuration I used for my setup:&lt;/p&gt;
 
 &lt;ol&gt;
-  &lt;li&gt;In the Proxmox Host Console, run &lt;code class="language-plaintext highlighter-rouge"&gt;nano /etc/network/interfaces&lt;/code&gt;&lt;/li&gt;
+  &lt;li&gt;In the &lt;strong&gt;Proxmox Host Console&lt;/strong&gt;, run &lt;code class="language-plaintext highlighter-rouge"&gt;nano /etc/network/interfaces&lt;/code&gt;&lt;/li&gt;
   &lt;li&gt;Add this in there:&lt;/li&gt;
 &lt;/ol&gt;
 
@@ -212,16 +212,16 @@ iface lo inet loopback
 # LAN bridge (built-in NIC)
 auto vmbr0
 iface vmbr0 inet static
-    address 192.168.10.2/24 # the IP address of Proxmox
-    bridge-ports enp1s0     # your built-in NIC
+    address 192.168.10.2/24     # the IP address of Proxmox
+    bridge-ports enp1s0         # your built-in NIC
     bridge-stp off
     bridge-fd 0
-    gateway 192.168.10.1    # OPNsense LAN as default route
+    gateway 192.168.10.1        # OPNsense LAN as default route
 
 # WAN bridge (USB NIC)
 auto vmbr1
 iface vmbr1 inet manual
-    bridge-ports enxXXXX     # your USB NIC
+    bridge-ports enxXXXX        # your USB NIC
     bridge-stp off
     bridge-fd 0
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
@@ -231,11 +231,12 @@ iface vmbr1 inet manual
   &lt;li&gt;vmbr0 is the internal bridge (LAN), vmbr1 is the external bridge (WAN).&lt;/li&gt;
   &lt;li&gt;The LAN address needs to be on the same subnet as the rest of your LAN (192.168.10.x/24 in my example).&lt;/li&gt;
   &lt;li&gt;The gateway for the LAN side is the IP address we are going to assign to the OPNsense VM.&lt;/li&gt;
-  &lt;li&gt;
-    &lt;p&gt;You put the name of the USB NIC into the birdge-ports option of vmbr1. This is usually the devices MAC address, which can be found by running &lt;code class="language-plaintext highlighter-rouge"&gt;ip a&lt;/code&gt; in the Proxmox host console while it is plugged in. It will likely be the only device listed with a MAC address as the interface name&lt;/p&gt;
-  &lt;/li&gt;
-  &lt;li&gt;Save and close the file. Restart networking with &lt;code class="language-plaintext highlighter-rouge"&gt;systemctl restart networking&lt;/code&gt;.&lt;/li&gt;
+  &lt;li&gt;You put the name of the USB NIC into the birdge-ports option of vmbr1. This is usually the devices MAC address, which can be found by running &lt;code class="language-plaintext highlighter-rouge"&gt;ip a&lt;/code&gt; in the Proxmox host console while it is plugged in. It will likely be the only device listed with a MAC address as the interface name&lt;/li&gt;
 &lt;/ol&gt;
+
+&lt;p&gt;&lt;br /&gt;&lt;/p&gt;
+
+&lt;p&gt;Save and close the file. Restart networking with &lt;code class="language-plaintext highlighter-rouge"&gt;systemctl restart networking&lt;/code&gt;.&lt;/p&gt;
 
 &lt;p&gt;When you run &lt;code class="language-plaintext highlighter-rouge"&gt;ip a&lt;/code&gt; from the host, you should see the built in NIC and USB NIC appearing as interfaces, with an assigned IP addresses for the built in (LAN) one. THE NIC (WAN) interface gets it’s IP address from the ISP (either statically or via DHCP, depending on your homes internet. My WAN IP is assigned via DHCP, but you may need to assign it yourself if your ISP gives you a static one.).&lt;/p&gt;
 
@@ -252,22 +253,22 @@ iface vmbr1 inet manual
   &lt;li&gt;If prompted, don’t assign an IP address to WAN (so that it can be assigned via DHCP. Unless, as stated before, your ISP gives you a specific one, then assign that one).&lt;/li&gt;
   &lt;li&gt;Assign &lt;code class="language-plaintext highlighter-rouge"&gt;vmbr0&lt;/code&gt; to LAN&lt;/li&gt;
   &lt;li&gt;Assign the LAN IP address to &lt;code class="language-plaintext highlighter-rouge"&gt;192.168.10.2&lt;/code&gt; (for my example).&lt;/li&gt;
-  &lt;li&gt;Enter &lt;code class="language-plaintext highlighter-rouge"&gt;Y&lt;/code&gt; when prompted to enable DHCP for LAN.&lt;/li&gt;
-  &lt;li&gt;You can probably &lt;code class="language-plaintext highlighter-rouge"&gt;N&lt;/code&gt; on everything.&lt;/li&gt;
+  &lt;li&gt;Enter &lt;code class="language-plaintext highlighter-rouge"&gt;Y&lt;/code&gt; when prompted to enable DHCP for LAN. This will allow the router to assign IP addresses to devices that connect to it.&lt;/li&gt;
+  &lt;li&gt;You can probably &lt;code class="language-plaintext highlighter-rouge"&gt;N&lt;/code&gt; on everything else.&lt;/li&gt;
 &lt;/ul&gt;
 
 &lt;p&gt;&lt;strong&gt;7. Configure from the OPNsense Web Console with the Setup Wizard&lt;/strong&gt;&lt;/p&gt;
 
-&lt;p&gt;In the VM console in Proxmox you will see a few IP address listed above the options: one is the LAN you just set and one is the WAN (either set statically or assigned by DHCP). The web console is accessed at the LAN IP address. In order to reach it, your client device needs to be on the its same subnet. You can set that statically or temporarily.&lt;/p&gt;
+&lt;p&gt;In the VM console in Proxmox you will see a few IP address listed above the options: one is the LAN you just set and one is the WAN (either set statically or assigned by DHCP). The web console is accessed at the LAN IP address. In order to reach it, your client device (the device you’ll be reaching the web console from) needs to be on the its same subnet. You can set that statically or temporarily.&lt;/p&gt;
 
-&lt;p&gt;The Wizard is the easiest way to configure everything. After logging in to the web console you should drop to the installation wizard automatically. If you don’t, go to &lt;code class="language-plaintext highlighter-rouge"&gt;System-&amp;gt;Configuration-&amp;gt;Wizard&lt;/code&gt;. It will walk through and apply the base configurations automatically. These are some things it will set up:&lt;/p&gt;
+&lt;p&gt;The Wizard is the easiest way to configure everything. After logging in to the web console you should drop to the installation wizard automatically. If you don’t, go to &lt;code class="language-plaintext highlighter-rouge"&gt;System → Configuration → Wizard&lt;/code&gt;. It will walk through and apply the base configurations automatically. These are some things it will set up:&lt;/p&gt;
 
 &lt;ul&gt;
   &lt;li&gt;Set a host name. Make it obvious, like &lt;code class="language-plaintext highlighter-rouge"&gt;opnsense&lt;/code&gt;&lt;/li&gt;
   &lt;li&gt;Don’t enable DNS (unless you know what you are doing with it). Leave the rest default.&lt;/li&gt;
   &lt;li&gt;Set your correct timezone, important for logs and cert validation.&lt;/li&gt;
   &lt;li&gt;Leave NTP servers default.&lt;/li&gt;
-  &lt;li&gt;Set the WAN to IPV4 DHCP&lt;/li&gt;
+  &lt;li&gt;Set the WAN to IPV4 DHCP (again, unless you were given one statically from your ISP)&lt;/li&gt;
   &lt;li&gt;You can leave Block private networks and Block bogon networks off.&lt;/li&gt;
   &lt;li&gt;Set the LAN IP statically (the same as what you set before i.e. 192.168.10.1/24. Note: this is the LAN address of OPNsense, not of the Proxmox host)&lt;/li&gt;
   &lt;li&gt;Set a root password&lt;/li&gt;
@@ -277,9 +278,9 @@ iface vmbr1 inet manual
 
 &lt;p&gt;&lt;strong&gt;8. Update&lt;/strong&gt;&lt;/p&gt;
 
-&lt;p&gt;After getting the initial configurations set up, it’s time to update. Check the left menu bar and go to &lt;code class="language-plaintext highlighter-rouge"&gt;System-&amp;gt;Firmware-&amp;gt;Status&lt;/code&gt;. Click &lt;code class="language-plaintext highlighter-rouge"&gt;Check for Updates&lt;/code&gt; and let the update checker run. If there is an update, let it apply, and then reboot the VM from Proxmox so it applies.&lt;/p&gt;
+&lt;p&gt;After getting the initial configurations set up, it’s time to update. Check the left menu bar and go to &lt;code class="language-plaintext highlighter-rouge"&gt;System → Firmware → Status&lt;/code&gt;. Click &lt;code class="language-plaintext highlighter-rouge"&gt;Check for Updates&lt;/code&gt; and let the update checker run. If there is an update, let it apply, and then reboot the VM from Proxmox so it applies.&lt;/p&gt;
 
-&lt;p&gt;If the update hangs, or upon checking for updates again the same update shows up, you can also update from the console in Proxmox. Pick option 12, choose Fetch Updates and Apply Updates. Say &lt;code class="language-plaintext highlighter-rouge"&gt;Yes&lt;/code&gt; to rebooting. When the patch notes appear press Space to scroll through them, and the &lt;code class="language-plaintext highlighter-rouge"&gt;q&lt;/code&gt; to let the updates finish installing. The VM should reboot itself when it finishes.&lt;/p&gt;
+&lt;p&gt;If the update hangs, or if upon checking for updates again the same update shows up, you can also update from the console in Proxmox. Pick option 12, choose Fetch Updates and Apply Updates. Say &lt;code class="language-plaintext highlighter-rouge"&gt;Yes&lt;/code&gt; to rebooting. When the patch notes appear press Space to scroll through them, and then &lt;code class="language-plaintext highlighter-rouge"&gt;q&lt;/code&gt; to let the updates finish installing. The VM should reboot itself when it finishes.&lt;/p&gt;
 
 &lt;p&gt;&lt;strong&gt;9. Finish Manual Configurations&lt;/strong&gt;&lt;/p&gt;
 
@@ -297,11 +298,65 @@ iface vmbr1 inet manual
 
 &lt;hr /&gt;
 
+&lt;h2 id="tailscale-on-opnsense"&gt;Tailscale on OPNsense&lt;/h2&gt;
+
 &lt;p&gt;The following instructions detail how to setup Tailscale on a router, to make the entire LAN accessible via Tailscale subnet routing.&lt;/p&gt;
 
 &lt;p&gt;&lt;strong&gt;1. Install Tailscale&lt;/strong&gt;&lt;/p&gt;
 
-&lt;p&gt;Go to &lt;code class="language-plaintext highlighter-rouge"&gt;System → Firmware → Plugins&lt;/code&gt;. Click the &lt;code class="language-plaintext highlighter-rouge"&gt;Show community plugins&lt;/code&gt; box on the far right.&lt;/p&gt;
+&lt;p&gt;Go to &lt;code class="language-plaintext highlighter-rouge"&gt;System → Firmware → Plugins&lt;/code&gt;. Click the &lt;code class="language-plaintext highlighter-rouge"&gt;Show community plugins&lt;/code&gt; box on the far right. Search for &lt;code class="language-plaintext highlighter-rouge"&gt;os-tailscale&lt;/code&gt;. After installing finishes, reboot.&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;2. Authenticate Tailscale&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;In another tab, sign in to &lt;a href="https://login.tailscale.com/admin/settings/keys"&gt;Tailscale&lt;/a&gt; to generate a key. Once in the Tailscale admin console, go to &lt;code class="language-plaintext highlighter-rouge"&gt;Settings&lt;/code&gt; on the top, then &lt;code class="language-plaintext highlighter-rouge"&gt;Keys&lt;/code&gt; on the left. Click on the &lt;code class="language-plaintext highlighter-rouge"&gt;Generate auth key...&lt;/code&gt; button on the right.&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;Keep &lt;code class="language-plaintext highlighter-rouge"&gt;Reusable off&lt;/code&gt;&lt;/li&gt;
+  &lt;li&gt;Keep &lt;code class="language-plaintext highlighter-rouge"&gt;Ephemeral off&lt;/code&gt;&lt;/li&gt;
+  &lt;li&gt;Keep &lt;code class="language-plaintext highlighter-rouge"&gt;Expiration Disabled&lt;/code&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;Copy the key. You may not be able to access it again.&lt;/p&gt;
+
+&lt;p&gt;Then, in the OPNsense web console, go to &lt;code class="language-plaintext highlighter-rouge"&gt;VPN → Tailscale → Authentication&lt;/code&gt;. Set the Login Server to &lt;code class="language-plaintext highlighter-rouge"&gt;https://controlplane.tailscale.com&lt;/code&gt;. Paste your key into the &lt;code class="language-plaintext highlighter-rouge"&gt;Pre-authentication Key&lt;/code&gt; section and click Apply.&lt;/p&gt;
+
+&lt;p&gt;Then go to back to the Machines tab of the Tailscale admin console. Your router should be newly listed at the bottom of the list. Click on the machine name, and then click “Approve” if necessary.&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;3. Enable the Interface&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;Back in the OPNsense web console, go to &lt;code class="language-plaintext highlighter-rouge"&gt;Interfaces → Tailscale&lt;/code&gt;.&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;Click the &lt;code class="language-plaintext highlighter-rouge"&gt;Enable&lt;/code&gt; check box&lt;/li&gt;
+  &lt;li&gt;Set a description if you’d like&lt;/li&gt;
+  &lt;li&gt;Click the Save button at the bottom&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;&lt;strong&gt;4. Create a Tailscale Firewall Rule&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;Go to &lt;code class="language-plaintext highlighter-rouge"&gt;Firewall → Rules → Tailscale&lt;/code&gt;. Use the little orange + button on the right to add a rule.&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;Action: Pass&lt;/li&gt;
+  &lt;li&gt;Interface: Tailscale&lt;/li&gt;
+  &lt;li&gt;Protocol: Any&lt;/li&gt;
+  &lt;li&gt;Source: Any&lt;/li&gt;
+  &lt;li&gt;Destination: Any&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;Click the Save at the bottom, then Apply at the top right when back at the &lt;code class="language-plaintext highlighter-rouge"&gt;Firewall: Rules: Tailscale&lt;/code&gt; page.&lt;/p&gt;
+
+&lt;p&gt;Your router is now part of your Tailscale VPN. The OPNsense web console can be reached by any device connected to the VPN, allowing you to monitor the status of your home network from anywhere.&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;5. Enable Subnet Routing&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;Now that Tailscale is on OPNsense, it can be configured to allow external access to every machine in the LAN, without needing to install Tailscale on every machine or VM therein. This is called “Subnet Routing”.&lt;/p&gt;
+
+&lt;p&gt;Go to &lt;code class="language-plaintext highlighter-rouge"&gt;VPN → Tailscale → Settings&lt;/code&gt;. Make sure Enabled and Accept DNS are checked. Also check Accept Subnet Routes if other nodes in your Tailscale network are advertising subnets.&lt;/p&gt;
+
+&lt;p&gt;Then go to the &lt;code class="language-plaintext highlighter-rouge"&gt;Advertised Routes&lt;/code&gt; tab at the top. Use the orange + button to add a subnet. Put your LAN subnet in the Subnet section (like 192.168.10.0/24) and add a description if you’d like. Click Save, then Apply.&lt;/p&gt;
+
+&lt;p&gt;Finally, in the Tailscale admin console, go to the Machines tab. Click on your OPNsense machine and in the Subnet Routes portion click approve on the newly listed subnet route.&lt;/p&gt;
 
   &lt;/main&gt;
 

@@ -2,7 +2,6 @@
 title: OPNsense
 layout: default
 ---
-
 ## OPNsense
 
 Opensense is a robust, open-source router software platform. It began as a fork of pfSense and m0n0wall and is generally considered more user friendly. Setting up a virtual router is not exactly trivial, but if you are careful it can be done.
@@ -21,7 +20,7 @@ This is a very networking heavy project. One way to reduce headaches later is to
 
 Download <a href="https://opnsense.org/download/">here</a>. Be sure to download the AMD64, VGA installer. 
 
-It will probably download as very specific `.iso.bz2` format (compressed). I used 7-zip on Windows to export it properly. You can download 7-zip <a href="https://www.7-zip.org/download.html">here</a>. Just grab the .exe version. When extracted properly, the file will have a .iso extension.
+It will probably download as a very specific `.iso.bz2` format (compressed). I used **7-Zip** on Windows to export it properly. You can download 7-Zip <a href="https://www.7-zip.org/download.html">here</a>. Just grab the .exe version. When extracted properly, the file will have a .iso extension.
 
 **2. Upload the ISO to Proxmox**
 
@@ -30,14 +29,14 @@ It will probably download as very specific `.iso.bz2` format (compressed). I use
 - Select the "local" storage option
 - Go to "ISO Images"
 - Click "Upload" on the top left
-- Select the Ubuntu ISO from the last step
+- Select the OPNsense ISO from the last step
 - Wait for the upload to complete, then close the upload window
 
-Make sure you see the iso listed 
+Make sure you see the iso listed. 
 
 **3. Create the VM**
 
-This are the settings I used, organized by section/tab:
+This are the settings I used for creating the VM, organized by section/tab:
 
 
 - General
@@ -91,7 +90,7 @@ The router is going to be connecting internal (LAN) traffic to the outside inter
 
 This is the configuration I used for my setup:
 
-1. In the Proxmox Host Console, run `nano /etc/network/interfaces`
+1. In the **Proxmox Host Console**, run `nano /etc/network/interfaces`
 2. Add this in there:
 
 ```
@@ -102,16 +101,16 @@ iface lo inet loopback
 # LAN bridge (built-in NIC)
 auto vmbr0
 iface vmbr0 inet static
-    address 192.168.10.2/24 # the IP address of Proxmox
-    bridge-ports enp1s0     # your built-in NIC
+    address 192.168.10.2/24     # the IP address of Proxmox
+    bridge-ports enp1s0         # your built-in NIC
     bridge-stp off
     bridge-fd 0
-    gateway 192.168.10.1    # OPNsense LAN as default route
+    gateway 192.168.10.1        # OPNsense LAN as default route
 
 # WAN bridge (USB NIC)
 auto vmbr1
 iface vmbr1 inet manual
-    bridge-ports enxXXXX     # your USB NIC
+    bridge-ports enxXXXX        # your USB NIC
     bridge-stp off
     bridge-fd 0
 ```
@@ -122,7 +121,9 @@ A couple of things to note here:
 3. The gateway for the LAN side is the IP address we are going to assign to the OPNsense VM.
 4. You put the name of the USB NIC into the birdge-ports option of vmbr1. This is usually the devices MAC address, which can be found by running `ip a` in the Proxmox host console while it is plugged in. It will likely be the only device listed with a MAC address as the interface name
 
-3. Save and close the file. Restart networking with `systemctl restart networking`.
+<br>
+
+Save and close the file. Restart networking with `systemctl restart networking`.
 
 When you run `ip a` from the host, you should see the built in NIC and USB NIC appearing as interfaces, with an assigned IP addresses for the built in (LAN) one. THE NIC (WAN) interface gets it's IP address from the ISP (either statically or via DHCP, depending on your homes internet. My WAN IP is assigned via DHCP, but you may need to assign it yourself if your ISP gives you a static one.).
 
@@ -138,20 +139,20 @@ In the OPNsense console, select option `1` to Assign Interfaces.
 - If prompted, don't assign an IP address to WAN (so that it can be assigned via DHCP. Unless, as stated before, your ISP gives you a specific one, then assign that one).
 - Assign `vmbr0` to LAN
 - Assign the LAN IP address to `192.168.10.2` (for my example).
-- Enter `Y` when prompted to enable DHCP for LAN.
-- You can probably `N` on everything.
+- Enter `Y` when prompted to enable DHCP for LAN. This will allow the router to assign IP addresses to devices that connect to it.
+- You can probably `N` on everything else.
 
 **7. Configure from the OPNsense Web Console with the Setup Wizard**
 
-In the VM console in Proxmox you will see a few IP address listed above the options: one is the LAN you just set and one is the WAN (either set statically or assigned by DHCP). The web console is accessed at the LAN IP address. In order to reach it, your client device needs to be on the its same subnet. You can set that statically or temporarily.
+In the VM console in Proxmox you will see a few IP address listed above the options: one is the LAN you just set and one is the WAN (either set statically or assigned by DHCP). The web console is accessed at the LAN IP address. In order to reach it, your client device (the device you'll be reaching the web console from) needs to be on the its same subnet. You can set that statically or temporarily.
 
-The Wizard is the easiest way to configure everything. After logging in to the web console you should drop to the installation wizard automatically. If you don't, go to `System->Configuration->Wizard`. It will walk through and apply the base configurations automatically. These are some things it will set up:
+The Wizard is the easiest way to configure everything. After logging in to the web console you should drop to the installation wizard automatically. If you don't, go to `System → Configuration → Wizard`. It will walk through and apply the base configurations automatically. These are some things it will set up:
 
 - Set a host name. Make it obvious, like `opnsense`
 - Don't enable DNS (unless you know what you are doing with it). Leave the rest default.
 - Set your correct timezone, important for logs and cert validation.
 - Leave NTP servers default.
-- Set the WAN to IPV4 DHCP
+- Set the WAN to IPV4 DHCP (again, unless you were given one statically from your ISP)
 - You can leave Block private networks and Block bogon networks off.
 - Set the LAN IP statically (the same as what you set before i.e. 192.168.10.1/24. Note: this is the LAN address of OPNsense, not of the Proxmox host)
 - Set a root password
@@ -160,9 +161,9 @@ Once it finishes, reboot.
 
 **8. Update**
 
-After getting the initial configurations set up, it's time to update. Check the left menu bar and go to `System->Firmware->Status`. Click `Check for Updates` and let the update checker run. If there is an update, let it apply, and then reboot the VM from Proxmox so it applies.
+After getting the initial configurations set up, it's time to update. Check the left menu bar and go to `System → Firmware → Status`. Click `Check for Updates` and let the update checker run. If there is an update, let it apply, and then reboot the VM from Proxmox so it applies.
 
-If the update hangs, or upon checking for updates again the same update shows up, you can also update from the console in Proxmox. Pick option 12, choose Fetch Updates and Apply Updates. Say `Yes` to rebooting. When the patch notes appear press Space to scroll through them, and the `q` to let the updates finish installing. The VM should reboot itself when it finishes.
+If the update hangs, or if upon checking for updates again the same update shows up, you can also update from the console in Proxmox. Pick option 12, choose Fetch Updates and Apply Updates. Say `Yes` to rebooting. When the patch notes appear press Space to scroll through them, and then `q` to let the updates finish installing. The VM should reboot itself when it finishes.
 
 **9. Finish Manual Configurations**
 
@@ -176,8 +177,57 @@ You'll know everything is working if everything in your LAN can reach each other
 
 <hr>
 
+## Tailscale on OPNsense
+
 The following instructions detail how to setup Tailscale on a router, to make the entire LAN accessible via Tailscale subnet routing.
 
 **1. Install Tailscale**
 
-Go to `System → Firmware → Plugins`. Click the `Show community plugins` box on the far right. 
+Go to `System → Firmware → Plugins`. Click the `Show community plugins` box on the far right. Search for `os-tailscale`. After installing finishes, reboot.
+
+**2. Authenticate Tailscale**
+
+In another tab, sign in to <a href="https://login.tailscale.com/admin/settings/keys">Tailscale</a> to generate a key. Once in the Tailscale admin console, go to `Settings` on the top, then `Keys` on the left. Click on the `Generate auth key...` button on the right.
+
+- Keep `Reusable off`
+- Keep `Ephemeral off`
+- Keep `Expiration Disabled`
+
+Copy the key. You may not be able to access it again.
+
+Then, in the OPNsense web console, go to `VPN → Tailscale → Authentication`. Set the Login Server to `https://controlplane.tailscale.com`. Paste your key into the `Pre-authentication Key` section and click Apply.
+
+Then go to back to the Machines tab of the Tailscale admin console. Your router should be newly listed at the bottom of the list. Click on the machine name, and then click "Approve" if necessary.
+
+**3. Enable the Interface**
+
+Back in the OPNsense web console, go to `Interfaces → Tailscale`.
+
+- Click the `Enable` check box
+- Set a description if you'd like
+- Click the Save button at the bottom
+
+**4. Create a Tailscale Firewall Rule**
+
+Go to `Firewall → Rules → Tailscale`. Use the little orange + button on the right to add a rule. 
+
+- Action: Pass
+- Interface: Tailscale
+- Protocol: Any
+- Source: Any
+- Destination: Any
+
+Click the Save at the bottom, then Apply at the top right when back at the `Firewall: Rules: Tailscale` page.
+
+
+Your router is now part of your Tailscale VPN. The OPNsense web console can be reached by any device connected to the VPN, allowing you to monitor the status of your home network from anywhere.
+
+**5. Enable Subnet Routing**
+
+Now that Tailscale is on OPNsense, it can be configured to allow external access to every machine in the LAN, without needing to install Tailscale on every machine or VM therein. This is called "Subnet Routing".
+
+Go to `VPN → Tailscale → Settings`. Make sure Enabled and Accept DNS are checked. Also check Accept Subnet Routes if other nodes in your Tailscale network are advertising subnets.
+
+Then go to the `Advertised Routes` tab at the top. Use the orange + button to add a subnet. Put your LAN subnet in the Subnet section (like 192.168.10.0/24) and add a description if you'd like. Click Save, then Apply.
+
+Finally, in the Tailscale admin console, go to the Machines tab. Click on your OPNsense machine and in the Subnet Routes portion click approve on the newly listed subnet route.
