@@ -1,0 +1,267 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>OPNsense | Homelab</title>
+  <link rel="icon" type="image/png" href="/jpprojects/images/PorcoRosso.png">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="/jpprojects/assets/style.css">
+</head>
+
+<body>
+  <div id="Default_Title_Bar">
+    <h1 id="title">jpprojects</h1>
+    <img src="/jpprojects/images/PorcoRosso.png" id="ProfilePic" alt="My Github Profile Picture">
+  </div>
+
+  <div id="Default_Nav_Bar">
+    <nav>
+      <a href="/jpprojects/">↩︎ Home</a>
+      <a href="https://github.com/jacob-parra">My Github</a>
+      <a href="https://jacob-parra.github.io/jpprojects/proxmox/proxmoxhub">Proxmox Hub</a>
+    </nav>
+  </div>
+
+
+  <main>
+    <h2 id="opnsense">OPNsense</h2>
+
+<p>Opensense is a robust, open-source router software platform. It began as a fork of pfSense and m0n0wall and is generally considered more user friendly. Setting up a virtual router is not exactly trivial, but if you are careful it can be done.</p>
+
+<p>These are the steps for configuring an OPNsense VM in Proxmox.</p>
+
+<div class="info">
+One of the parts that makes this tricky is the fact that routing, naturally, requires two network ports: one for the LAN side, one for the WAN side. If your Proxmox host server does not have 2 ports, you have a few options. Adding a new network card can be expensive depending on the host hardware, so a much cheaper, albeit less ideal option, is to buy an RJ45 to USB adapter to act as the second network interface. I used <a href="amazon.com/dp/B09GRL3VCN ref=ppx_yo2ov_dt_b_fed_asin_title">this one</a> from TP-Link: it's cheap and works reliably with Linux systems (which Proxmox is). This page will be written with this strategy in mind.
+</div>
+<p><br /></p>
+<div class="info">
+This is a very networking heavy project. One way to reduce headaches later is to solidify your network topology now. For sake of simplicity, I put all of my machines on a single subnet before starting (i.e. 192.168.10.x/24). This will be your LAN subnet. Machines and services not explicetly assigned an IP address within that range will be assigned one via DHCP, which may affect your ability to connect to them later. It's worth the investment to get your ducks in a row now. Quack.
+</div>
+
+<p><strong>1. Download the OPNsense ISO</strong></p>
+
+<p>Download <a href="https://opnsense.org/download/">here</a>. Be sure to download the AMD64, VGA installer.</p>
+
+<p>It will probably download as very specific <code class="language-plaintext highlighter-rouge">.iso.bz2</code> format (compressed). I used 7-zip on Windows to export it properly. You can download 7-zip <a href="https://www.7-zip.org/download.html">here</a>. Just grab the .exe version. When extracted properly, the file will have a .iso extension.</p>
+
+<p><strong>2. Upload the ISO to Proxmox</strong></p>
+
+<ul>
+  <li>Access the Proxmox Web UI</li>
+  <li>Click on your node (on the left side, under “Datacenter”)</li>
+  <li>Select the “local” storage option</li>
+  <li>Go to “ISO Images”</li>
+  <li>Click “Upload” on the top left</li>
+  <li>Select the Ubuntu ISO from the last step</li>
+  <li>Wait for the upload to complete, then close the upload window</li>
+</ul>
+
+<p>Make sure you see the iso listed</p>
+
+<p><strong>3. Create the VM</strong></p>
+
+<p>This are the settings I used, organized by section/tab:</p>
+
+<ul>
+  <li>General
+    <ul>
+      <li>Leave the default VM ID</li>
+      <li>Set a name (something like opnsense.)</li>
+      <li>Click “Next”</li>
+    </ul>
+  </li>
+  <li>OS
+    <ul>
+      <li>ISO Image: select the opnsense ISO</li>
+      <li>Set “Guest OS” as “Other”</li>
+      <li>Version: 6.x - 2.6 Kernal, if the option is there</li>
+      <li>Click “Next”</li>
+    </ul>
+  </li>
+  <li>System
+    <ul>
+      <li>BIOS : OVMF (UEFI)</li>
+      <li>Machine : q35</li>
+      <li>SCSI Controller: VirtIO SCSI</li>
+      <li>QEMU Guest Agent: Checked</li>
+      <li>Add EFI Disk: Yes</li>
+      <li>Click “Next”</li>
+    </ul>
+  </li>
+  <li>Disks
+    <ul>
+      <li>Bus/Device : VirtIO Block</li>
+      <li>Storage : local-lvm (or whatever is available)</li>
+      <li>Disk size : 32 GB is fine.</li>
+      <li>Click “Next”</li>
+    </ul>
+  </li>
+  <li>CPU
+    <ul>
+      <li>Cores : 2 (at least. If your host has more and you’ll be sending lots of encrypted traffic, more cores can preserve bandwidth)</li>
+      <li>Type : host (scroll down, it’s probably on the bottom)</li>
+    </ul>
+  </li>
+  <li>Memory
+    <ul>
+      <li>Set 4096 (you could get by with 2 GB if needed)(it’s listed in MiB)</li>
+      <li>Click “Next”</li>
+    </ul>
+  </li>
+  <li>Network : These settings are going to be added to later, as we will need to add a second bridge.
+    <ul>
+      <li>Bridge: vmbr0</li>
+      <li>Model: VirtIO (paravirtualized)</li>
+      <li>Click “Next”</li>
+    </ul>
+  </li>
+  <li>Confirm
+    <ul>
+      <li>Make sure everything is right</li>
+      <li>Click Finish</li>
+    </ul>
+  </li>
+</ul>
+
+<p><strong>4. Install the ISO in the VM</strong></p>
+
+<p>Before installing, OPNsense can be run “live” (live media mode), where configurations won’t save between reboots.</p>
+
+<p>After the machine boots up and you log in, there will be a menu with several numbered options. Pick option <code class="language-plaintext highlighter-rouge">8</code> to access the shell. Run <code class="language-plaintext highlighter-rouge">opnsense-installer</code> or <code class="language-plaintext highlighter-rouge">Installer</code> to enter the install menu.</p>
+
+<p>When prompted for the Keymap, keep the defualt by pressing Enter. On the Filesystem menu, I had to use <code class="language-plaintext highlighter-rouge">UFS</code> (<code class="language-plaintext highlighter-rouge">ZFS</code> may be an option on your hardware). Then select the only available disk, confirm the install and let it finish.</p>
+
+<p>When it finishes and reboots you should be able to log in as <code class="language-plaintext highlighter-rouge">root</code> with <code class="language-plaintext highlighter-rouge">opnsense</code> as the password.</p>
+
+<p><strong>5. Prepare the Bridges</strong></p>
+
+<p>The router is going to be connecting internal (LAN) traffic to the outside internet (WAN). Physically, this will require our Proxmox host to have 2 NICs. Virtually, these NICs will each be configured as a VM Bridge (vmbr). 2 NICs means 2 vmbr.</p>
+
+<p>This is the configuration I used for my setup:</p>
+
+<ol>
+  <li>In the Proxmox Host Console, run <code class="language-plaintext highlighter-rouge">nano /etc/network/interfaces</code></li>
+  <li>Add this in there:</li>
+</ol>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code># loopback
+auto lo
+iface lo inet loopback
+
+# LAN bridge (built-in NIC)
+auto vmbr0
+iface vmbr0 inet static
+    address 192.168.10.2/24 # the IP address of Proxmox
+    bridge-ports enp1s0     # your built-in NIC
+    bridge-stp off
+    bridge-fd 0
+    gateway 192.168.10.1    # OPNsense LAN as default route
+
+# WAN bridge (USB NIC)
+auto vmbr1
+iface vmbr1 inet manual
+    bridge-ports enxXXXX     # your USB NIC
+    bridge-stp off
+    bridge-fd 0
+</code></pre></div></div>
+
+<p>A couple of things to note here:</p>
+<ol>
+  <li>vmbr0 is the internal bridge (LAN), vmbr1 is the external bridge (WAN).</li>
+  <li>The LAN address needs to be on the same subnet as the rest of your LAN (192.168.10.x/24 in my example).</li>
+  <li>The gateway for the LAN side is the IP address we are going to assign to the OPNsense VM.</li>
+  <li>
+    <p>You put the name of the USB NIC into the birdge-ports option of vmbr1. This is usually the devices MAC address, which can be found by running <code class="language-plaintext highlighter-rouge">ip a</code> in the Proxmox host console while it is plugged in. It will likely be the only device listed with a MAC address as the interface name</p>
+  </li>
+  <li>Save and close the file. Restart networking with <code class="language-plaintext highlighter-rouge">systemctl restart networking</code>.</li>
+</ol>
+
+<p>When you run <code class="language-plaintext highlighter-rouge">ip a</code> from the host, you should see the built in NIC and USB NIC appearing as interfaces, with an assigned IP addresses for the built in (LAN) one. THE NIC (WAN) interface gets it’s IP address from the ISP (either statically or via DHCP, depending on your homes internet. My WAN IP is assigned via DHCP, but you may need to assign it yourself if your ISP gives you a static one.).</p>
+
+<p><strong>6. Assign interfaces in OPNsense</strong></p>
+
+<p>Until now, only Proxmox itself is using the interfaces. We need to assign them in our VM too so that OPNsense can use them.</p>
+
+<p>In the OPNsense console, select option <code class="language-plaintext highlighter-rouge">1</code> to Assign Interfaces.</p>
+
+<ul>
+  <li>Enter <code class="language-plaintext highlighter-rouge">N</code> for LAGGs</li>
+  <li>Enter <code class="language-plaintext highlighter-rouge">N</code> for VLANs</li>
+  <li>The available interfaces will be listed. It will ask to assign 1 to WAN. Do <code class="language-plaintext highlighter-rouge">vnet1</code>, which is the interface for <code class="language-plaintext highlighter-rouge">vmbr1</code>, our WAN interface on the USB NIC.</li>
+  <li>If prompted, don’t assign an IP address to WAN (so that it can be assigned via DHCP. Unless, as stated before, your ISP gives you a specific one, then assign that one).</li>
+  <li>Assign <code class="language-plaintext highlighter-rouge">vmbr0</code> to LAN</li>
+  <li>Assign the LAN IP address to <code class="language-plaintext highlighter-rouge">192.168.10.2</code> (for my example).</li>
+  <li>Enter <code class="language-plaintext highlighter-rouge">Y</code> when prompted to enable DHCP for LAN.</li>
+  <li>You can probably <code class="language-plaintext highlighter-rouge">N</code> on everything.</li>
+</ul>
+
+<p><strong>7. Configure from the OPNsense Web Console with the Setup Wizard</strong></p>
+
+<p>In the VM console in Proxmox you will see a few IP address listed above the options: one is the LAN you just set and one is the WAN (either set statically or assigned by DHCP). The web console is accessed at the LAN IP address. In order to reach it, your client device needs to be on the its same subnet. You can set that statically or temporarily.</p>
+
+<p>The Wizard is the easiest way to configure everything. After logging in to the web console you should drop to the installation wizard automatically. If you don’t, go to <code class="language-plaintext highlighter-rouge">System-&gt;Configuration-&gt;Wizard</code>. It will walk through and apply the base configurations automatically. These are some things it will set up:</p>
+
+<ul>
+  <li>Set a host name. Make it obvious, like <code class="language-plaintext highlighter-rouge">opnsense</code></li>
+  <li>Don’t enable DNS (unless you know what you are doing with it). Leave the rest default.</li>
+  <li>Set your correct timezone, important for logs and cert validation.</li>
+  <li>Leave NTP servers default.</li>
+  <li>Set the WAN to IPV4 DHCP</li>
+  <li>You can leave Block private networks and Block bogon networks off.</li>
+  <li>Set the LAN IP statically (the same as what you set before i.e. 192.168.10.1/24. Note: this is the LAN address of OPNsense, not of the Proxmox host)</li>
+  <li>Set a root password</li>
+</ul>
+
+<p>Once it finishes, reboot.</p>
+
+<p><strong>8. Update</strong></p>
+
+<p>After getting the initial configurations set up, it’s time to update. Check the left menu bar and go to <code class="language-plaintext highlighter-rouge">System-&gt;Firmware-&gt;Status</code>. Click <code class="language-plaintext highlighter-rouge">Check for Updates</code> and let the update checker run. If there is an update, let it apply, and then reboot the VM from Proxmox so it applies.</p>
+
+<p>If the update hangs, or upon checking for updates again the same update shows up, you can also update from the console in Proxmox. Pick option 12, choose Fetch Updates and Apply Updates. Say <code class="language-plaintext highlighter-rouge">Yes</code> to rebooting. When the patch notes appear press Space to scroll through them, and the <code class="language-plaintext highlighter-rouge">q</code> to let the updates finish installing. The VM should reboot itself when it finishes.</p>
+
+<p><strong>9. Finish Manual Configurations</strong></p>
+
+<ol>
+  <li>Check that LAN-side DHCP is enabled
+    <ul>
+      <li>Go to <code class="language-plaintext highlighter-rouge">Services → DHCPv4 → LAN</code>.</li>
+      <li>Make sure it’s enabled</li>
+      <li>Set a range (like 192.168.10.100/24 - 192.168.10.200/24)</li>
+    </ul>
+  </li>
+</ol>
+
+<p>You’ll know everything is working if everything in your LAN can reach each other and the internet (again, make sure every device is using the internal router LAN IP address as their gateway)</p>
+
+<hr />
+
+<p>The following instructions detail how to setup Tailscale on a router, to make the entire LAN accessible via Tailscale subnet routing.</p>
+
+<p><strong>1. Install Tailscale</strong></p>
+
+<p>Go to <code class="language-plaintext highlighter-rouge">System → Firmware → Plugins</code>. Click the <code class="language-plaintext highlighter-rouge">Show community plugins</code> box on the far right.</p>
+
+  </main>
+
+
+<footer class="site-footer">
+  <div class="footer-content">
+    <hr>
+    <p>
+      © <span id="year"></span> Jacob Parra ·
+      jpprojects ·
+      <a href="https://github.com/jacob-parra" target="_blank" rel="noopener">GitHub</a>
+    </p>
+    <p class="footer-subtext">
+    Project documentation, walkthroughs and notes | Built with Markdown · Hosted on GitHub Pages
+
+  </div>
+</footer>
+
+<script>
+  document.getElementById("year").textContent = new Date().getFullYear();
+</script>
+
+</body>
+</html>

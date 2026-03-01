@@ -37,6 +37,6 @@ This page serves as the a landing page for a dedicated Proxmox server and a vari
   </tr>
   <tr>
     <td class="pmh_logo_cell"><img src="/jpprojects/images/images/opnsense.png" class="pmh_logo" alt="OPNsense"></td>
-    <td><a href="https://jacob-parra.github.io/jpprojects/proxmox/proxmoxvms/opnsense">Docker</a></td>
+    <td><a href="https://jacob-parra.github.io/jpprojects/proxmox/proxmoxvms/opnsense">OPNsense</a></td>
   </tr>
 </table>

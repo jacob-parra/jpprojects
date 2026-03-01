@@ -3,6 +3,8 @@ title: Migration
 layout: default
 ---
 
+## Migration
+
 There may come a time when a Proxmox server needs to move hosts, usually because of restrictive hardware. Examples of reasons to migrate include lack of memory, storage or compute, hardware form factor needs, or power usage concerns. VMs and system configurations can be easily moved from one server to another with terminal commands and the web GUI.
 
 
