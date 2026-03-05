@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Vaultwarden | Homelab</title>
+  <link rel="icon" type="image/png" href="/jpprojects/images/PorcoRosso.png">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="/jpprojects/assets/style.css">
+</head>
+
+<body>
+  <div id="Default_Title_Bar">
+    <h1 id="title">jpprojects</h1>
+    <img src="/jpprojects/images/PorcoRosso.png" id="ProfilePic" alt="My Github Profile Picture">
+  </div>
+
+  <div id="Default_Nav_Bar">
+    <nav>
+      <a href="/jpprojects/">↩︎ Home</a>
+      <a href="https://github.com/jacob-parra">My Github</a>
+      <a href="https://jacob-parra.github.io/jpprojects/proxmox/proxmoxhub">Proxmox Hub</a>
+    </nav>
+  </div>
+
+
+  <main>
+    <h2 id="vaultwarden">Vaultwarden</h2>
+
+<p>Vaultwarden is an open-source, self-hosted password manager server that is fully compatible with the official Bitwarden client apps (browser extensions, phone apps, etc.). It’s very lightweight, and enables local password management without relying on or paying for third-party cloud servers.</p>
+
+<p>Vaultwarden is so lightweight that it can actually be hosted as a container in Proxmox (like a VM, but interacts differently with the host, are much faster and very cheap on resources). Ideally, it can be hosted natively, directly as the container “OS”. But in actuality it’s easier to configure inside Docker.</p>
+
+<div class="info">
+Creating and configuring the Vaultwarden container itself is relatively simple. However, Vaultwarden requires HTTPS, which requires SSL certificates. There are lots of ways to get these certificates that range in difficulty, from self-signed to reverse proxy distributed. I opted to use Caddy, a reverse proxy service that can manage cert rotation automatically. It's very easy to use, and can be ran in tandem with Vaultwarden in Docker. It's a good setup
+</div>
+
+<p><strong>1. Add the Container Template</strong></p>
+
+<p>Proxmox is cool, and has a list of a bunch of popular container readily available for download.</p>
+
+<p>In your Proxmox host, go to your Nodes storage, probably called “local”, in the left menu. Then go to CT Templates. Click the Templates button at the top, and find <code class="language-plaintext highlighter-rouge">debian-12-standard_12.12-1_amd64.tar.zst</code>. Click the Download button and wait for it to download to your host.</p>
+
+<p><strong>2. Create the Container</strong></p>
+
+<p>Click the blue Create Container button at the top right of Proxmox.</p>
+
+<ul>
+  <li>General
+    <ul>
+      <li>Set the Container ID (CT ID)</li>
+      <li>Set a host name</li>
+      <li>Set a password for the container</li>
+      <li>Uncheck Unprivileged container</li>
+    </ul>
+  </li>
+  <li>Template
+    <ul>
+      <li>Add the Debian template from the last step</li>
+    </ul>
+  </li>
+  <li>Disk
+    <ul>
+      <li>Give 8-16 GB</li>
+    </ul>
+  </li>
+  <li>Cores
+    <ul>
+      <li>Leave 1 core (or 2, if you can afford it)</li>
+    </ul>
+  </li>
+  <li>RAM
+    <ul>
+      <li>Give 1024 MiB</li>
+    </ul>
+  </li>
+  <li>Network
+    <ul>
+      <li>Leave the Name and Bridge (but make sure the bridge is the LAN one, if you have multiple)</li>
+      <li>Set an IPv4 address and gateway, but leave IPv6 blank</li>
+    </ul>
+  </li>
+  <li>DNS
+    <ul>
+      <li>Leave both options as “use host settings”</li>
+    </ul>
+  </li>
+</ul>
+
+<p>Confirm everything is correct, then hit Finish.</p>
+
+<p>Once the container is created, click on it in the left menu, and go to Options. Click on the “Start at boot” option and check the box, so that the container turns on with Proxmox. While here, click on the “Features” option and check the “Nesting” box. This is required for Docker.</p>
+
+<p><strong>3. Install Docker</strong></p>
+
+<ul>
+  <li>Update and Upgrade : <code class="language-plaintext highlighter-rouge">apt update &amp;&amp; apt upgrade -y</code></li>
+  <li>Install Docker : <code class="language-plaintext highlighter-rouge">apt install docker.io docker-compose -y</code></li>
+  <li>Enable and Start : <code class="language-plaintext highlighter-rouge">sytemctl enable docker</code> and <code class="language-plaintext highlighter-rouge">systemctl start docker</code></li>
+</ul>
+
+<p><strong>4. Create the Vaultwarden Directory</strong></p>
+
+<p>This is where all the Vaultwarden files will be kept, including the docker-compose.yaml and Caddy File.</p>
+
+<ul>
+  <li>Create the directory : <code class="language-plaintext highlighter-rouge">mkdir -p /opt/vaultwarden</code></li>
+  <li>Go there : <code class="language-plaintext highlighter-rouge">cd /opt/vaultwarden</code></li>
+</ul>
+
+<p><strong>5. Create the Configuration Files</strong></p>
+
+<p>While in the Vaultwarden Directory, create the following file: <code class="language-plaintext highlighter-rouge">nano docker-compose.yml</code></p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>version: "3.8"
+
+services:
+  vaultwarden:
+    image: vaultwarden/server:latest
+    container_name: vaultwarden
+    restart: unless-stopped
+    expose:
+      - "80"
+    volumes:
+      - ./vw-data:/data
+    networks:
+      - internal
+
+  caddy:
+    image: caddy:2-alpine
+    container_name: caddy
+    restart: unless-stopped
+    ports:
+      - "443:443"
+    volumes:
+      - ./Caddyfile:/etc/caddy/Caddyfile
+      - caddy_data:/data
+      - caddy_config:/config
+    networks:
+      - internal
+
+volumes:
+  caddy_data:
+  caddy_config:
+
+networks:
+  internal:
+</code></pre></div></div>
+
+<p>While in this same directory, also create the Caddyfile (which holds the Caddy configuration): <code class="language-plaintext highlighter-rouge">nano Caddyfile</code></p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>vaultwarden.local {
+    tls internal
+    reverse_proxy vaultwarden:80
+}
+</code></pre></div></div>
+
+<p><strong>6. Start the Docker Container and Extract the Cert</strong></p>
+
+<p>While in this same directory, bring up the project with <code class="language-plaintext highlighter-rouge">docker compose up -d</code>.</p>
+
+<p>Caddy stores the certificate inside the Docker volume. Make sure it is there: <code class="language-plaintext highlighter-rouge">cocker exec caddy ls /data/caddy/pki/authorities/local</code>.</p>
+
+<p>Copy it out: <code class="language-plaintext highlighter-rouge">docker cp caddy:/data/caddy/pki/authorities/local/root.crt ./caddy-root.crt</code>. The certificate will be in this directory in the <code class="language-plaintext highlighter-rouge">caddy-root.crt</code> file.</p>
+
+<p><strong>7. Install the Certificate</strong></p>
+
+<p>The certificate from the last step needs to be installed on every device you would like to access Vaultwarden from (a downside to using self-signed certificates). The certificate can be extracted from Proxmox with an scp command (from the Vaultwarden container console): <code class="language-plaintext highlighter-rouge">scp caddy-root.crt &lt;username&gt;@&lt;remoteip&gt;:</code></p>
+
+<p>These are the steps for installing the certificate on both Mac and Windows.</p>
+
+<h4 id="mac">Mac</h4>
+
+<ol>
+  <li>Open Keychain Access by opening the Spotlight Search (<code class="language-plaintext highlighter-rouge">Cmd + Space</code>) to find Keychain Access. Open it.</li>
+  <li>Import the Certificate by going to System in the left sidebar. The go to <code class="language-plaintext highlighter-rouge">File → Import Items</code> and select the <code class="language-plaintext highlighter-rouge">caddy-root.crt</code> file. Enter your Mac password if necessary</li>
+  <li>Trust the imported certificate by double clicking it, expanding Trust, and set “When using this certificate → Always Trust”</li>
+</ol>
+
+<h4 id="windows">Windows</h4>
+
+<ol>
+  <li>Open Notepad as Admin (by right clicking the app and selecting “Run as Administrator”). Click <code class="language-plaintext highlighter-rouge">File → Open</code> and paste this into the filename box at the bottom: <code class="language-plaintext highlighter-rouge">C:\Windows\System32\drivers\etc\hosts</code>. After the file opens, add this line to the bottom of the file: <code class="language-plaintext highlighter-rouge">&lt;Vaultwarden Tailscale IP&gt;  vaultwarden.local</code>.</li>
+  <li>Double click on thye <code class="language-plaintext highlighter-rouge">caddy-root.crt</code> file. Click “Install Certificate”. Choose “Local Machine”. Select Place all certificates in the following store”. Click “Browse” and choose “Trusted Root Certification Authorities”. Then click Finish.</li>
+</ol>
+
+<p>After installing the certificate on your device, relaunch your browser for the change to take affect. Visit <code class="language-plaintext highlighter-rouge">https://vaultwarden.local</code>. It should resolve properly. If your browser warns you about visiting the site, click “advance to vaultwarden.local” to ignore it.</p>
+
+<p><strong>8. Access the Web App</strong></p>
+
+<p>Once you’ve reached the Web App you will be asked to create an account. Use your email and set a strong master password, necessary to unlock your vault.</p>
+
+<p>Once you are in</p>
+
+<p>Install the Cert on iPhone:</p>
+<ul>
+  <li>Download the cert</li>
+  <li>Search Profile Downloaded</li>
+  <li>Tap install, use password, and install</li>
+  <li>Go to General-&gt;about-&gt;Certificate Trust Settings, enable the cert and hit continue</li>
+</ul>
+
+  </main>
+
+
+<footer class="site-footer">
+  <div class="footer-content">
+    <hr>
+    <p>
+      © <span id="year"></span> Jacob Parra ·
+      jpprojects ·
+      <a href="https://github.com/jacob-parra" target="_blank" rel="noopener">GitHub</a>
+    </p>
+    <p class="footer-subtext">
+    Project documentation, walkthroughs and notes | Built with Markdown · Hosted on GitHub Pages
+
+  </div>
+</footer>
+
+<script>
+  document.getElementById("year").textContent = new Date().getFullYear();
+</script>
+
+</body>
+</html>

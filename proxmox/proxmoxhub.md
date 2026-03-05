@@ -39,4 +39,8 @@ This page serves as the a landing page for a dedicated Proxmox server and a vari
     <td class="pmh_logo_cell"><img src="/jpprojects/images/images/opnsense.png" class="pmh_logo" alt="OPNsense"></td>
     <td><a href="https://jacob-parra.github.io/jpprojects/proxmox/proxmoxvms/opnsense">OPNsense</a></td>
   </tr>
+  <tr>
+    <td class="pmh_logo_cell"><img src="/jpprojects/images/images/vaultwarden.png" class="pmh_logo" alt="Vaultwarden"></td>
+    <td><a href="https://jacob-parra.github.io/jpprojects/proxmox/proxmoxvms/vaultwarden">Vaultwarden</a></td>
+  </tr>
 </table>
