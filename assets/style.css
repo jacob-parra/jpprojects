@@ -28,7 +28,7 @@ nav {
 }
 
 nav a {
-  color: var(--charcoal_floral_white);
+  color: var(--charcoal_brown);
   margin-right: 1rem;
   margin-left: 1rem;
   text-decoration: none;
@@ -63,10 +63,10 @@ ul {
 }
 
 code {
-  background: white;
+  background: var(--floral_white);
   padding: 0.2rem 0.4rem;
   border-radius: 4px;
-  color: var(--charcoal_floral_white);
+  color: var(--charcoal_brown);
 }
 
 pre {
@@ -86,7 +86,7 @@ hr {
 }
 
 a, a:visited {
-  color: var(--charcoal_floral_white);
+  color: var(--charcoal_brown);
 }
 
 table {
