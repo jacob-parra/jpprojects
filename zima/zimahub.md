@@ -13,7 +13,7 @@ This page serves as the a landing page for a dedicated Zima server and a variety
 <table>
   <tr>
     <th>Logos</th>
-    <th>Virtual Machines</th>
+    <th>Applications</th>
   </tr>
   <tr>
     <td class="pmh_logo_cell"><img src="/jpprojects/images/images/Jellyfin.png" class="pmh_logo" alt="Jellyfin"></td>
