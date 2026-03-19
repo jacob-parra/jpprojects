@@ -1,13 +1,14 @@
 
-/**/
+
 :root {
-  --carbon_black: #252422;/*Carbon Black*/
-  --charcoal_brown: #403D39;/*Charcoal Brown*/
-  --floral_white: #FFFCF2;/*Floral White*/
-  --paprika_orange: #EB5E28;/*Paprika*/
-  --paprika_orange: #EB5E28;/*Paprika*/
+  --light_tan: hsl(48, 50%, 88%);
+  --light_brown: #a98467;
+  --brown: #6c584c;
+  --light_green: #d0d9a0;
+  --green: #879d4c;
   
 }
+
 
 * {
   box-sizing: border-box;
@@ -16,19 +17,19 @@
 body {
   margin: 0;
   font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Ubuntu;
-  background: var(--carbon_black);
-  color: var(--floral_white);
+  background: var(--light_tan);
+  color: var(--brown);
   line-height: 1.65;
 }
 
 nav {
   padding: 1rem;
-  border-bottom: 1px solid var(--paprika_orange);
-  background: var(--paprika_orange)
+  border-bottom: 1px solid var(--green);
+  background: var(--light_green)
 }
 
 nav a {
-  color: var(--charcoal_floral_white);
+  color: var(--light_brown);
   margin-right: 1rem;
   margin-left: 1rem;
   text-decoration: none;
@@ -50,12 +51,12 @@ h1, h2, h3 {
 
 h2 {
   margin-top: 3rem;
-  border-bottom: 1px solid var(--paprika_orange);
+  border-bottom: 1px solid var(--light_green);
   padding-bottom: 0.4rem;
 }
 
 p {
-  color: var(--floral_white);
+  color: var(--brown);
 }
 
 ul {
@@ -66,12 +67,12 @@ code {
   background: white;
   padding: 0.2rem 0.4rem;
   border-radius: 4px;
-  color: var(--charcoal_floral_white);
+  color: var(--light_brown);
 }
 
 pre {
-  background: var(--carbon_black);
-  border: 1px solid var(--paprika_orange);
+  background: var(--light_tan);
+  border: 1px solid var(--light_green);
   padding: 1rem;
   border-radius: 8px;
   overflow-x: visible;
@@ -82,11 +83,11 @@ pre code {
 }
 
 hr {
-  color : var(--paprika_orange);
+  color : var(--green);
 }
 
 a, a:visited {
-  color: var(--charcoal_floral_white);
+  color: var(--light_brown);
 }
 
 table {
@@ -96,14 +97,14 @@ table {
 }
 
 th, td {
-  border: 1px solid var(--paprika_orange);
+  border: 1px solid var(--light_green);
   padding: 0.6rem 0.75rem;
   border-width: 2px;
 
 }
 
 th {
-  background: var(--carbon_black);
+  background: var(--light_tan);
   font-weight: 600;
   text-align: left;
   text-align: center
@@ -115,7 +116,7 @@ th {
   position: sticky;
   top: 116px; /*Magic number for keeping the nav bar right where it needs to be*/
   z-index: 1000;
-  background-color: var(--paprika_orange);
+  background-color: var(--light_green);
   display: flex;
 }
 
@@ -129,7 +130,7 @@ th {
   align-items: center;
   
 
-  background: var(--carbon_black);
+  background: var(--light_tan);
 }
 
 #ProfilePic {
@@ -141,14 +142,14 @@ th {
 #title {
   padding: 1rem;
   padding-left: 2rem;
-  background: var(--carbon_black);
+  background: var(--light_tan);
 }
 
 
 
 .info {
-  background: var(--paprika_orange);
-  border-left: 4px solid var(--paprika_orange);
+  background: var(--light_green);
+  border-left: 4px solid var(--green);
   padding: 1rem;
   border-radius: 6px;
 }
