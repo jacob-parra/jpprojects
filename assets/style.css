@@ -5,7 +5,7 @@
   --charcoal_brown: #403D39;/*Charcoal Brown*/
   --floral_white: #FFFCF2;/*Floral White*/
   --paprika_orange: #EB5E28;/*Paprika*/
-  --paprika_orange: #EB5E28;/*Paprika*/
+  --silver: #CCC5B9;/*Silver*/
   
 }
 
@@ -40,7 +40,7 @@ nav a {
 main {
   max-width: 900px;
   margin: 0 auto;
-  padding: 2rem 1.25rem;
+  padding: 1rem 1.25rem;
 }
 
 h1, h2, h3 {
@@ -86,7 +86,7 @@ hr {
 }
 
 a, a:visited {
-  color: var(--charcoal_brown);
+  color: var(--silver);
 }
 
 table {
@@ -155,8 +155,8 @@ th {
 
 
 .site-footer {
-  margin-top: 4rem;
-  padding: 2rem 1rem;
+  
+  padding: 1rem 1rem;
   border-top: 1px solid var(--border);
   color: var(--muted);
   font-size: 0.9rem;
