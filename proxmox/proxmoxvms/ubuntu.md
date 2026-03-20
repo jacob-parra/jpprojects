@@ -97,10 +97,10 @@ Login with the name and password set in step 4. Make the following selections wh
 
 <hr>
 
-**7. Install the QEMU Guest Agent**
+#### 7. Install the QEMU Guest Agent
 
 See the [Proxmox Scripting project page](/jpprojects/proxmox/scripting), step 2, for instructions on how to do this.
 
-**8. Install OpenSSH**
+#### 8. Install OpenSSH
 
 See [OpenSSH project page](/jpprojects/proxmox/openssh) for instructions on how to do this.

@@ -43,11 +43,11 @@
 
 <hr />
 
-<p><strong>1 Create the Github Repo</strong></p>
+<h4 id="1-create-the-github-repo">1 Create the Github Repo</h4>
 
 <p>Leave all the default settings, but provide a good name (like homelab) and description.</p>
 
-<p><strong>2 Add the initial files</strong></p>
+<h4 id="2-add-the-initial-files">2 Add the initial files</h4>
 
 <p>This is the file structure:</p>
 
@@ -412,11 +412,11 @@ This site documents my homelab experiments, infrastructure, and lessons learned.
 
 </code></pre></div></div>
 
-<p><strong>3 Enable Pages</strong></p>
+<h4 id="3-enable-pages">3 Enable Pages</h4>
 
 <p>Navigate to the Settings tab in the top of the Repo menu, and click “Pages” in the left sidebar under “Code and automation”. Make sure “Source” is set to “Deploy from a brach”, and set the branch to “main” and the folder to “root”. Click save and wait about a minute or so</p>
 
-<p><strong>4 Add content and additional pages</strong></p>
+<h4 id="4-add-content-and-additional-pages">4 Add content and additional pages</h4>
 
 <p>Follow the index.md template to add more pages of content in markdown syntax. Link to each page in the index.md file.</p>
 
@@ -424,19 +424,19 @@ This site documents my homelab experiments, infrastructure, and lessons learned.
 
 <p>The following steps are optional to further sophisticate a Pages site.</p>
 
-<p><strong>5 Add Styling</strong></p>
+<h4 id="5-add-styling">5 Add Styling</h4>
 
 <p>Create an “assets” folder in root, and add a “style.css” file in it. Add a link to the file in the <code class="language-plaintext highlighter-rouge">&lt;head&gt;</code> tag of the default.html template file so that all pages can share the same styling: <code class="language-plaintext highlighter-rouge">&lt;link rel="stylesheet" href="/homelab/assets/style.css"&gt;</code>.</p>
 
 <p>Jekyll “translates” markdown into normal html syntax, tags and all. CSS can then be applied to those html tags like normal. Div tags with ids and classes can also be added directly among markdown syntax to further refine styling.</p>
 
-<p><strong>6 Add File Downloads</strong></p>
+<h4 id="6-add-file-downloads">6 Add File Downloads</h4>
 
 <p>The easiest way to support downloadable files is to keep them in a “downloads” folder in the root of the repository. Then link to them with this syntax: <code class="language-plaintext highlighter-rouge">[script](/homelab/downloads/script.txt)</code>. Upon clicking the link, the file will be opened in the browser or immediately download (depends on the browser).</p>
 
 <p>Alternatively, use this html syntax: <code class="language-plaintext highlighter-rouge">&lt;a href="/homelab/downloads/script.txt" download&gt;Download&lt;/a&gt;</code></p>
 
-<p><strong>7. Build Locally</strong></p>
+<h4 id="7-build-locally">7. Build Locally</h4>
 
 <p>Rather than commiting to see every change, build with Jekyll locally first:</p>
 

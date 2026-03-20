@@ -8,7 +8,7 @@ layout: default
 OpenSSH is a free, open source SSH server that can be installed on individual VM's to allow for remote, direct terminal connection. It's simple to install and lightweight.
 
 
-**1. Install OpenSSH**
+#### 1. Install OpenSSH
 
 - Run `sudo apt update` to make sure everything is up to date
 - Install with `sudo apt install -y openssh-server`

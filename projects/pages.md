@@ -11,11 +11,11 @@ The following instructions detail my process of creating this very site.
 
 <hr>
 
-**1 Create the Github Repo**
+#### 1 Create the Github Repo
 
 Leave all the default settings, but provide a good name (like homelab) and description.
 
-**2 Add the initial files**
+#### 2 Add the initial files
 
 This is the file structure:
 
@@ -112,11 +112,11 @@ This site documents my homelab experiments, infrastructure, and lessons learned.
 
 ```
 
-**3 Enable Pages**
+#### 3 Enable Pages
 
 Navigate to the Settings tab in the top of the Repo menu, and click "Pages" in the left sidebar under "Code and automation". Make sure "Source" is set to "Deploy from a brach", and set the branch to "main" and the folder to "root". Click save and wait about a minute or so
 
-**4 Add content and additional pages**
+#### 4 Add content and additional pages
 
 Follow the index.md template to add more pages of content in markdown syntax. Link to each page in the index.md file.
 
@@ -124,19 +124,19 @@ Follow the index.md template to add more pages of content in markdown syntax. Li
 
 The following steps are optional to further sophisticate a Pages site.
 
-**5 Add Styling**
+#### 5 Add Styling
 
 Create an "assets" folder in root, and add a "style.css" file in it. Add a link to the file in the `<head>` tag of the default.html template file so that all pages can share the same styling: `<link rel="stylesheet" href="/homelab/assets/style.css">`.
 
 Jekyll "translates" markdown into normal html syntax, tags and all. CSS can then be applied to those html tags like normal. Div tags with ids and classes can also be added directly among markdown syntax to further refine styling.
 
-**6 Add File Downloads**
+#### 6 Add File Downloads
 
 The easiest way to support downloadable files is to keep them in a "downloads" folder in the root of the repository. Then link to them with this syntax: `[script](/homelab/downloads/script.txt)`. Upon clicking the link, the file will be opened in the browser or immediately download (depends on the browser). 
 
 Alternatively, use this html syntax: `<a href="/homelab/downloads/script.txt" download>Download</a>`
 
-**7. Build Locally**
+#### 7. Build Locally
 
 Rather than commiting to see every change, build with Jekyll locally first:
 

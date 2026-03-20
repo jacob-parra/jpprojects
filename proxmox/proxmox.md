@@ -11,7 +11,7 @@ This was the most ambitious of my projects so far but it provides the infrastruc
 
 <hr>
 
-**1. Prepare the hardware**
+#### 1. Prepare the hardware
 
 Having a dedicated proxmox server prevents your services, servers and virtual machines prevents your main desktop for being bogged down by resource greedy processes. When selecting hardware, keep in mind that Proxmox VE requires very few resources: 
 
@@ -25,7 +25,7 @@ I would recommend buying a workstation desktop off of Ebay or Facebook Marketpla
 In terms of hardware, this project will also need a USB drive. USB Type A is the preffered type.
 </div>
 
-**2. Modify the BIOS**
+#### 2. Modify the BIOS
 
 The BIOS needs certain settings in order to support virtualization. While the exact settings may vary between CPUs and manufacturer, these are the basic settings that should be checked:
 
@@ -36,17 +36,17 @@ The BIOS needs certain settings in order to support virtualization. While the ex
 
 Be sure to hit "Apply" before exiting the BIOS
 
-**3. Download the ProxmoxVE ISO**
+#### 3. Download the ProxmoxVE ISO
 
 This can be found on the Proxmox website. I used version <a href="https://proxmox.com/en/downloads">9.1</a>. Download "Proxmox VE 9.1 ISO Installer". 
 
-**4. Flash the ISO to a bootable drive**
+#### 4. Flash the ISO to a bootable drive
 
 The installer needs to be flashed to a USB drive, which will later be used to put Proxmox on the machine. I used <a href="https://etcher.balena.io/#download-etcher">Balena Etcher</a> on my Mac and I believe it works on Windows too. 
 
 Using Balena is very straightforward. Upon opening the app click "Flash from file" and select the Proxmox ISO installer. Insert your USB Drive, click "Select Target" and select your USB drive. Then click "Flash". Mac or Windows may ask for your password, neccessary to write to a drive.
 
-**5. One-Time Boot and Install**
+#### 5. One-Time Boot and Install
 
 Once the bootable USB is made, plug it in to the proxmox machine (prefferably in a rear port). Start (or restart) the machine, and repeatedly press F12 (or F2, or Del, or Esc or F11. It depends between different machines. Look it up if needed) to enter the boot menu. Select your USB and press Enter. This will bring up the Proxmox Installer screen.
 
@@ -70,19 +70,19 @@ Note: THE SELECTED DRIVE WILL BE WIPED
 
 Review the summary (I suggest taking a picture) and click "Install". The installation may take several minutes
 
-**6. Access the GUI**
+#### 6. Access the GUI
 
 After installing, a black terminal will show the ip address and port where the GUI is available. Use another machine on the LAN and access the GUI via a browser at the shown address (i.e. visit 192.168.x.x:8006). Log in with the `root` user and password set in the previous step.
 
 A warning will pop up reminding you that you do not have an eterprise license. Just hit ok, it doesn't matter and is not necessary, but supporting opensource projects is cool.
 
-**7. Access the Terminal locally (and over SSH)**
+#### 7. Access the Terminal locally (and over SSH)
 
 Back on the proxmox server, login with `root` user and password. This is a terminal as usual.
 
 Proxmox comes with the standard OpenSSH server. SSH in with `root@192.168.x.x` from another computer on the LAN for remote access.
 
-**8. Stop using the Enterprise Repo**
+#### 8. Stop using the Enterprise Repo
 
 This is necessary before updating or installing apps. The exact steps vary between versions so some extra googling may be necessary.
 
@@ -90,6 +90,6 @@ This is necessary before updating or installing apps. The exact steps vary betwe
 `mv /etc/apt/sources.list.d/ceph.sources /etc/apt/sources.list.d/ceph.sources.disabled`. This renames the enterprise repo file, effectively removing Proxmox Access to it and preventing unallowed IPs from being blocked.
 - Create the non-enterprise repo file with `nano /etc/apt/sources.list.d/pve-no-subscription.list`. Put `deb http://download.proxmox.com/debian/pve trixie pve-no-subscription` in there.
 
-**9. Create VMs**
+#### 9. Create VMs
 
 Visit the [Proxmox Hub](/jpprojects/proxmox/proxmoxhub) to see documentation for a variety of VMs.

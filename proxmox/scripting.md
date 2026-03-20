@@ -7,11 +7,11 @@ layout: default
 
 Personal servers (probably) do not need to be on all the time. By scripting downtime at night the server uses less electricity and other resources. This page details configurations for automated down-scrits and up-scripts.
 
-**Down Scripting**
+#### Down Scripting
 
 A script executed regularly via cron allows for logs to track the down-timing. Some configurations in the Proxmox UI, as well as in individual VMs.
 
-**1. Enable QEMU Guest Agent**
+#### 1. Enable QEMU Guest Agent
 
 QEMU gues agent is a lightweight service inside a VM that (among other things) allows the hypervisor (in our case, Proxmox) to communicate directly with the guest OS. It's a safe way to interact with a VM, particularly for powering on and off.
 
@@ -20,7 +20,7 @@ By defauly, Proxmox disables Qemu guest agent for each VM and must be enabled pe
 - Select the VM on the left bar, then click Options and then "QEMU Guest Agent".
 - Click "Edit" in the top bar, and check the "Use QEMU Guest Agent" box. Proxmox will automatically remind you to install the QEMU Guest Agent in the VM itself. That's the next step.
 
-**2. Install the QEMU Guest Agent**
+#### 2. Install the QEMU Guest Agent
 
 These steps need to be run on every VM.
 
@@ -32,7 +32,7 @@ Enter the terminal of the VM itself. Follow these commands to install.
 - Optionally, check the status verbosely with `sudo systemctl status qemu-guest-agent`. You should see `running`.
 
 
-**3. Create the script**
+#### 3. Create the script
 
 In the terminal of the Proxmox host, create the script with `nano safe-shutdown.sh`:
 
@@ -81,14 +81,14 @@ If you ssh into the Proxmox host you can copy and paste this whole script in. I 
 
 This script sends a safe ACPI shutdown signal to each active VM, then turns off the Proxmox host itself, and logs the whole process. The log is accessible at `/var/log/proxmox-safe-shutdown.log`.
 
-**4. Set up the cronjob**
+#### 4. Set up the cronjob
 
 - Access the root user crontab with `crontab -e`
 - You may be asked to select a text editor to create the crontab file with. Enter 1 for Nano or 2 for Vim.
 - Add the following cronjob at the bottom of the file: `0 23 * * * /root/safe-shutdown.sh` (The first number is the minute, the second is the hour, in military time, obviously. Each following '*' represents every day of the month, every month, every day of the week, respectively. Change the hour as needed.)
 - Test that the cronjob is set with `crontab -l`. The job should be listed.
 
-**5. Test the Job**
+#### 5. Test the Job
 
 - Run `sh safe-shutdown.sh` to test the script.
 - After powering on the Proxmox host again, check the log to make sure everything worked.

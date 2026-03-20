@@ -39,11 +39,11 @@
 
 <p>Personal servers (probably) do not need to be on all the time. By scripting downtime at night the server uses less electricity and other resources. This page details configurations for automated down-scrits and up-scripts.</p>
 
-<p><strong>Down Scripting</strong></p>
+<h4 id="down-scripting">Down Scripting</h4>
 
 <p>A script executed regularly via cron allows for logs to track the down-timing. Some configurations in the Proxmox UI, as well as in individual VMs.</p>
 
-<p><strong>1. Enable QEMU Guest Agent</strong></p>
+<h4 id="1-enable-qemu-guest-agent">1. Enable QEMU Guest Agent</h4>
 
 <p>QEMU gues agent is a lightweight service inside a VM that (among other things) allows the hypervisor (in our case, Proxmox) to communicate directly with the guest OS. It’s a safe way to interact with a VM, particularly for powering on and off.</p>
 
@@ -54,7 +54,7 @@
   <li>Click “Edit” in the top bar, and check the “Use QEMU Guest Agent” box. Proxmox will automatically remind you to install the QEMU Guest Agent in the VM itself. That’s the next step.</li>
 </ul>
 
-<p><strong>2. Install the QEMU Guest Agent</strong></p>
+<h4 id="2-install-the-qemu-guest-agent">2. Install the QEMU Guest Agent</h4>
 
 <p>These steps need to be run on every VM.</p>
 
@@ -67,7 +67,7 @@
   <li>Optionally, check the status verbosely with <code class="language-plaintext highlighter-rouge">sudo systemctl status qemu-guest-agent</code>. You should see <code class="language-plaintext highlighter-rouge">running</code>.</li>
 </ul>
 
-<p><strong>3. Create the script</strong></p>
+<h4 id="3-create-the-script">3. Create the script</h4>
 
 <p>In the terminal of the Proxmox host, create the script with <code class="language-plaintext highlighter-rouge">nano safe-shutdown.sh</code>:</p>
 
@@ -115,7 +115,7 @@ If you ssh into the Proxmox host you can copy and paste this whole script in. I 
 
 <p>This script sends a safe ACPI shutdown signal to each active VM, then turns off the Proxmox host itself, and logs the whole process. The log is accessible at <code class="language-plaintext highlighter-rouge">/var/log/proxmox-safe-shutdown.log</code>.</p>
 
-<p><strong>4. Set up the cronjob</strong></p>
+<h4 id="4-set-up-the-cronjob">4. Set up the cronjob</h4>
 
 <ul>
   <li>Access the root user crontab with <code class="language-plaintext highlighter-rouge">crontab -e</code></li>
@@ -124,7 +124,7 @@ If you ssh into the Proxmox host you can copy and paste this whole script in. I 
   <li>Test that the cronjob is set with <code class="language-plaintext highlighter-rouge">crontab -l</code>. The job should be listed.</li>
 </ul>
 
-<p><strong>5. Test the Job</strong></p>
+<h4 id="5-test-the-job">5. Test the Job</h4>
 
 <ul>
   <li>Run <code class="language-plaintext highlighter-rouge">sh safe-shutdown.sh</code> to test the script.</li>

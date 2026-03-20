@@ -43,7 +43,7 @@
 
 <hr />
 
-<p><strong>1. Prepare the hardware</strong></p>
+<h4 id="1-prepare-the-hardware">1. Prepare the hardware</h4>
 
 <p>Having a dedicated proxmox server prevents your services, servers and virtual machines prevents your main desktop for being bogged down by resource greedy processes. When selecting hardware, keep in mind that Proxmox VE requires very few resources:</p>
 
@@ -59,7 +59,7 @@
 In terms of hardware, this project will also need a USB drive. USB Type A is the preffered type.
 </div>
 
-<p><strong>2. Modify the BIOS</strong></p>
+<h4 id="2-modify-the-bios">2. Modify the BIOS</h4>
 
 <p>The BIOS needs certain settings in order to support virtualization. While the exact settings may vary between CPUs and manufacturer, these are the basic settings that should be checked:</p>
 
@@ -72,17 +72,17 @@ In terms of hardware, this project will also need a USB drive. USB Type A is the
 
 <p>Be sure to hit “Apply” before exiting the BIOS</p>
 
-<p><strong>3. Download the ProxmoxVE ISO</strong></p>
+<h4 id="3-download-the-proxmoxve-iso">3. Download the ProxmoxVE ISO</h4>
 
 <p>This can be found on the Proxmox website. I used version <a href="https://proxmox.com/en/downloads">9.1</a>. Download “Proxmox VE 9.1 ISO Installer”.</p>
 
-<p><strong>4. Flash the ISO to a bootable drive</strong></p>
+<h4 id="4-flash-the-iso-to-a-bootable-drive">4. Flash the ISO to a bootable drive</h4>
 
 <p>The installer needs to be flashed to a USB drive, which will later be used to put Proxmox on the machine. I used <a href="https://etcher.balena.io/#download-etcher">Balena Etcher</a> on my Mac and I believe it works on Windows too.</p>
 
 <p>Using Balena is very straightforward. Upon opening the app click “Flash from file” and select the Proxmox ISO installer. Insert your USB Drive, click “Select Target” and select your USB drive. Then click “Flash”. Mac or Windows may ask for your password, neccessary to write to a drive.</p>
 
-<p><strong>5. One-Time Boot and Install</strong></p>
+<h4 id="5-one-time-boot-and-install">5. One-Time Boot and Install</h4>
 
 <p>Once the bootable USB is made, plug it in to the proxmox machine (prefferably in a rear port). Start (or restart) the machine, and repeatedly press F12 (or F2, or Del, or Esc or F11. It depends between different machines. Look it up if needed) to enter the boot menu. Select your USB and press Enter. This will bring up the Proxmox Installer screen.</p>
 
@@ -119,19 +119,19 @@ Note: THE SELECTED DRIVE WILL BE WIPED
 
 <p>Review the summary (I suggest taking a picture) and click “Install”. The installation may take several minutes</p>
 
-<p><strong>6. Access the GUI</strong></p>
+<h4 id="6-access-the-gui">6. Access the GUI</h4>
 
 <p>After installing, a black terminal will show the ip address and port where the GUI is available. Use another machine on the LAN and access the GUI via a browser at the shown address (i.e. visit 192.168.x.x:8006). Log in with the <code class="language-plaintext highlighter-rouge">root</code> user and password set in the previous step.</p>
 
 <p>A warning will pop up reminding you that you do not have an eterprise license. Just hit ok, it doesn’t matter and is not necessary, but supporting opensource projects is cool.</p>
 
-<p><strong>7. Access the Terminal locally (and over SSH)</strong></p>
+<h4 id="7-access-the-terminal-locally-and-over-ssh">7. Access the Terminal locally (and over SSH)</h4>
 
 <p>Back on the proxmox server, login with <code class="language-plaintext highlighter-rouge">root</code> user and password. This is a terminal as usual.</p>
 
 <p>Proxmox comes with the standard OpenSSH server. SSH in with <code class="language-plaintext highlighter-rouge">root@192.168.x.x</code> from another computer on the LAN for remote access.</p>
 
-<p><strong>8. Stop using the Enterprise Repo</strong></p>
+<h4 id="8-stop-using-the-enterprise-repo">8. Stop using the Enterprise Repo</h4>
 
 <p>This is necessary before updating or installing apps. The exact steps vary between versions so some extra googling may be necessary.</p>
 
@@ -141,7 +141,7 @@ Note: THE SELECTED DRIVE WILL BE WIPED
   <li>Create the non-enterprise repo file with <code class="language-plaintext highlighter-rouge">nano /etc/apt/sources.list.d/pve-no-subscription.list</code>. Put <code class="language-plaintext highlighter-rouge">deb http://download.proxmox.com/debian/pve trixie pve-no-subscription</code> in there.</li>
 </ul>
 
-<p><strong>9. Create VMs</strong></p>
+<h4 id="9-create-vms">9. Create VMs</h4>
 
 <p>Visit the <a href="/jpprojects/proxmox/proxmoxhub">Proxmox Hub</a> to see documentation for a variety of VMs.</p>
 

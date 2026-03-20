@@ -43,26 +43,26 @@
 
 <hr />
 
-<p><strong>1. Install the SSH Server</strong></p>
+<h4 id="1-install-the-ssh-server">1. Install the SSH Server</h4>
 
 <p>Run PowerShell as an admin, and run this command <code class="language-plaintext highlighter-rouge">dism /online /Add-Capability /CapabilityName:OpenSSH.Server~~~~0.0.1.0</code></p>
 
-<p><strong>2. Start the SSH Server</strong></p>
+<h4 id="2-start-the-ssh-server">2. Start the SSH Server</h4>
 
 <p><code class="language-plaintext highlighter-rouge">Start-Service sshd</code></p>
 
-<p><strong>3. Make SSH start automnatically on boot</strong></p>
+<h4 id="3-make-ssh-start-automnatically-on-boot">3. Make SSH start automnatically on boot</h4>
 
 <p><code class="language-plaintext highlighter-rouge">Set-Service -Name sshd -StartupType Automatic</code></p>
 
-<p><strong>4. Confirm SSH is running</strong></p>
+<h4 id="4-confirm-ssh-is-running">4. Confirm SSH is running</h4>
 
 <p><code class="language-plaintext highlighter-rouge">Get-Service sshd</code>
 You should see
 <code class="language-plaintext highlighter-rouge">Status: Running</code>
 <code class="language-plaintext highlighter-rouge">StartType: Automatic</code></p>
 
-<p><strong>5. Configure the Firewall</strong></p>
+<h4 id="5-configure-the-firewall">5. Configure the Firewall</h4>
 
 <p>This command allows TCP traffic through port 22 (the default SSH port)
 <code class="language-plaintext highlighter-rouge">New-NetFirewallRule -Name sshd -DisplayName "OpenSSH Server" -Enabled True -Direction Inbound -Protocol TCP -Action Allow -LocalPort 22</code></p>

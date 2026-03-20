@@ -41,11 +41,11 @@
 
 <p>The following steps detail Jellyfin configuration, specifically for a movie streaming service:</p>
 
-<p><strong>1. Install the server</strong></p>
+<h4 id="1-install-the-server">1. Install the server</h4>
 
 <p>Download <a href="https://repo.jellyfin.org/?path=/server/windows/latest-stable">here. </a>Run the .exe installer. Keep all the default options, except select the “Service” version, which is not the default.</p>
 
-<p><strong>2. Configure the server and add your media</strong></p>
+<h4 id="2-configure-the-server-and-add-your-media">2. Configure the server and add your media</h4>
 
 <p>Once Jellyfin is installed, access the UI at <a href="http://localhost:8096">http://localhost:8096</a>.</p>
 
@@ -58,7 +58,7 @@
 A movie media folder can be easily ammassed by ripping content from DVDs. With an external optical drive, movies can be copied from DVDs via <a href="https://www.makemkv.com/">MakeMKV</a>, a ripper (transcoder) software. Movie `.mkv` files can then be compressed with <a href="https://handbrake.fr/">HandBrake</a> to optimize for space. The workflow can even be automatted. Further details can be found below.
 </div>
 
-<p><strong>3. Connect your clients</strong></p>
+<h4 id="3-connect-your-clients">3. Connect your clients</h4>
 
 <p>Upon finishing setup, access Jellyfin from another device on the same LAN via a web browser : <code class="language-plaintext highlighter-rouge">http://&lt;server_ip&gt;:8096</code></p>
 
@@ -68,27 +68,29 @@ A movie media folder can be easily ammassed by ripping content from DVDs. With a
 
 <p>The following steps are optional to further optimize a Jellyfin Server.</p>
 
-<p><strong>4. Enable Hardware Transcoding</strong></p>
+<h4 id="4-enable-hardware-transcoding">4. Enable Hardware Transcoding</h4>
 
 <p>Hardware Encoding refers to optimization streaming capabilities of a media server by converting media files (video/audio) with a dedicated chip (GPU) rather than a CPU. It dramatically improves streaming quality, but can decrease stability.</p>
 
 <p>While logged in as admin, navigate to the admin dashboard with the three line menu on the top. From the admin dashboard, navigate to the “Playback” &gt; “Transcoding” section on from side-bar. Enable “Hardware Acceleration” and select the transcoding method that corrosponds with the machine’s GPU (AMD, NVIDIA, Intel).</p>
 
-<p><strong>5. Add additional users</strong></p>
+<h4 id="5-add-additional-users">5. Add additional users</h4>
 
 <p>While logged in as admin, navigate to the admin dashboard with the three line menu on the top. From the admin dashboard, navigate to the “Users” section on from side-bar. Use the “+” button to add a User. Upon setting a Name and Password, configure permissions (best-practice is to follow principles of zero-trust, which the defaults do). Ensure that “Allow remote connections to this server” to allow a user to log in over a VPN.</p>
 
 <hr />
 
+<h3 id="how-to-rip">How to Rip</h3>
+
 <p>The following instructions detail the process of digitizing via the aforementioned method. NOTE: This workflow is optimized for DVDs. Digitizing BlueRays is fundamentally different and requires different hardware and different software and configuration.</p>
 
-<p><strong>1. Download the Necessary Software</strong></p>
+<h4 id="1-download-the-necessary-software">1. Download the Necessary Software</h4>
 
 <p>As described, this method relies on <a href="https://www.makemkv.com/">MakeMKV</a> for ripping and <a href="https://handbrake.fr/">HandBrake</a> for compression. Download both (they are free).</p>
 
 <p>Not software, but an external USB disc drive is also, obviously, needed.</p>
 
-<p><strong>2. Rip</strong></p>
+<h4 id="2-rip">2. Rip</h4>
 
 <p>With the disc in the drive, start MakeMKV. The software will recognize the disc, and when recognized, click the drive icon to scan the disk.</p>
 
@@ -96,7 +98,7 @@ A movie media folder can be easily ammassed by ripping content from DVDs. With a
 
 <p>When the desired media is selected, specify a destination location. Then click the Make MKV button on the right. Ripping can take between 15 and 40 minutes depending on drive speed and media quality and size.</p>
 
-<p><strong>3. Compress</strong></p>
+<h4 id="3-compress">3. Compress</h4>
 
 <p>Moderate compression, especially of DVDs, can save nearly all the quality of the original media and reduce up to 50% file size.</p>
 
@@ -154,13 +156,13 @@ A movie media folder can be easily ammassed by ripping content from DVDs. With a
 
 <p>Upon proper configuration, click the green “Begin Transcoding” in the topmost menu.</p>
 
-<p><strong>4. Add to Jellyfin</strong></p>
+<h4 id="4-add-to-jellyfin">4. Add to Jellyfin</h4>
 
 <p>Add the resulting .mkv file to Library folder listed in Jellyfin. Then on the Admin Dashboard, click “Scan all Libraries” to refresh listed media and make added files available for streaming. A few minutes may be needed to properly find and add all files and metadata.</p>
 
-<p><strong>Note on FileBot</strong></p>
-
-<p><a href="https://www.filebot.net/">FileBot</a> is a tool that facilitates proper name formatting and metadata retrieval for movies and tv shows. It is optional, as all naming can be done manually and certain metadata is not strictly necessary. It requires a license to use, but can be a valuable tool especially for large digitizing projects or tv shows.</p>
+<div class="info">
+Note on  <a href="https://www.filebot.net/">FileBot</a>: Filebot is a tool that facilitates proper name formatting and metadata retrieval for movies and tv shows. It is optional, as all naming can be done manually and certain metadata is not strictly necessary. It requires a license to use, but can be a valuable tool especially for large digitizing projects or tv shows.
+</div>
 
   </main>
 

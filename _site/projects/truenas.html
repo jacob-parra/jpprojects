@@ -48,15 +48,15 @@
 
 <hr />
 
-<p><strong>1. Install a VM Platform</strong></p>
+<h4 id="1-install-a-vm-platform">1. Install a VM Platform</h4>
 
 <p>VirtualBox is the easiest option, though hypervisors like Proxmox are also great, especially for managing multiple VMs. Download VirtualBox <a href="[url](https://www.virtualbox.org/wiki/Downloads)">here</a>. Select the “Windows hosts” option.</p>
 
-<p><strong>2. Download TrueNAS SCALE ISO</strong></p>
+<h4 id="2-download-truenas-scale-iso">2. Download TrueNAS SCALE ISO</h4>
 
 <p><a href="https://www.truenas.com/download-truenas-community-edition/">This</a> is the image of the TrueNAS OS our VM will run. Download the current version and check that it has the .iso extension.</p>
 
-<p><strong>3. Create the Virtual Machine</strong></p>
+<h4 id="3-create-the-virtual-machine">3. Create the Virtual Machine</h4>
 
 <ul>
   <li>In VirtualBox, select “New” in the top menu.</li>
@@ -73,11 +73,11 @@
   <li>In the Network tab, navigate to and enable “Adapter 1”. Set Attached to” to “Bridged Adapter”. Then set “Promiscuous Mode” to “Allow All”. Check the “Cable Connected option”. This allows the NAS to appear on the LAN.</li>
 </ul>
 
-<p><strong>4. Attach the TrueNAS ISO</strong></p>
+<h4 id="4-attach-the-truenas-iso">4. Attach the TrueNAS ISO</h4>
 
 <p>While still in the settings, go to the Storage tab. Click the empty optical drive, then click the vlue CD Icon. Select the TrueNAS ISO downloaded in step 2.</p>
 
-<p><strong>5. Start the VM and Install TrueNAS</strong></p>
+<h4 id="5-start-the-vm-and-install-truenas">5. Start the VM and Install TrueNAS</h4>
 
 <p>Start the VM with the Green Go Arrow in the top menu.</p>
 
@@ -85,7 +85,7 @@
 
 <p>Once it finishes navigate to VirtualBox, then Devices,Optical Drives and finally Remove the ISO. Then, reboot the VM.</p>
 
-<p><strong>6. Access the TrueNAS from your Browser</strong></p>
+<h4 id="6-access-the-truenas-from-your-browser">6. Access the TrueNAS from your Browser</h4>
 
 <p>The TrueNAS VM Console should display an IP address:</p>
 
@@ -93,19 +93,19 @@
 
 <p>Open a browser and visit <code class="language-plaintext highlighter-rouge">http://&lt;that-ip&gt;</code>. Log in with Username: root and the root password set in step 5.</p>
 
-<p><strong>7. Create a Storage Pool</strong></p>
+<h4 id="7-create-a-storage-pool">7. Create a Storage Pool</h4>
 
 <p>In the TrueNAS UI, navigate to the Storage page on the left sidebar and click “Pools”. Click “Create Pool” and name it “tank”. Select the big (100 GB) disk. Click Add VDev. Set “Layout” to “Single Disk” and click “Create”. The storage is now ready</p>
 
-<p><strong>8. Create shared folder/dataset</strong></p>
+<h4 id="8-create-shared-folderdataset">8. Create shared folder/dataset</h4>
 
 <p>Navigate to Storage, then Pools, then tank. Click “Add Dataset” and name it NASshare. Click “Save”</p>
 
-<p><strong>9. Create SMB Share</strong></p>
+<h4 id="9-create-smb-share">9. Create SMB Share</h4>
 
 <p>In the left sidebar, navigate to “Shares”. In the SMB section, click “Add”. Make sure the path is <code class="language-plaintext highlighter-rouge">/mnt/tank/NASshare</code>. Set the name to NASshare. Set “Enable SMB service?” to “Yes”.</p>
 
-<p><strong>10. Connect to the NAS</strong></p>
+<h4 id="10-connect-to-the-nas">10. Connect to the NAS</h4>
 
 <p>On Windows, press Win + R. Type <code class="language-plaintext highlighter-rouge">\\&lt;TrueNAS-ip&gt;</code> and hit enter. NASshare should display and can be mapped as a drive by right clicking and selecting “Map Network Drive”.</p>
 
