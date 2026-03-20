@@ -41,11 +41,11 @@
 
 <p>These are the steps for configuring an Ubuntu Virtual Machine</p>
 
-<p><strong>1. Download the Ubuntu ISO</strong></p>
+<h4 id="1-download-the-ubuntu-iso">1. Download the Ubuntu ISO</h4>
 
 <p>Download <a href="https://ubuntu.com/download/server">here</a>.</p>
 
-<p><strong>2. Upload the ISO to Proxmox</strong></p>
+<h4 id="2-upload-the-iso-to-proxmox">2. Upload the ISO to Proxmox</h4>
 
 <ul>
   <li>Access the Proxmox Web UI</li>
@@ -59,8 +59,8 @@
 
 <p>Make sure you see the iso listed.</p>
 
-<p><strong>3. Create the VM</strong>
-This has a lot of steps, but there is <em>some</em> room for error. These configurations are organized by section/tab:</p>
+<h4 id="3-create-the-vm">3. Create the VM</h4>
+<p>This has a lot of steps, but there is <em>some</em> room for error. These configurations are organized by section/tab:</p>
 
 <ul>
   <li>General
@@ -124,7 +124,7 @@ This has a lot of steps, but there is <em>some</em> room for error. These config
   </li>
 </ul>
 
-<p><strong>4. Install Mint</strong></p>
+<h4 id="4-install-mint">4. Install Mint</h4>
 
 <p>Click on the VM (listed by id) on the left bar, then click “Console”. Click the “Start Now” power button in the middle.</p>
 
@@ -141,14 +141,14 @@ This has a lot of steps, but there is <em>some</em> room for error. These config
   <li>Wait for the installation to finish (it can take a while)</li>
 </ul>
 
-<p><strong>5. Remove the ISO</strong></p>
+<h4 id="5-remove-the-iso">5. Remove the ISO</h4>
 
 <p>When the installation finishes and restarts, it will show a black screen instructing you to remove the ISO. To do so, click on “Hardware” on the left menu of the VM. Click “CD/DVD” in the list, and click “Remove” on the top. Select “Confirm”.</p>
 
 <p>This keeps the machine from reinstalling Ubuntu over and over again. Navigate back to the 
 “Console” section of the VM and press “Enter” as instructed.</p>
 
-<p><strong>6. Login and finish configurations</strong></p>
+<h4 id="6-login-and-finish-configurations">6. Login and finish configurations</h4>
 
 <p>Login with the name and password set in step 4. Make the following selections when prompted:</p>
 
@@ -158,11 +158,11 @@ This has a lot of steps, but there is <em>some</em> room for error. These config
 
 <hr />
 
-<p><strong>7. Install the QEMU Guest Agent</strong></p>
+<h4 id="7-install-the-qemu-guest-agent">7. Install the QEMU Guest Agent</h4>
 
 <p>See the <a href="/jpprojects/proxmox/scripting">Proxmox Scripting project page</a>, step 2, for instructions on how to do this.</p>
 
-<p><strong>8. Install OpenSSH</strong></p>
+<h4 id="8-install-openssh">8. Install OpenSSH</h4>
 
 <p>See <a href="/jpprojects/proxmox/openssh">OpenSSH project page</a> for instructions on how to do this.</p>
 

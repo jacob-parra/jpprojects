@@ -9,17 +9,20 @@ Wazuh (pronounced Waw-zuhh) is a free and open source SIEM (Security Information
 
 This page will describe generally how to set up both
 
+<hr>
+
 ### First: the Server
+
 
 I set up the Wazuh Server as a container in Proxmox. If you have the resources a VM may be better as the server has a lot to do but I got it running in a container fine.
 
-**1. Download the Ubuntu Container Template**
+#### 1. Download the Ubuntu Container Template
 
 In your proxmox node, go to the "local" storage, click "CT Templates" in the left menu and click "Templates" at the top.
 
 Select `ubuntu-22.04-standard` and download it.
 
-**2. Create the Container**
+#### 2. Create the Container**
 
 Click the big "Create Container" button at the top right of the page. 
 
@@ -43,13 +46,13 @@ These are the configurations needed for this this container:
 
 Finish and create the VM.
 
-**3. Enable required features**
+#### 3. Enable required features
 
 In the Proxmox Host shell, edit the container congig file with `nano /etc/pve/lxc/<Container ID #>.conf`.
 
 Make sure `features: nesting=1,keyctl=1` is in there. Save and close when done.
 
-**4. Increase memory limits**
+#### 4. Increase memory limits
 
 OpenSearch, a critical feature for Wazuh Server, needs memory locking.
 
@@ -57,13 +60,13 @@ To enable it, first make sure the container is on (you can right click it in the
 
 Add `vm.max_map_count=262144` in there. Then save and close, and apply the change with `sysctl -p`.
 
-**5. Install Wazuh**
+#### 5. Install Wazuh
 
 Download with `curl -sO https://packages.wazuh.com/4.7/wazuh-install.sh` (if curl is not installed yet, install it by first updating `apt update` and installing with `apt install curl`). 
 
 Run the install script that the last command pulled : `bash wazuh-install.sh -a`.
 
-**6. Access the Dashboard**
+#### 6. Access the Dashboard
 
 The default admin account generates a password for accessing the Web Dashboard. This is not the same as the root user in the CLI. Find out what what the admin password is by first unzipping the installer `tar -xvf wazuh-install-files.tar` and then checking in the passwords file `cat wazuh-install-files/wazuh-passwords.txt`.
 
@@ -74,5 +77,7 @@ The admin password can also be changed with `/var/ossec/indexer/bin/opensearch-u
 - `systemctl restart wazuh-indexer`
 
 Once you know what the n a device on the same lan, visit the Wazuh Server IP address assigned in Step 2 in the browser. Login with `admin/<admin password>`. 
+
+<hr>
 
 ### Second, the Agents

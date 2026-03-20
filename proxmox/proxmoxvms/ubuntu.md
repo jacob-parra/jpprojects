@@ -9,11 +9,11 @@ Ubuntu is one of the friendliest distros for people new to Linux. It's widely su
 
 These are the steps for configuring an Ubuntu Virtual Machine
 
-**1. Download the Ubuntu ISO**
+#### 1. Download the Ubuntu ISO
 
 Download <a href="https://ubuntu.com/download/server">here</a>.
 
-**2. Upload the ISO to Proxmox**
+#### 2. Upload the ISO to Proxmox
 
 - Access the Proxmox Web UI
 - Click on your node (on the left side, under "Datacenter")
@@ -25,7 +25,7 @@ Download <a href="https://ubuntu.com/download/server">here</a>.
 
 Make sure you see the iso listed 
 
-**3. Create the VM**
+#### 3. Create the VM
 This has a lot of steps, but there is *some* room for error. These configurations are organized by section/tab:
 
 - General
@@ -64,7 +64,7 @@ This has a lot of steps, but there is *some* room for error. These configuration
     - Check the "Start after created" box
     - Click Finish
 
-**4. Install Ubuntu**
+#### 4. Install Ubuntu
 
 Click on the VM (listed by id) on the left bar, then click "Console". Click the "Start Now" power button in the middle. 
 
@@ -79,14 +79,14 @@ As it boots up, it will send you through an installation process. Follow these c
 - Set the name, computer name, username and password for the machine
 - Wait for the installation to complete
 
-**5. Remove the ISO**
+#### 5. Remove the ISO
 
 When the installation finishes and restarts, it will show a black screen instructing you to remove the ISO. To do so, click on "Hardware" on the left menu of the VM. Click "CD/DVD" in the list, and click "Remove" on the top. Select "Confirm".
 
 This keeps the machine from reinstalling Ubuntu over and over again. Navigate back to the 
 "Console" section of the VM and press "Enter" as instructed.
 
-**6. Login and finish configurations**
+#### 6. Login and finish configurations
 
 Login with the name and password set in step 4. Make the following selections when prompted:
 

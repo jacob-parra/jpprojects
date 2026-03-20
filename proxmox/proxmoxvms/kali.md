@@ -5,15 +5,13 @@ layout: default
 
 ## Kali
 
-
-
 These are the steps for configuring a Kali Virtual Machine
 
-**1. Download the Kali ISO**
+#### 1. Download the Kali ISO
 
 Download <a href="https://ubuntu.com/download/server">here</a>.
 
-**2. Upload the ISO to Proxmox**
+#### 2. Upload the ISO to Proxmox
 
 - Access the Proxmox Web UI
 - Click on your node (on the left side, under "Datacenter")
@@ -25,7 +23,7 @@ Download <a href="https://ubuntu.com/download/server">here</a>.
 
 Make sure you see the iso listed 
 
-**3. Create the VM**
+#### 3. Create the VM
 This has a lot of steps, but there is *some* room for error. These configurations are organized by section/tab:
 
 - General
@@ -67,7 +65,7 @@ This has a lot of steps, but there is *some* room for error. These configuration
     - Check the "Start after created" box if you want
     - Click Finish
 
-**4. Install Kali**
+#### 4. Install Kali
 
 Click on the VM (listed by id) on the left bar, then click "Console". Click the "Start Now" power button in the middle. 
 
@@ -91,22 +89,22 @@ As it boots up, it will send you through an installation process. Follow these c
 
 Let the VM reboot, and quickly move to step 5
 
-**5. Remove the ISO**
+#### 5. Remove the ISO
 
 - If the VM has already finished rebooting, shut off the VM
 - Go to Hardware, click the CD/DVD Drive and click "Remove" on the top menu
 - Restart the VM and wait for it to boot
 
-**6. Login and finish configurations**
+#### 6. Login and finish configurations
 
 Login with the name and password set in step 4.
 
 <hr>
 
-**7. Install the QEMU Guest Agent**
+#### 7. Install the QEMU Guest Agent
 
 See the [Proxmox Scripting project page](/jpprojects/proxmox/scripting), step 2, for instructions on how to do this.
 
-**8. Install OpenSSH**
+#### 8. Install OpenSSH
 
 See [OpenSSH project page](/jpprojects/proxmox/openssh) for instructions on how to do this.

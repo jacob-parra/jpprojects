@@ -11,13 +11,13 @@ This page is in 2 parts: first for creating the Debian VM and then installing an
 
 <hr>
 
-## Part 1 : Debian CLI VM
+### Part 1 : Debian CLI VM
 
-**1. Download the Debian ISO**
+#### 1. Download the Debian ISO
 
 We will be using Debian 12 <a href="https://cdimage.debian.org/cdimage/archive/12.0.0/amd64/iso-cd/">(debian-12.0.0-amd64-netinst.iso)</a>
 
-**2. Upload the ISO**
+#### 2. Upload the ISO
 
 - Access the Proxmox Web UI
 - Click on your node (on the left side, under "Datacenter")
@@ -29,7 +29,7 @@ We will be using Debian 12 <a href="https://cdimage.debian.org/cdimage/archive/1
 
 Make sure you see the iso listed.
 
-**3. Create the VM**
+#### 3. Create the VM
 
 This has a lot of steps, but there is *some* room for error. These configurations are organized by section/tab:
 
@@ -69,7 +69,7 @@ This has a lot of steps, but there is *some* room for error. These configuration
     - Check the "Start after created" box
     - Click Finish
 
-**4. Finish the Installation**
+#### 4. Finish the Installation
 
 Follow these steps for post-creation installation options. Most are pretty predictable, but some are not. Safest to just follow along.
 
@@ -99,20 +99,20 @@ Follow these steps for post-creation installation options. Most are pretty predi
 
 All done! Finally. 
 
-**5. Install the QEMU Guest Agent**
+#### 5. Install the QEMU Guest Agent
 
 See the [Proxmox Scripting project page](/jpprojects/proxmox/scripting), step 2, for instructions on how to do this.
 
-**6. Install OpenSSH**
+#### 6. Install OpenSSH
 
 See [OpenSSH project page](/jpprojects/proxmox/openssh) for instructions on how to do this.
 
 
 <hr>
 
-## Part 2 : Docker CLI
+### Part 2 : Docker CLI
 
-**1. SSH in**
+#### 1. SSH in
 
 SSH in, as these steps require lots of copy and pasting, easiest done from SSH rather than directly in the Proxmox Web GUI. Log in as root, or a user with root priviledge, or as a normal user and then `su` to a user with `sudo`.
 
@@ -120,7 +120,7 @@ SSH in, as these steps require lots of copy and pasting, easiest done from SSH r
 Remeber, this is done with `ssh username@ip`. Find the Debian VM's IP address with `ip a`, it will likely be the last one listed.
 </div>
 
-**2. Install Docker**
+#### 2. Install Docker
 
 This is where the copy and pasting is going to be very handy.
 
@@ -143,13 +143,13 @@ The VM may come without `tee`. Run `apt install coreutils sudo -y` to install it
     - Update again : `sudo apt update`
     - `sudo apt install docker-ce docker-ce-cli containerd.io \docker-buildx-plugin docker-compose-plugin -y`
 
-**3. Allow user to run Docker**
+#### 3. Allow user to run Docker
 
 This allows the current user to run Docker without `sudo`. Run `newgrp docker`, then `sudo usermod -aG docker $USER`.
 
 Test that everything is working by running `docker run hello-world`. Output should be see a message that says `Hello from Docker!`.
 
-**4. Finishing touches**
+#### 4. Finishing touches
 
 First, check that auto-start is enabled (which is the default, but good to check).
     - `sudo systemctl enable docker`
@@ -161,7 +161,7 @@ Second, organize the Docker stuff for a clean layout:
 
 <hr>
 
-## How to Docker CLI
+### How to Docker CLI
 
 It isn't totally intuitive, but it isn't too tricky either.
 
