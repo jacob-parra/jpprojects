@@ -22,12 +22,12 @@ Having a dedicated proxmox server prevents your services, servers and virtual ma
 I would recommend buying a workstation desktop off of Ebay or Facebook Marketplace. These machines often have plenty of resources and are not very expensive (from $100-$150). Mini PCs can also work, use even less energy, take less space and cost lest money.
 
 <div class="info">
-In terms of hardware, this project will also need a USB drive. USB Type A is the preffered type.
+In terms of hardware, this project will also need a USB drive. USB Type A is the preffered type. You also need a keyboard, as well as a monitor for initial setup.
 </div>
 
 #### 2. Modify the BIOS
 
-The BIOS needs certain settings in order to support virtualization. While the exact settings may vary between CPUs and manufacturer, these are the basic settings that should be checked:
+The BIOS needs certain settings in order to support virtualization. You can access the BIOS by spamming the DEL key while booting the host. While the exact settings may vary between CPUs and manufacturer, these are the basic settings that should be checked:
 
 - Check "Virtualization Support", and make sure your CPU virtualization support is enabled
 - Enable "UEFI" in the Boot List Options (Proxmox runs better in UEFI compared to "Legacy")
@@ -48,7 +48,7 @@ Using Balena is very straightforward. Upon opening the app click "Flash from fil
 
 #### 5. One-Time Boot and Install
 
-Once the bootable USB is made, plug it in to the proxmox machine (prefferably in a rear port). Start (or restart) the machine, and repeatedly press F12 (or F2, or Del, or Esc or F11. It depends between different machines. Look it up if needed) to enter the boot menu. Select your USB and press Enter. This will bring up the Proxmox Installer screen.
+Once the bootable USB is made, plug it in to the proxmox machine (prefferably in a rear port), along with a keyboard. Boot (or restart) the machine, and repeatedly press F12 (or F2, or Del, or Esc or F11. It depends between different machines. Look it up if needed) to enter the boot menu. Select your USB and press Enter. This will bring up the Proxmox Installer screen.
 
 - Choose Install Proxmox VE (the first option) and press Enter.
 

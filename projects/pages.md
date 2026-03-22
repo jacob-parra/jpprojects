@@ -41,14 +41,14 @@ markdown: kramdown
 
 **_layouts/defualt.html**
 
-This file will be applied to every page in the site to place a top navbar and provide metadata.
+This file will be applied to every page in the site to place a top navbar and provide metadata. Remove the spaces between the mustache syntax ({ { stuff } })
 
 ```
 <!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>{{ page.title }} | {{ site.title }}</title>
+  <title>{ { page.title } } | { { site.title } }</title>
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="stylesheet" href="/jpprojects/assets/style.css">
 </head>
@@ -61,13 +61,13 @@ This file will be applied to every page in the site to place a top navbar and pr
 
   <div id="Default_Nav_Bar">
     <nav>
-      <a href="{{ site.baseurl }}/">↩︎ Home</a>
+      <a href="{ { site.baseurl } }/">↩︎ Home</a>
     </nav>
   </div>
 
 
   <main>
-    {{ content }}
+    { { content } }
   </main>
 
 

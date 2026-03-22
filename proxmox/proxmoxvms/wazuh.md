@@ -72,12 +72,45 @@ The default admin account generates a password for accessing the Web Dashboard. 
 
 The admin password can also be changed with `/var/ossec/indexer/bin/opensearch-users passwd admin`. This will prompt for a new password and confirmation. If you do this be sure to restart affected services: 
 
-- `systemctl restart wazuh-dashboard`
-- `systemctl restart wazuh-manager`
-- `systemctl restart wazuh-indexer`
+```
+systemctl restart wazuh-dashboard
+systemctl restart wazuh-manager
+systemctl restart wazuh-indexer
+```
 
 Once you know what the n a device on the same lan, visit the Wazuh Server IP address assigned in Step 2 in the browser. Login with `admin/<admin password>`. 
 
 <hr>
 
 ### Second, the Agents
+
+An agent gets installed on every host that you would like to monitor and get logs from. You can install agents on physcial hosts as well as VMs and containers.
+
+#### 1. Get the install command
+
+On the Wazuh Dashboard, click the down arrow at the top and click Agents. On the agents dashboard click "Deploy new agent".
+
+This will take you to the installer wizard, which will create a command you can run on the device you are installing the agent to for fast setup. You need to configure the install command with the right options with the wizard.
+
+Depending on the device you are installing the agent to you, pick the right install version. For most devices, `DEB amd64` is the right option (if it is not you will find out when you try to run the install command.)
+
+You could set an agent name and add to a group if you'd like. If you don't, the agent name defaults to the host device name. Also, add the IP address of your Wazuh Server.
+
+The install command will be generated in section 4, which will probably look something like this: `curl -sO https://packages.wazuh.com/4.x/wazuh-agent.sh / WAZUH_MANAGER='192.168.x.x' bash wazuh-agent.sh`. Note that you may need to set WAZUH_MANAGER to manually be the ip address of 
+
+#### 2. Run install command
+
+On the host you are adding, run the install command in the terminal.
+Then start the agent: 
+
+```
+systemctl daemon-reload
+systemctl enable wazuh-agent
+systemctl start wazuh-agent
+```
+
+Verify it's status with `systemctl status wazuh-agent`.
+
+#### 3. Check the Dashboard
+
+Make sure you see the agent appear in the Wazuh Server, and that it's name and logs are appearing properly. 
