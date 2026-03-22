@@ -46,7 +46,7 @@ After rebooting the terminal will display the IP address. Go to this IP address 
 
 After the initial setup, click the gear/settings icon of the Storage section on the left. Besides your system storage, you'll see a banner option to configure storage (make sure your hard drives are plugged in by now). Click on the arrow of the banner and follow through the steps to configure your drives.
 
-You will have the option to pick a RAID configuration, as well as select which drives you want included in it. This becomes a storage pool, basically a single "drive" for storage, comprised of multiuple drives behind the scenes.
+You will have the option to pick a RAID configuration, as well as select which drives you want included in it. This becomes a storage pool, basically a single "drive" for storage, comprised of multiuple drives behind the scenes. The name you give to this pool cannot be changed, so choose wisely.
 
 #### 7. Other Settings
 
