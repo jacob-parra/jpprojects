@@ -47,4 +47,8 @@ This page serves as the a landing page for a dedicated Proxmox server and a vari
     <td class="pmh_logo_cell"><img src="/jpprojects/images/images/wazuh.png" class="pmh_logo" alt="Wazuh"></td>
     <td><a href="https://jacob-parra.github.io/jpprojects/proxmox/proxmoxvms/wazuh">Wazuh</a></td>
   </tr>
+  <tr>
+    <td class="pmh_logo_cell"><img src="/jpprojects/images/images/pihole.png" class="pmh_logo" alt="Pi-Hole"></td>
+    <td><a href="https://jacob-parra.github.io/jpprojects/proxmox/proxmoxvms/pihole">Pi-Hole</a></td>
+  </tr>
 </table>

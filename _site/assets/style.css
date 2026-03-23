@@ -113,14 +113,13 @@ th, td {
   border: 1px solid var(--paprika_orange);
   padding: 0.6rem 0.75rem;
   border-width: 2px;
+  text-align: center;
 
 }
 
 th {
   background: var(--carbon_black);
   font-weight: 600;
-  text-align: left;
-  text-align: center
 }
 
 
