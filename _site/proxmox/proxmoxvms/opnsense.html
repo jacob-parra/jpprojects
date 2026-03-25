@@ -228,7 +228,7 @@ iface vmbr1 inet manual
 
 <h4 id="8-update">8. Update</h4>
 
-<p>After getting the initial configurations set up, it’s time to update. Check the left menu bar and go to <code class="language-plaintext highlighter-rouge">System → Firmware → Status</code>. Click <code class="language-plaintext highlighter-rouge">Check for Updates</code> and let the update checker run. If there is an update, let it apply, and then reboot the VM from Proxmox so it applies.</p>
+<p>After getting the initial configurations set up, it’s time to update. Check the left menu bar and go to <code class="language-plaintext highlighter-rouge">System → Firmware → Status</code>. Click <code class="language-plaintext highlighter-rouge">Check for Updates</code> and let the update checker run. If there is an update, click OK on the popup and scroll to the bottom and click blue update button. Then let the system reboot, or manually reboot from the Proxmox host console.</p>
 
 <p>If the update hangs, or if upon checking for updates again the same update shows up, you can also update from the console in Proxmox. Pick option 12, choose Fetch Updates and Apply Updates. Say <code class="language-plaintext highlighter-rouge">Yes</code> to rebooting. When the patch notes appear press Space to scroll through them, and then <code class="language-plaintext highlighter-rouge">q</code> to let the updates finish installing. The VM should reboot itself when it finishes.</p>
 
@@ -248,7 +248,7 @@ iface vmbr1 inet manual
 
 <hr />
 
-<h3 id="tailscale-on-opnsense">Tailscale on OPNsense</h3>
+<h2 id="tailscale-on-opnsense">Tailscale on OPNsense</h2>
 
 <p>The following instructions detail how to setup Tailscale on a router, to make the entire LAN accessible via Tailscale subnet routing.</p>
 
@@ -268,7 +268,7 @@ iface vmbr1 inet manual
 
 <p>Copy the key. You may not be able to access it again.</p>
 
-<p>Then, in the OPNsense web console, go to <code class="language-plaintext highlighter-rouge">VPN → Tailscale → Authentication</code>. Set the Login Server to <code class="language-plaintext highlighter-rouge">https://controlplane.tailscale.com</code>. Paste your key into the <code class="language-plaintext highlighter-rouge">Pre-authentication Key</code> section and click Apply.</p>
+<p>Then, in the OPNsense web console, go to <code class="language-plaintext highlighter-rouge">VPN → Tailscale → Authentication</code>. Click the “advanced” toggle in the top left. Set the Login Server to <code class="language-plaintext highlighter-rouge">https://controlplane.tailscale.com</code>. Paste your key into the <code class="language-plaintext highlighter-rouge">Pre-authentication Key</code> section and click Apply.</p>
 
 <p>Then go to back to the Machines tab of the Tailscale admin console. Your router should be newly listed at the bottom of the list. Click on the machine name, and then click “Approve” if necessary.</p>
 
@@ -291,7 +291,7 @@ iface vmbr1 inet manual
   <li>Interface: Tailscale</li>
   <li>Protocol: Any</li>
   <li>Source: Any</li>
-  <li>Destination: Any</li>
+  <li>Destination: LAN net</li>
 </ul>
 
 <p>Click the Save at the bottom, then Apply at the top right when back at the <code class="language-plaintext highlighter-rouge">Firewall: Rules: Tailscale</code> page.</p>

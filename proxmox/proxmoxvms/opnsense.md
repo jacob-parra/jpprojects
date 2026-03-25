@@ -161,7 +161,7 @@ Once it finishes, reboot.
 
 #### 8. Update
 
-After getting the initial configurations set up, it's time to update. Check the left menu bar and go to `System → Firmware → Status`. Click `Check for Updates` and let the update checker run. If there is an update, let it apply, and then reboot the VM from Proxmox so it applies.
+After getting the initial configurations set up, it's time to update. Check the left menu bar and go to `System → Firmware → Status`. Click `Check for Updates` and let the update checker run. If there is an update, click OK on the popup and scroll to the bottom and click blue update button. Then let the system reboot, or manually reboot from the Proxmox host console.
 
 If the update hangs, or if upon checking for updates again the same update shows up, you can also update from the console in Proxmox. Pick option 12, choose Fetch Updates and Apply Updates. Say `Yes` to rebooting. When the patch notes appear press Space to scroll through them, and then `q` to let the updates finish installing. The VM should reboot itself when it finishes.
 
@@ -177,7 +177,7 @@ You'll know everything is working if everything in your LAN can reach each other
 
 <hr>
 
-### Tailscale on OPNsense
+## Tailscale on OPNsense
 
 The following instructions detail how to setup Tailscale on a router, to make the entire LAN accessible via Tailscale subnet routing.
 
@@ -195,7 +195,7 @@ In another tab, sign in to <a href="https://login.tailscale.com/admin/settings/k
 
 Copy the key. You may not be able to access it again.
 
-Then, in the OPNsense web console, go to `VPN → Tailscale → Authentication`. Set the Login Server to `https://controlplane.tailscale.com`. Paste your key into the `Pre-authentication Key` section and click Apply.
+Then, in the OPNsense web console, go to `VPN → Tailscale → Authentication`. Click the "advanced" toggle in the top left. Set the Login Server to `https://controlplane.tailscale.com`. Paste your key into the `Pre-authentication Key` section and click Apply.
 
 Then go to back to the Machines tab of the Tailscale admin console. Your router should be newly listed at the bottom of the list. Click on the machine name, and then click "Approve" if necessary.
 
@@ -215,7 +215,7 @@ Go to `Firewall → Rules → Tailscale`. Use the little orange + button on the 
 - Interface: Tailscale
 - Protocol: Any
 - Source: Any
-- Destination: Any
+- Destination: LAN net
 
 Click the Save at the bottom, then Apply at the top right when back at the `Firewall: Rules: Tailscale` page.
 

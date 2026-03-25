@@ -27,7 +27,7 @@ I continue to learn and I'm looking for feedback. For questions or comments, ple
     <td><a href="https://jacob-parra.github.io/jpprojects/projects/tailscale">Tailscale</a></td>
   </tr>
   <tr>
-    <td class="pmh_logo_cell"><img src="/jpprojects/images/images/KeePass.png" class="pmh_logo" alt="KeePass"></td>
+    <td class="pmh_logo_cell"><img src="/jpprojects/images/images/keepass.png" class="pmh_logo" alt="KeePass"></td>
     <td><a href="https://jacob-parra.github.io/jpprojects/projects/keepass">KeePass Password Database</a></td>
   </tr>
   <tr>
