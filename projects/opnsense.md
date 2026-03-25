@@ -5,73 +5,104 @@ layout: default
 
 ## OPNsense
 
-Project coming soon!
+Opensense is a robust, open-source router software platform. It began as a fork of pfSense and m0n0wall and is generally considered more user friendly. I would recommend installing OPNsense directly onto bare metal to avoid passthrough headaches.
 
-Download and unzip to a .img
 
-use balena etcher to flash to a bootable drive
+<div class="info">
+I was given a Qotom mini PC which I used for this project. Qotom mini PCs are very low power and quite, while still plenty powerful for a robust router and firewall. There were certain headaches with mine, but I believe newer models are just fine. Any mini pc with enough ethernet ports/interfaces will probably work. There are many options online, but I would recommend getting one used because they can be pretty pricey. Go for something cheap, because you really do not need much compute for a dedicated router/firewall (2-4 cores, 4-8 GB ram, 32-64 GB Disk, 1-2.5 GB ethernet)
+</div>
 
-plug in drive, enter bios, set boot order to be the usb first.
-Or, wipe the other drive, so it is forced to boot from the usb
+These are the steps for configuring an OPNsense VM.
 
-Let boot from the usb, don't touch anything until it finishes or you'll reach options you probably don't want.
+#### 1. Download the OPNsense ISO
 
-login with installer:opnsense
+Download <a href="https://opnsense.org/download/">here</a>. Be sure to download the AMD64, VGA installer. 
 
-go to option 3 (something like other install options)
+It will probably download as a very specific `.img.bz2` format (compressed). I used **7-Zip** on Windows to export it properly. You can download 7-Zip <a href="https://www.7-zip.org/download.html">here</a>. Just grab the .exe version. When extracted properly, the file will have a .img extension.
 
-Select guided UFS option, select the bottom partition option and hit enter to finish. If that doesnt work, try a different partition option or try zfs. if that still doesnt work, look up how to destroy partitions manually.
+On Mac, just double click the download and it will create the .img.
+
+#### 2. Flash to a USB drive
+
+The installer needs to be flashed to a USB drive, which will later be used to put OPNsense on the machine. I used <a href="https://etcher.balena.io/#download-etcher">Balena Etcher</a> on my Mac and I believe it works on Windows too. 
+
+Using Balena is very straightforward. Upon opening the app click "Flash from file" and select the OPNsense .img installer. Insert your USB Drive, click "Select Target" and select your USB drive. Then click "Flash". Mac or Windows may ask for your password, neccessary to write to a drive.
+
+#### 3. Boot from the Bootable Drive
+
+Plug your hardrive in, as well as the display cable and a keybaord. While booting the system, spam the del key (or F12, or F11, or F2, or F10) to enter the BIOS. Find the section that talks about the boot order, and set the USB to boot first. Then save and exit.
+
+<div class="info">
+My mini pc booted so quickly that I could not enter the bios before booting straight to the previously installed os. I circumvented this by wiping the original drive so that the system had to boot from the usb instead. This is valid, but may require some wiggling to fully wipe any partitions and metadata from the original drive. [Crystal Disk Info](https://crystalmark.info/en/software/crystaldiskinfo/) may be helpful for this process.
+</div>
+
+Let the system boot from the usb. Don't touch anything until it finishes or you'll start editing options you probably don't want.
+
+#### 4. Install
+
+When the boot finishes, you'll have an option to login. Login to user `installer` with password `opnsense`.
+
+Enter option 3 (should say something like "other install options").
+
+Select guided UFS option. When given the parition version option, select the bottom partition option and hit enter to finish. If that doesnt work, try a different partition option or try zfs. if that still doesnt work, look up how to destroy partitions manually.
 
 Let install and reboot
 
+#### 5. Assign Interfaces
 
+Login to user `root` with password `opnsense`.
 
-1. Login with root:opnsense
+Enter `1` for the Assign Interfaces option.
+- For LAGGs: n
+- For VLANs : n
+- When it shows the interface names and asks for the WAN interface, if you dont know what your interface names are, unplug all ethernet cables and enter "a".
+- Then plug in WAN cable, make sure the connection is up (lights on) and hit enter.
+- When it asks for the LAN interface, enter "a".
+- Then plug in LAN cable, make sure the connection is up (lights on) and hit enter.
+- Press enter to skip extra interfaces.
+- Enter "y" to finish.
 
-2. 
-- 1. Assign Interfaces
-- Laggs: n
-- vlans: n
-- when you see the interface names, if you dont know what they are, unplug everything, do a
-- plug in wan cable and hit enter
-- do a
-- plug in lan cable and hit enter
-- press space to skip extra interfaces
-- press y to finish
+#### 6. Set Interface IP addresses
 
-3. 
-- 2. Set interface Ip address
-- select the number for you wan
-- do yes to configure ipv4 address for wan via dhcp
-- n for ipv6 via dhcp
-- change web gui protocol from https to http : n
-- new self signed cert for the gui : n
-- restore gui defaults : n
+First assign the WAN IP address over DHCP.
+Enter `2` for the "Set Interface IP Address" option.
+- Select the interface number for the WAN
+- Enter "Y" to configure IPv4 address for WAN via DHCP
+- Enter "n" for IPv6 via DHCP
+- Enter to skip assigning a IPv6 address
+- Change web GUI protocol from https to http : n
+- New self signed cert for the GUI : n
+- Restore GUI defaults : n
 
-- 2. Set interface ip address
-- select the number for your lan interface
-- do no for configure ipv4 address for lan via dhcp
-- enter address (without subnet)
-- enter subnet cidr number
-- press enter for none
-- configure ipv6 : n
-- enable dhcp server on lan : y
-- enter start dhcp range
-- enter end dhcp range
-- change web gui protocol from https to http : n
-- new self signed cert for the gui : n
-- restore gui defaults : n
-
-4.
-- Access the web console at the LAN ip address
-- go to System Firmware Status
-- click check for updates
-- click ok if updates pop up, scroll to bottom and click blue update button
-- let update and reboot
+Second, assign the LAN IP address statically, and 
+Again, enter `2` for the "Set Interface IP Address" option.
+- Select the interface number for the LAN.
+- Enter "n" to configure IPv4 address for LAN via DHCP.
+- Enter LAN IP address (without the subnet).
+- Under the subnet mask CIDR notation number (i.e. 24, 16, 8).
+- Press enter for none
+- Enable DHCP server on LAN : y
+- Enter DHCP range start address (i.e. 192.168.1.150)
+- Enter DHCP range end address (i.e. 192.168.1.200)
+- Change web GUI protocol from https to http : n
+- New self signed cert for the GUI : n
+- Restore GUI defaults : n
 
 
 
-## Tailscale on OPNsense
+#### 7. Access the Web Console and Update
+
+OPNsense has a great web console to make configuring a little easier. Access the web console at the LAN IP address you assigned in the last step (it should be displayed in the terminal manu near the top). Login to user `root` with password `opnsense`.
+
+In the left menu, go to `System > Firmware > Status`. Click the "Check for Updates" button at the bottom. After the updates are found, click ok if there is a pop up and scroll to the bottom to click blue update button
+
+Let update and reboot, it may take a few minutes. Refresh the web console after a few minutes if it doesnt refresh automatically.
+
+If the update hangs, or if upon checking for updates again the same update shows up, you can also update from the physical terminal. Pick option 12, choose Fetch Updates and Apply Updates. Say `Yes` to rebooting. When the patch notes appear press Space to scroll through them, and then `q` to let the updates finish installing. The system should reboot itself when it finishes.
+
+<hr>
+
+### Tailscale on OPNsense
 
 The following instructions detail how to setup Tailscale on a router, to make the entire LAN accessible via Tailscale subnet routing.
 

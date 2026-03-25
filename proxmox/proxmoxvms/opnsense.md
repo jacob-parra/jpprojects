@@ -20,7 +20,9 @@ This is a very networking heavy project. One way to reduce headaches later is to
 
 Download <a href="https://opnsense.org/download/">here</a>. Be sure to download the AMD64, VGA installer. 
 
-It will probably download as a very specific `.iso.bz2` format (compressed). I used **7-Zip** on Windows to export it properly. You can download 7-Zip <a href="https://www.7-zip.org/download.html">here</a>. Just grab the .exe version. When extracted properly, the file will have a .iso extension.
+It will probably download as a very specific `.img.bz2` format (compressed). I used **7-Zip** on Windows to export it properly. You can download 7-Zip <a href="https://www.7-zip.org/download.html">here</a>. Just grab the .exe version. When extracted properly, the file will have a .img extension.
+
+On Mac, just double click the download and it will create the .img.
 
 #### 2. Upload the ISO to Proxmox
 
