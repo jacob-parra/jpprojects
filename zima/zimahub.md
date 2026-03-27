@@ -8,7 +8,7 @@ layout: default
 This page serves as the a landing page for a dedicated Zima server and a variety of Docker App configurations.
 
 1. [Dedicated Zima NAS](/jpprojects/zima/zima) Project Page
-
+2. [Understanding Path Mapping](https://community.zimaspace.com/t/tutorial-how-to-understand-docker-apps-paths-on-zimaos-take-plex-as-an-example/3395)
 
 <table>
   <tr>

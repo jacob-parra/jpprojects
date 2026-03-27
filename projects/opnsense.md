@@ -156,3 +156,42 @@ Go to `VPN → Tailscale → Settings`. Make sure Enabled and Accept DNS are che
 Then go to the `Advertised Routes` tab at the top. Use the orange + button to add a subnet. Put your LAN subnet in the Subnet section (like 192.168.10.0/24) and add a description if you'd like. Click Save, then Apply.
 
 Finally, in the Tailscale admin console, go to the Machines tab. Click on your OPNsense machine and in the Subnet Routes portion click approve on the newly listed subnet route.
+
+#### 6. Intrusion Detection and Prevention
+
+OPNsense has built in Intrusion Detection that can block malicious traffic.
+
+In the left hand menu of the web console, go to `Services → Intrusion Detection → Administration`. 
+
+- Click the "Enabled" box.
+- Set "Pattern Matcher" to "Hyperscan" for Intel systems, or "Aho-Corasick, 'Ken Steele'" for AMD systems.
+- Set "Interfaces" to the interface to listen to (probably WAN).
+
+Click the orange Apply button at the bottom.
+
+Then go to the Download tab at the top.
+
+The listed items are essentially databases of known malicious sites and traffic which are regularly updated. I selected:
+
+- abuse.ch/Feodo Trackernot
+- abuse.ch/SSL Fingerprint Blacklistnot
+- abuse.ch/SSL IP Blacklistnot
+- abuse.ch/ThreatFoxnot
+- abuse.ch/URLhaus
+
+For each selected ruleset, click the pencil in the right to edit and check the "Enabled" box.
+
+Then click the orange Download & Update Rules. It may take a second to finish, but you'll know its working when the "Last Updated" will not say "not installed".
+
+Right now your rules are operating as Intrusion Detection, noting the traffic but doing nothing about it. These next steps turn the rules into Intrusion Prevention, dropping the traffic entirely.
+
+Then, in the left menu, go to `Services → Intrusion Detection → Policy`. Click the orange plus button on the right to add a rule.
+
+- Make sure the Enabled box is checked
+- Set Rulesets to be all of your downloaded rules
+- Add a description if you'd like
+- Set Action to Drop
+
+Then click Save, and Apply. Give it a sec to apply.
+
+[Additional Help](https://www.thomas-krenn.com/en/wiki/Configuration_of_OPNsense_Intrusion_Detection_and_Intrusion_Prevention)

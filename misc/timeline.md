@@ -7,17 +7,19 @@ layout: default
 This is the timeline and evolution of my homelab. 
 
 - March 2026
-    - Mar 2026 [Jellyfin for Zima](jpprojects/zima/apps/jellyfin)
-    - Mar 2026 [Zima](jpprojects/zima/zima)
+    - Mar 2026 [Immich for Zima](/jpprojects/zima/apps/immich)
+    - Mar 2026 [OPNsense](/jpprojects/projects/opnsense)
+    - Mar 2026 [Jellyfin for Zima](/jpprojects/zima/apps/jellyfin)
+    - Mar 2026 [Zima](/jpprojects/zima/zima)
 - February 2026
-    - Feb 2026 [Vaultwarden](jpprojects/proxmox/proxmoxvms/opnsense)
-    - Feb 2026 [OPNsense](jpprojects/proxmox/proxmoxvms/opnsense)
+    - Feb 2026 [Vaultwarden](/jpprojects/proxmox/proxmoxvms/opnsense)
+    - Feb 2026 [OPNsense on Proxmox](/jpprojects/proxmox/proxmoxvms/opnsense)
     - Feb 2026 [Migration](/jpprojects/proxmox/migration)
-    - Feb 2026 [Docker](jpprojects/proxmox/proxmoxvms/docker)
+    - Feb 2026 [Docker](/jpprojects/proxmox/proxmoxvms/docker)
 - January 2026
-    - Jan 2026 [Kali](jpprojects/proxmox/proxmoxvms/kali)
-    - Jan 2026 [Mint](jpprojects/proxmox/proxmoxvms/mint)
-    - Jan 2026 [Ubuntu](jpprojects/proxmox/proxmoxvms/ubuntu)
+    - Jan 2026 [Kali](/jpprojects/proxmox/proxmoxvms/kali)
+    - Jan 2026 [Mint](/jpprojects/proxmox/proxmoxvms/mint)
+    - Jan 2026 [Ubuntu](/jpprojects/proxmox/proxmoxvms/ubuntu)
     - Jan 2026 [OpenSSH on VMs](/jpprojects/proxmox/openssh)
     - Jan 2026 [Proxmox Server Downtime Scripting](/jpprojects/proxmox/scripting)
     - Jan 2026 [Tailscale on Proxmox](/jpprojects/proxmox/tailscale)
