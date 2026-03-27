@@ -3,6 +3,8 @@ title: KeePass Password Manager
 layout: default
 ---
 
+<img src="/jpprojects/images/images/keepass.png" class="float_img" alt="KeePass">
+
 ## KeePass Password Manager
 
 KeePassXC is a free, open source and self hostable password manager database software. Passwords are kept in an encrypted file. The file is navigated with a UI and supports folders for greater organization.

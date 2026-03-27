@@ -3,6 +3,8 @@ title: Proxmox Scripting
 layout: default
 ---
 
+<img src="/jpprojects/images/images/proxmox.png" class="float_img" alt="Proxmox">
+
 ## Proxmox Downtime Scripting
 
 Personal servers (probably) do not need to be on all the time. By scripting downtime at night the server uses less electricity and other resources. This page details configurations for automated down-scrits and up-scripts.

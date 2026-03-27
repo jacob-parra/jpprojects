@@ -3,6 +3,8 @@ title: OPNsense
 layout: default
 ---
 
+<img src="/jpprojects/images/images/opnsense.png" class="float_img" alt="OPNsense">
+
 ## OPNsense
 
 Opensense is a robust, open-source router software platform. It began as a fork of pfSense and m0n0wall and is generally considered more user friendly. I would recommend installing OPNsense directly onto bare metal to avoid passthrough headaches.

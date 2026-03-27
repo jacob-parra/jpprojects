@@ -3,6 +3,9 @@ title: Ubuntu
 layout: default
 ---
 
+<img src="/jpprojects/images/images/proxmox.png" class="float_img" alt="Proxmox">
+<img src="/jpprojects/images/images/ubuntu.png" class="float_img" alt="Ubuntu">
+
 ## Ubuntu
 
 Ubuntu is one of the friendliest distros for people new to Linux. It's widely supported with a large community. It boeasts a slick GUI and reliable stability.

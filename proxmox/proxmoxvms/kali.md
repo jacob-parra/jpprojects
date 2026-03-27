@@ -3,6 +3,9 @@ title: Kali
 layout: default
 ---
 
+<img src="/jpprojects/images/images/proxmox.png" class="float_img" alt="Proxmox">
+<img src="/jpprojects/images/images/kali.png" class="float_img" alt="Kali">
+
 ## Kali
 
 These are the steps for configuring a Kali Virtual Machine

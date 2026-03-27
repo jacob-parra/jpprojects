@@ -2,6 +2,9 @@
 title: ZimaOS
 layout: default
 ---
+
+<img src="/jpprojects/images/images/zima.png" class="float_img" alt="Zima">
+
 ## ZimaOS NAS box
 
 Zima is a simple, open-source NAS operating system. It is less powerful and controlable than TrueNAS, but also much more simple and polished. I chose Zima because it still gives lots of control and power to you as the admin while still feeling very clean, which makes it much more appealing and easy to use for those less-technical in my family. For example, along with a very clean browser file explorer, it also has IOS and Android apps that give access to all apps and features in one place. It's support for Docker Apps and RAID configurations was also a factor for deciding to go with Zima.

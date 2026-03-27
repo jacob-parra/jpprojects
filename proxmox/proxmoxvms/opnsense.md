@@ -2,6 +2,10 @@
 title: OPNsense
 layout: default
 ---
+
+<img src="/jpprojects/images/images/proxmox.png" class="float_img" alt="Proxmox">
+<img src="/jpprojects/images/images/opnsense.png" class="float_img" alt="OPNsense">
+
 ## OPNsense
 
 Opensense is a robust, open-source router software platform. It began as a fork of pfSense and m0n0wall and is generally considered more user friendly. Setting up a virtual router is not exactly trivial, but if you are careful it can be done.

@@ -221,3 +221,13 @@ th {
   justify-content: center; /* horizontal */
   align-items: center;     /* vertical */
 }
+
+.float_img{
+  float: right;
+  margin: 125px 0 20px 20px; /* space between image and text */
+  background-color: var(--silver);
+  border-radius: 12px; /* controls roundness */
+  padding: 10px;
+  height:200px;
+  width:200px;
+}

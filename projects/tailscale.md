@@ -3,6 +3,8 @@ title: Tailscale VPN
 layout: default
 ---
 
+<img src="/jpprojects/images/images/tailscale.png" class="float_img" alt="Tailscale">
+
 ## Tailscale VPN
 
 The Tailscale VPN allows all connected devices to behave as if they were on the same LAN. This enables access to services hosted on the Desktop from any VPN-connected device from anywhere and on any WiFi.

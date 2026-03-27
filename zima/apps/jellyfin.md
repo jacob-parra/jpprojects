@@ -3,6 +3,10 @@ title: Jellyfin
 layout: default
 ---
 
+<img src="/jpprojects/images/images/zima.png" class="float_img" alt="Zima">
+<img src="/jpprojects/images/images/Jellyfin.png" class="float_img" alt="Jellyfin">
+
+
 ## Jellyfin Media Server as a Docker App in Zima
 
 Jellyfin is a free, open-source media system that manages digital movie, tv show and music libraries streaming. It's a self-hosted Plex alternative. The server softeware is easy to configure with a web UI, and clients can connect and stream over the LAN or a VPN.

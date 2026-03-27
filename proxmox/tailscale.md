@@ -3,6 +3,8 @@ title: Proxmox Tailscale
 layout: default
 ---
 
+<img src="/jpprojects/images/images/proxmox.png" class="float_img" alt="Proxmox">
+
 ## Tailscale on Proxmox
 
 Your entire proxmox server, and the VMs it manages, can be made accessible over Tailscale. Tailscale is installed on the Proxmox host machine, the server itself, NOT on individual VMs.

@@ -2,6 +2,10 @@
 title: Vaultwarden
 layout: default
 ---
+
+<img src="/jpprojects/images/images/proxmox.png" class="float_img" alt="Proxmox">
+<img src="/jpprojects/images/images/vaultwarden.png" class="float_img" alt="VaultWarden">
+
 ## Vaultwarden
 
 Vaultwarden is an open-source, self-hosted password manager server that is fully compatible with the official Bitwarden client apps (browser extensions, phone apps, etc.). It's very lightweight, and enables local password management without relying on or paying for third-party cloud servers.

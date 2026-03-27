@@ -3,6 +3,8 @@ title: OpenSSH
 layout: default
 ---
 
+<img src="/jpprojects/images/images/proxmox.png" class="float_img" alt="Proxmox">
+
 ## OpenSSH
 
 OpenSSH is a free, open source SSH server that can be installed on individual VM's to allow for remote, direct terminal connection. It's simple to install and lightweight.

@@ -3,6 +3,8 @@ title: SSH & SFTP
 layout: default
 ---
 
+<img src="/jpprojects/images/images/ssh.png" class="float_img" alt="SSH">
+
 ## SSH & SFTP
 
 SSH (Secure Shell) is a protocol that allows secure remote console connection into another machine. SFTP (Safe File Transfer Protocol) is a protocol that securely move files between machines remotely.

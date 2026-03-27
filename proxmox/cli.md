@@ -3,6 +3,8 @@ title: CLI
 layout: default
 ---
 
+<img src="/jpprojects/images/images/proxmox.png" class="float_img" alt="Proxmox">
+
 ## Managing VMs/Containers from the Command Line
 
 This is a list of commands to use from the CLI of the Proxmox host to be able to control VMs, in case you are not able to access the Proxmox Web Console.

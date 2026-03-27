@@ -3,6 +3,9 @@ title: Immich
 layout: default
 ---
 
+<img src="/jpprojects/images/images/zima.png" class="float_img" alt="Zima">
+<img src="/jpprojects/images/images/immich.png" class="float_img" alt="Immich">
+
 ## Immich Photo Server as a Docker App in Zima
 
 Immich is a self-hosted image server. It acts as a substitute for Google Photos and has both browser and iOS/Android apps. It's robust and full of features, while still being very slick and user friendly.

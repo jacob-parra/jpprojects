@@ -3,6 +3,8 @@ title: Scripting
 layout: default
 ---
 
+<img src="/jpprojects/images/images/bash.png" class="float_img" alt="Bash">
+
 ## Downtime Batch Scripting
 
 A limit of self hosting solutions is downtime: with cloud service providers your applications/servers can stay up at all times with minimal costs/resources, as cloud services have extremely optimized scaling. In order for self hosted solutions to be available, the server or virtualized machine must remain on. To minimize costs, scripts can routinely and safely turn off servers and virtual machines at night (when downtime is acceptable) and turn back on in the morning. 

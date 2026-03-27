@@ -3,6 +3,8 @@ title: Github Pages
 layout: default
 ---
 
+<img src="/jpprojects/images/images/github.png" class="float_img" alt="Github">
+
 ## Github Pages
 
 Github Pages is a simple way to host simple static websites, like this one, directly from a Github Repo. It supports markdown natively via Jekyll, a static site generator perfect for sites focused on content over interactability. It's fast, secure and simple, perfect for the free hosting Github Pages provides.

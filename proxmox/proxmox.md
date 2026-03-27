@@ -3,6 +3,8 @@ title: Proxmox
 layout: default
 ---
 
+<img src="/jpprojects/images/images/proxmox.png" class="float_img" alt="Proxmox">
+
 ## Proxmox Virtual Environment
 
 Proxmox is an opensource, enterprise grade server management platform for virtualization (essentially a very good hypervisor). It can be run locally and is free for personal use. It stands out among other hypervisors for screenshot and backup capabilities and smooth networking.
