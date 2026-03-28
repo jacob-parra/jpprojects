@@ -12,7 +12,7 @@ There may come a time when a Proxmox server needs to move hosts, usually because
 
 <div class="info">
 This method of migration assumes you have one Proxmox server with VMs and configurations (original server), and another fresh install of Proxmox on another machine (new server) on the same LAN. Follow the [Dedicated Proxmox Server](/jpprojects/proxmox/proxmox) project page if needed 
-<div>
+</div>
 
 #### 1. Create Backups
 

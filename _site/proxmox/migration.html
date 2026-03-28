@@ -16,7 +16,7 @@
   <h1 id="title">jpprojects</h1>
 
   <nav class="TopLinks">
-    <a href="https://github.com/jacob-parra">GitHub</a>
+    <a href="https://github.com/jacob-parra" class="links">GitHub</a>
   </nav>
 
   <img src="/jpprojects/images/PorcoRosso.png" id="ProfilePic">
@@ -43,21 +43,22 @@
 
 <div class="info">
 This method of migration assumes you have one Proxmox server with VMs and configurations (original server), and another fresh install of Proxmox on another machine (new server) on the same LAN. Follow the [Dedicated Proxmox Server](/jpprojects/proxmox/proxmox) project page if needed 
-<div>
+</div>
 
-#### 1. Create Backups
+<h4 id="1-create-backups">1. Create Backups</h4>
 
-On the original server, enter the host terminal. This can be done on the machine itself, or via the web GUI by selecting your server node on the left sidebar, then clicking "Shell" in the interior left sidebar.
+<p>On the original server, enter the host terminal. This can be done on the machine itself, or via the web GUI by selecting your server node on the left sidebar, then clicking “Shell” in the interior left sidebar.</p>
 
-1. Create backups of all VMs : `vzdump --all --storage local --compress zstd`
-2. Send the backups to the new server : `scp /var/lib/vz/dump/*.vma.zst root@<new_server_ip>:/var/lib/vz/dump/`
+<ol>
+  <li>Create backups of all VMs : <code class="language-plaintext highlighter-rouge">vzdump --all --storage local --compress zstd</code></li>
+  <li>Send the backups to the new server : <code class="language-plaintext highlighter-rouge">scp /var/lib/vz/dump/*.vma.zst root@&lt;new_server_ip&gt;:/var/lib/vz/dump/</code></li>
+</ol>
 
-These commands can take a while to finish, especially if there are many large VMs in the node.
+<p>These commands can take a while to finish, especially if there are many large VMs in the node.</p>
 
-#### 2. Restore Backups
+<h4 id="2-restore-backups">2. Restore Backups</h4>
 
-On the new server, select the host storage in the left sidebar (probably called "local"). Then select "Backups" in the interior left sidebar. The VM backups should be listed. Select a VM, then click "Restore" in the top menu. Restore each VM one at a time and check that they appear under the new server Node.
-</new_server_ip></div></div>
+<p>On the new server, select the host storage in the left sidebar (probably called “local”). Then select “Backups” in the interior left sidebar. The VM backups should be listed. Select a VM, then click “Restore” in the top menu. Restore each VM one at a time and check that they appear under the new server Node.</p>
 
   </main>
 

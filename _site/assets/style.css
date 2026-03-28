@@ -23,8 +23,8 @@ body {
 
 nav {
   padding: 1rem;
-  border-bottom: 1px solid var(--paprika_orange);
-  background: var(--paprika_orange)
+  
+  
 }
 
 nav a {
@@ -230,4 +230,9 @@ th {
   padding: 10px;
   height:200px;
   width:200px;
+}
+
+link{
+  background-color: var(--silver);
+  border-radius: 12px; /* controls roundness */
 }
