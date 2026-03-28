@@ -13,6 +13,7 @@ This page serves as the a landing page for a dedicated Proxmox server and a vari
 4. [OpenSSH on VMs](/jpprojects/proxmox/openssh)
 5. [Migration](/jpprojects/proxmox/migration) between servers
 6. [Manage VM's from CLI](/jpprojects/proxmox/cli)
+7. [Clustering](/jpprojects/proxmox/cluster)
 
 <table>
   <tr>
@@ -47,6 +48,10 @@ This page serves as the a landing page for a dedicated Proxmox server and a vari
   <tr>
     <td class="pmh_logo_cell"><img src="/jpprojects/images/images/wazuh.png" class="pmh_logo" alt="Wazuh"></td>
     <td><a href="https://jacob-parra.github.io/jpprojects/proxmox/proxmoxvms/wazuh">Wazuh</a></td>
+  </tr>
+  <tr>
+    <td class="pmh_logo_cell"><img src="/jpprojects/images/images/ollama.png" class="pmh_logo" alt="Ollama"></td>
+    <td><a href="https://jacob-parra.github.io/jpprojects/proxmox/proxmoxvms/ai">Ollama AI</a></td>
   </tr>
   <tr>
     <td class="pmh_logo_cell"><img src="/jpprojects/images/images/pihole.png" class="pmh_logo" alt="Pi-Hole"></td>

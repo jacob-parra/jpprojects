@@ -87,7 +87,7 @@ I continue to learn and I'm looking for feedback. For questions or comments, ple
   </tr>
   <tr>
     <td class="pmh_logo_cell"><img src="/jpprojects/images/images/ollama.png" class="pmh_logo" alt=""></td>
-    <td><a href="https://jacob-parra.github.io/jpprojects/projects/ai">AI</a></td>
+    <td><a href="https://jacob-parra.github.io/jpprojects/proxmox/proxmoxvms/ai">AI</a></td>
   </tr>
 </table>
 

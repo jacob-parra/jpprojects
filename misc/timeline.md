@@ -7,6 +7,7 @@ layout: default
 This is the timeline and evolution of my homelab. 
 
 - March 2026
+    - Mar 2026 [Clustering](/jpprojects/proxmox/cluster)
     - Mar 2026 [Immich for Zima](/jpprojects/zima/apps/immich)
     - Mar 2026 [OPNsense](/jpprojects/projects/opnsense)
     - Mar 2026 [Jellyfin for Zima](/jpprojects/zima/apps/jellyfin)
