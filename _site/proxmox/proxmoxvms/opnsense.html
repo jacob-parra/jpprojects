@@ -45,6 +45,10 @@
 <p>These are the steps for configuring an OPNsense VM in Proxmox.</p>
 
 <div class="info">
+Update : I found a dedicated router much more stable than a virtual one. See the dedicated <a href="https://jacob-parra.github.io/jpprojects/projects/opnsense">OPNsense</a> Router project page for details.
+</div>
+<p><br /></p>
+<div class="info">
 One of the parts that makes this tricky is the fact that routing, naturally, requires two network ports: one for the LAN side, one for the WAN side. If your Proxmox host server does not have 2 ports, you have a few options. Adding a new network card can be expensive depending on the host hardware, so a much cheaper, albeit less ideal option, is to buy an RJ45 to USB adapter to act as the second network interface. I used <a href="amazon.com/dp/B09GRL3VCN ref=ppx_yo2ov_dt_b_fed_asin_title">this one</a> from TP-Link: it's cheap and works reliably with Linux systems (which Proxmox is). This page will be written with this strategy in mind.
 </div>
 <p><br /></p>

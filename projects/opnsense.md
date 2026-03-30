@@ -11,7 +11,7 @@ Opensense is a robust, open-source router software platform. It began as a fork 
 
 
 <div class="info">
-I was given a Qotom mini PC which I used for this project. Qotom mini PCs are very low power and quite, while still plenty powerful for a robust router and firewall. There were certain headaches with mine, but I believe newer models are just fine. Any mini pc with enough ethernet ports/interfaces will probably work. There are many options online, but I would recommend getting one used because they can be pretty pricey. Go for something cheap, because you really do not need much compute for a dedicated router/firewall (2-4 cores, 4-8 GB ram, 32-64 GB Disk, 1-2.5 GB ethernet)
+I was given a Qotom mini PC which I used for this project. Qotom mini PCs are very low power and quiet, while still plenty powerful for a robust router and firewall. There were certain headaches with mine, but I believe newer models are just fine. Any mini pc with enough ethernet ports/interfaces will probably work. There are many options online, but I would recommend getting one used because they can be pretty pricey. Go for something cheap, because you really do not need much compute for a dedicated router/firewall (2-4 cores, 4-8 GB ram, 32-64 GB Disk, 1-2.5 GB ethernet)
 </div>
 
 These are the steps for configuring an OPNsense VM.
@@ -159,9 +159,13 @@ Then go to the `Advertised Routes` tab at the top. Use the orange + button to ad
 
 Finally, in the Tailscale admin console, go to the Machines tab. Click on your OPNsense machine and in the Subnet Routes portion click approve on the newly listed subnet route.
 
-#### 6. Intrusion Detection and Prevention
+<hr>
 
-OPNsense has built in Intrusion Detection that can block malicious traffic.
+### Intrusion Detection and Prevention
+
+OPNsense has built in Intrusion Detection and Prevention that can both notice and block malicious traffic.
+
+#### 1. Enable Detection
 
 In the left hand menu of the web console, go to `Services → Intrusion Detection → Administration`. 
 
@@ -170,6 +174,8 @@ In the left hand menu of the web console, go to `Services → Intrusion Detectio
 - Set "Interfaces" to the interface to listen to (probably WAN).
 
 Click the orange Apply button at the bottom.
+
+#### 2. Download Rules
 
 Then go to the Download tab at the top.
 
@@ -185,6 +191,8 @@ For each selected ruleset, click the pencil in the right to edit and check the "
 
 Then click the orange Download & Update Rules. It may take a second to finish, but you'll know its working when the "Last Updated" will not say "not installed".
 
+#### 3. Enable Prevention
+
 Right now your rules are operating as Intrusion Detection, noting the traffic but doing nothing about it. These next steps turn the rules into Intrusion Prevention, dropping the traffic entirely.
 
 Then, in the left menu, go to `Services → Intrusion Detection → Policy`. Click the orange plus button on the right to add a rule.
@@ -197,3 +205,22 @@ Then, in the left menu, go to `Services → Intrusion Detection → Policy`. Cli
 Then click Save, and Apply. Give it a sec to apply.
 
 [Additional Help](https://www.thomas-krenn.com/en/wiki/Configuration_of_OPNsense_Intrusion_Detection_and_Intrusion_Prevention)
+
+<hr>
+
+### Wake On LAN (WoL)
+
+Wake on LAN is a technology to turn on machines by sending a "magic packet" to that device's NIC over the LAN. The packet includes the NIC MAC address and a boot command. I chose my OPNsense router as the WoL hub for a few reasons: 1. The router is always on, 2. The router can access any device/VLAN, and 3. The router is on my Tailnet and accessible from anywhere.
+
+<div class="info">
+Note : WoL by defualt only works will physical interfaces, meaning MAC addresses for physical NICs. Virtual interface MAC addresses can't be used for WoL commands without additional configuration, but this isn't really a problem, because WoL can be used to wake the hosts and then VMs or containers can be started from the host terminal or web console.
+</div>
+
+#### 1. Install WoL Service
+
+In the OPNsense web console, go to `System → Firmware → Plugins` in the left menu. Check the "Show Community Plugins" on the far right, and search for "os-wol". Click the + button on the right to install it. Give it a moment to install. Refresh the page when it finishes.
+
+#### 2. Set up
+
+Then go to `Services → Wake on LAN` in the left menu. Click the orange + button on the right and set the machine details in the pop up. The interface will probably be "LAN", and the MAC address is the address of the NIC (which can be found by running `ip a` in the machines terminal. The MAC address will be listed in the NICs interface, probably called something like "eth18". Be sure not to use a virtual interface MAC, because that will not work). Then, all added machines can be woken at once with the orange "Wake All" button on the right.
+
