@@ -99,7 +99,13 @@ Depending on the device you are installing the agent to you, pick the right inst
 
 You could set an agent name and add to a group if you'd like. If you don't, the agent name defaults to the host device name. Also, add the IP address of your Wazuh Server.
 
-The install command will be generated in section 4, which will probably look something like this: `curl -sO https://packages.wazuh.com/4.x/wazuh-agent.sh / WAZUH_MANAGER='192.168.x.x' bash wazuh-agent.sh`. Note that you may need to set WAZUH_MANAGER to manually be the ip address of 
+The install command will be generated in section 4, which will probably look something like this: `curl -sO https://packages.wazuh.com/4.x/wazuh-agent.sh / WAZUH_MANAGER='192.168.x.x' bash wazuh-agent.sh`.
+
+<div class="info">
+After running the agent install command, you may need to set WAZUH_MANAGER in the configs to manually be the ip address of server.
+</div> 
+
+Edit the config with `nano /var/ossec/etc/ossec.conf`. 10 lines down or so, find the line that says `<address>MANAGER_IP<address>` and set the wazuh server IP address there.
 
 #### 2. Run install command
 
@@ -117,3 +123,32 @@ Verify it's status with `systemctl status wazuh-agent`.
 #### 3. Check the Dashboard
 
 Make sure you see the agent appear in the Wazuh Server, and that it's name and logs are appearing properly. 
+
+<hr>
+
+## Helpful commands
+
+#### Server
+
+- Manage agents (from the wazuh server) : `sudo /var/ossec/bin/manage_agents`.
+- View server configs : `cat /var/ossec/etc/ossec.conf`.
+
+#### Agent
+
+- Reenroll an agent : `/var/ossec/bin/agent-auth -m <Wazuh Server IP>`.
+- View agent logs : `tail -f /var/ossec/logs/ossec.log`.
+- Control agent service : `systemctl <start/status/enable/restart/stop> wazuh-agent`.
+
+<hr>
+
+## Wazuh on OPNsense
+
+OPNsense has a native way to give logs to Wazuh. Go to `System > Settings > Logging` and go to the remote tab. Click the orange + button on the right to add a new destination. 
+
+- Enabled : Check
+- Transport : TCP(4)
+- Applications : firewall
+- Levels : warn, error, critical, alert, emergency
+- Facilities : Nothing
+- Hostname : opnsense (or something similar)
+- Description : Add a good description.

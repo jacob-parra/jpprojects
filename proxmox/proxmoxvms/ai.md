@@ -142,7 +142,7 @@ This is now essentially a self hosted AI chatbot. It will likely be much slower 
 
 <hr>
 
-### Scripts
+## Scripts
 
 These optional scripts can facilitate managment of the application and its data.
 

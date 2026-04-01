@@ -161,7 +161,7 @@ Finally, in the Tailscale admin console, go to the Machines tab. Click on your O
 
 <hr>
 
-### Intrusion Detection and Prevention
+## Intrusion Detection and Prevention
 
 OPNsense has built in Intrusion Detection and Prevention that can both notice and block malicious traffic.
 
@@ -208,7 +208,7 @@ Then click Save, and Apply. Give it a sec to apply.
 
 <hr>
 
-### Wake On LAN (WoL)
+## Wake On LAN (WoL)
 
 Wake on LAN is a technology to turn on machines by sending a "magic packet" to that device's NIC over the LAN. The packet includes the NIC MAC address and a boot command. I chose my OPNsense router as the WoL hub for a few reasons: 1. The router is always on, 2. The router can access any device/VLAN, and 3. The router is on my Tailnet and accessible from anywhere.
 
@@ -224,3 +224,6 @@ In the OPNsense web console, go to `System → Firmware → Plugins` in the left
 
 Then go to `Services → Wake on LAN` in the left menu. Click the orange + button on the right and set the machine details in the pop up. The interface will probably be "LAN", and the MAC address is the address of the NIC (which can be found by running `ip a` in the machines terminal. The MAC address will be listed in the NICs interface, probably called something like "eth18". Be sure not to use a virtual interface MAC, because that will not work). Then, all added machines can be woken at once with the orange "Wake All" button on the right.
 
+#### 3. Enable WoL in the BIOS
+
+Some machines may disable WoL in the BIOS by defualt. Be sure to check there and ensure it is enabled if necessary.
