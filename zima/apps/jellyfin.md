@@ -4,7 +4,7 @@ layout: default
 ---
 
 <img src="/jpprojects/images/images/zima.png" class="float_img" alt="Zima">
-<img src="/jpprojects/images/images/Jellyfin.png" class="float_img" alt="Jellyfin">
+<img src="/jpprojects/images/images/jellyfin.png" class="float_img" alt="jellyfin">
 
 
 ## Jellyfin Media Server as a Docker App in Zima
