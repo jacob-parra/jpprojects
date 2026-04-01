@@ -57,4 +57,8 @@ This page serves as the a landing page for a dedicated Proxmox server and a vari
     <td class="pmh_logo_cell"><img src="/jpprojects/images/images/pihole.png" class="pmh_logo" alt="Pi-Hole"></td>
     <td><a href="https://jacob-parra.github.io/jpprojects/proxmox/proxmoxvms/pihole">Pi-Hole</a></td>
   </tr>
+  <tr>
+    <td class="pmh_logo_cell"><img src="/jpprojects/images/images/silverbullet.png" class="pmh_logo" alt="Pi-Hole"></td>
+    <td><a href="https://jacob-parra.github.io/jpprojects/proxmox/proxmoxvms/silverbullet">Silver Bullet</a></td>
+  </tr>
 </table>

@@ -7,6 +7,7 @@ layout: default
 This is the timeline and evolution of my homelab. 
 
 - April 2026
+    - [AI](/jpprojects/proxmox/proxmoxvms/ai)
     - [Wake on LAN](/jpprojects/projects/opnsense)
 - March 2026
     - [Clustering](/jpprojects/proxmox/cluster)
@@ -15,7 +16,8 @@ This is the timeline and evolution of my homelab.
     - [Jellyfin for Zima](/jpprojects/zima/apps/jellyfin)
     - [Zima](/jpprojects/zima/zima)
 - February 2026
-    - [Vaultwarden](/jpprojects/proxmox/proxmoxvms/opnsense)
+    - [Wazuh](/jpprojects/proxmox/proxmoxvms/wazuh)
+    - [Vaultwarden](/jpprojects/proxmox/proxmoxvms/vaultwarden)
     - [OPNsense on Proxmox](/jpprojects/proxmox/proxmoxvms/opnsense)
     - [Migration](/jpprojects/proxmox/migration)
     - [Docker](/jpprojects/proxmox/proxmoxvms/docker)

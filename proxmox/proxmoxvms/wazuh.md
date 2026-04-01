@@ -4,13 +4,13 @@ layout: default
 ---
 
 <img src="/jpprojects/images/images/proxmox.png" class="float_img" alt="Proxmox">
-<img src="/jpprojects/images/images/Wazuh.png" class="float_img" alt="Wazuh">
+<img src="/jpprojects/images/images/wazuh.png" class="float_img" alt="Wazuh">
 
 ## Wazuh
 
-Wazuh (pronounced Waw-zuhh) is a free and open source SIEM (Security Information and Event Management) tool. It is used for compiling logs from many machines and unifying them into practical dashboards. It is comprised of many parts, but the most important are the **Wazuh Server** and the **Wazuh Agent**: The server is the machine that collects and catologues the logs and the agent is a service on the machines that are being monitored that sends the logs to the server. 
+Wazuh (pronounced Wah-zuhh) is a free and open source SIEM (Security Information and Event Management) tool. It is used for compiling logs from many machines and unifying them into practical dashboards. It is comprised of many parts, but the most important are the **Wazuh Server** and the **Wazuh Agent**: The server is the machine that collects and catologues the logs and the agent is a service on the machines that are being monitored which sends the logs to the server. 
 
-This page will describe generally how to set up both
+This page will describe generally how to set up both.
 
 <hr>
 
