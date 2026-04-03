@@ -7,6 +7,7 @@ layout: default
 This is the timeline and evolution of my homelab. 
 
 - April 2026
+    - [Obsidian LiveSync Server](/jpprojects/zima/apps/obsidian)
     - [AI](/jpprojects/proxmox/proxmoxvms/ai)
     - [Wake on LAN](/jpprojects/projects/opnsense)
 - March 2026

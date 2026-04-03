@@ -25,6 +25,6 @@ This page serves as the a landing page for a dedicated Zima server and a variety
   </tr>
   <tr>
     <td class="pmh_logo_cell"><img src="/jpprojects/images/images/obsidian.png" class="pmh_logo" alt="Obsidian"></td>
-    <td><a href="https://jacob-parra.github.io/jpprojects/zima/apps/obsidian">Obsidian</a></td>
+    <td><a href="https://jacob-parra.github.io/jpprojects/zima/apps/obsidian">Obsidian LiveSync Server</a></td>
   </tr>
 </table>

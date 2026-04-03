@@ -8,7 +8,7 @@ layout: default
 
 ## Obisidan LiveSync Server
 
-Obsidian is a note taking app, where notes are taken in Markdown. It is heavily supported with tons of community plugins. Rather than saving and editing files in obsidian on your machine, LiveSync lets files be edited and synced to an external database. This LiveSync Server is actually run as a CouchDB container in Zima. Obsidian is run natively on your devices and points to the server as the storage location.
+Obsidian is a Markdown note taking app / personal knowledge base. It is heavily supported with lots of community plugins. Rather than saving and editing files in Obsidian on your machine, the LiveSync plugin lets files be edited and synced to an external database. This LiveSync Server is actually run as a CouchDB container in Zima. Obsidian is run natively on your devices and points to the server as the storage location. This keeps the file editing quick and smooth while not taking storage on your device.
 
 <div class="info">
 I did this project without HTTPS, which won't let obsidian apps on mobile connect to this LiveSync server. Maybe I will go back and change this later, but it works fine for my purposes for now.
