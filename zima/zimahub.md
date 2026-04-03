@@ -24,7 +24,7 @@ This page serves as the a landing page for a dedicated Zima server and a variety
     <td><a href="https://jacob-parra.github.io/jpprojects/zima/apps/immich">Immich</a></td>
   </tr>
   <tr>
-    <td class="pmh_logo_cell"><img src="/jpprojects/images/images/silverbullet.png" class="pmh_logo" alt="SilverBullet"></td>
-    <td><a href="https://jacob-parra.github.io/jpprojects/zima/apps/silverbullet">Silver Bullet</a></td>
+    <td class="pmh_logo_cell"><img src="/jpprojects/images/images/obsidian.png" class="pmh_logo" alt="Obsidian"></td>
+    <td><a href="https://jacob-parra.github.io/jpprojects/zima/apps/obsidian">Obsidian</a></td>
   </tr>
 </table>
