@@ -146,6 +146,13 @@ th {
   gap: 1.5rem;
 }
 
+.TopLinks a {
+  margin-left: auto;
+  display: flex;
+  gap: 1.5rem;
+  color: var(--paprika_orange);
+}
+
 /* Keep profile pic at far right */
 #ProfilePic {
   margin-left: 1.5rem;
@@ -166,6 +173,9 @@ th {
   gap: 1.5rem;
 }
 
+#Default_Nav_Bar nav a {
+  font-weight: bold;
+}
 
 
 
