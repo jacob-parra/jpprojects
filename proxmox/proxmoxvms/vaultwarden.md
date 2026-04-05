@@ -76,6 +76,8 @@ services:
     restart: unless-stopped
     expose:
       - "80"
+    environment:
+      - DOMAIN=https://vault.lan
     volumes:
       - ./vw-data:/data
     networks:
@@ -105,21 +107,49 @@ networks:
 While in this same directory, also create the Caddyfile (which holds the Caddy configuration): `nano Caddyfile`
 
 ```
-vaultwarden.local {
-    tls internal
-    reverse_proxy vaultwarden:80
+vault.lan {
+        tls internal
+        reverse_proxy vaultwarden:80
 }
 ```
 
-#### 6. Start the Docker Container and Extract the Cert
+#### 6. Configure DNS Override
 
-While in this same directory, bring up the project with `docker compose up -d`.
+In order to be able to reach the Vaultwarden container, you need to configure the DNS resolution. You have to be accessing to `vault.lan`, have DNS point you to the container's IP, and have Caddy catch the request as the reverse proxy.
+
+The best way to do this is to configure a DNS override on your router. I used OPNsense, but it is probably a similar process on other router systems.
+
+In OPNsense, in the left menu go to `Services > Unbound DNS > Overrides`. Click the orange + button on the right to add an override:
+
+- Make sure the Enabled box is checked
+- Set Host to `vault`
+- Set Domain to `lan`
+- Set IP address to the IP address of the Vaultwarden container.
+- Add a description if you'd like.
+
+Click the orange Apply in the bottom left. This will let devices that use the router as DNS to resolve to the container correctly when going to `https://vault.lan`.
+
+You can have this override apply in your Tailscale Tailnet by adding a Split DNS Nameserver. Go to the [DNS tab](https://login.tailscale.com/admin/dns) of the Tailscale dashboard. Scroll down to the Nameservers section, and click the Add nameserver button. In the pop up menu, click "custom" at the bottom. 
+
+- Set Nameserver to the (LAN) IP address of OPNsense.
+- Enable "Restrict to Domain".
+  - Set Domain to `lan`
+
+Click save. 
+
+Now devices on the Tailnet will have requests sent to `.lan` domains redirected by Tailscale to your OPNsense router, and correctly resolved to the containers IP, and caught by Caddy for HTTPS.
+
+But your devices still need to trust Caddy as the Certifying Authority.
+
+#### 7. Start the Docker Container and Extract the Cert
+
+While in this same directory, bring up the project with `docker-compose up -d` (or `docker compose up -d`, if that doesnt work).
 
 Caddy stores the certificate inside the Docker volume. Make sure it is there: `cocker exec caddy ls /data/caddy/pki/authorities/local`.
 
 Copy it out: `docker cp caddy:/data/caddy/pki/authorities/local/root.crt ./caddy-root.crt`. The certificate will be in this directory in the `caddy-root.crt` file. 
 
-#### 7. Install the Certificate
+#### 8. Install the Certificate
 
 The certificate from the last step needs to be installed on every device you would like to access Vaultwarden from (a downside to using self-signed certificates). The certificate can be extracted from Proxmox with an scp command (from the Vaultwarden container console): `scp caddy-root.crt <username>@<remoteip>:`
 
@@ -136,14 +166,14 @@ These are the steps for installing the certificate on both Mac and Windows.
 1. Open Notepad as Admin (by right clicking the app and selecting "Run as Administrator"). Click `File → Open` and paste this into the filename box at the bottom: `C:\Windows\System32\drivers\etc\hosts`. After the file opens, add this line to the bottom of the file: `<Vaultwarden Tailscale IP>  vaultwarden.local`. 
 2. Double click on thye `caddy-root.crt` file. Click "Install Certificate". Choose "Local Machine". Select Place all certificates in the following store". Click "Browse" and choose "Trusted Root Certification Authorities". Then click Finish.
 
-After installing the certificate on your device, relaunch your browser for the change to take affect. Visit `https://vaultwarden.local`. It should resolve properly. If your browser warns you about visiting the site, click "advance to vaultwarden.local" to ignore it.
+After installing the certificate on your device, relaunch your browser for the change to take affect. Visit `https://vault.lan`. It should resolve properly. If your browser warns you about visiting the site, click "advance to vaultwarden.local" to ignore it.
 
-#### 8. Access the Web App
+
+#### 9. Access the Web App
 
 Once you've reached the Web App you will be asked to create an account. Use your email and set a strong master password, necessary to unlock your vault.
 
 Once you are in 
-
 
 Install the Cert on iPhone:
 - Download the cert
