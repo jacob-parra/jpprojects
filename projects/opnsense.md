@@ -11,7 +11,7 @@ Opensense is a robust, open-source router software platform. It began as a fork 
 
 
 <div class="info">
-I was given a Qotom mini PC which I used for this project. Qotom mini PCs are very low power and quiet, while still plenty powerful for a robust router and firewall. There were certain headaches with mine, but I believe newer models are just fine. Any mini pc with enough ethernet ports/interfaces will probably work. There are many options online, but I would recommend getting one used because they can be pretty pricey. Go for something cheap, because you really do not need much compute for a dedicated router/firewall (2-4 cores, 4-8 GB ram, 32-64 GB Disk, 1-2.5 GB ethernet)
+I was given a Qotom mini PC which I used for this project. Qotom mini PCs are very low power and quiet, while still plenty powerful for a robust router and firewall. There were certain headaches with mine, but I believe newer models are just fine. Any mini pc with enough ethernet ports/interfaces will probably work. There are many options online, but I would recommend getting one used because they can be pretty pricey. Go for something cheap, because you really do not need much compute for a dedicated router/firewall (2-4 cores, 4-8 GB ram, 32-64 GB Disk, 1-2.5 GB ethernet).
 </div>
 
 These are the steps for configuring an OPNsense VM.
@@ -227,3 +227,8 @@ Then go to `Services → Wake on LAN` in the left menu. Click the orange + butto
 #### 3. Enable WoL in the BIOS
 
 Some machines may disable WoL in the BIOS by defualt. Be sure to check there and ensure it is enabled if necessary.
+
+<hr>
+
+## NUT (Network UPS (Uninterrupted Power Supply) Tools)
+
