@@ -205,7 +205,7 @@ networks:
 
 <p>Click save.</p>
 
-<p>Now devices on the Tailnet will have requests sent to <code class="language-plaintext highlighter-rouge">.lan</code> domains redirected by Tailscale to your OPNsense router, and correctly resolved to the containers IP, and caught by Caddy for HTTPS.</p>
+<p>Now devices on the Tailnet will have requests sent to <code class="language-plaintext highlighter-rouge">.lan</code> domains redirected by Tailscale to your OPNsense router, and correctly resolved to the containers IP, and caught by Caddy for HTTPS (as long as they are using Tailscales DNS settings. In the Tailscale settings on each device, makes sure “Use Tailscale DNS settings” is enabled).</p>
 
 <p>But your devices still need to trust Caddy as the Certifying Authority.</p>
 

@@ -137,7 +137,7 @@ You can have this override apply in your Tailscale Tailnet by adding a Split DNS
 
 Click save. 
 
-Now devices on the Tailnet will have requests sent to `.lan` domains redirected by Tailscale to your OPNsense router, and correctly resolved to the containers IP, and caught by Caddy for HTTPS.
+Now devices on the Tailnet will have requests sent to `.lan` domains redirected by Tailscale to your OPNsense router, and correctly resolved to the containers IP, and caught by Caddy for HTTPS (as long as they are using Tailscales DNS settings. In the Tailscale settings on each device, makes sure "Use Tailscale DNS settings" is enabled).
 
 But your devices still need to trust Caddy as the Certifying Authority.
 
