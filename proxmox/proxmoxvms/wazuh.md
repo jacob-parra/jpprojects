@@ -99,7 +99,11 @@ Depending on the device you are installing the agent to you, pick the right inst
 
 You could set an agent name and add to a group if you'd like. If you don't, the agent name defaults to the host device name. Also, add the IP address of your Wazuh Server.
 
-The install command will be generated in section 4, which will probably look something like this: `curl -sO https://packages.wazuh.com/4.x/wazuh-agent.sh / WAZUH_MANAGER='192.168.x.x' bash wazuh-agent.sh`.
+The install command will be generated in section 4, which will probably look something like this: `curl -sO https://packages.wazuh.com/4.x/wazuh-agent.sh / WAZUH_MANAGER='192.168.x.x' bash wazuh-agent.sh`. 
+
+#### 2. Run install command
+
+On the host you are adding, run the install command in the terminal. (You may need to install lsb-release first: `apt install lsb-release`).
 
 <div class="info">
 After running the agent install command, you may need to set WAZUH_MANAGER in the configs to manually be the ip address of server.
@@ -107,9 +111,6 @@ After running the agent install command, you may need to set WAZUH_MANAGER in th
 
 Edit the config with `nano /var/ossec/etc/ossec.conf`. 10 lines down or so, find the line that says `<address>MANAGER_IP<address>` and set the wazuh server IP address there.
 
-#### 2. Run install command
-
-On the host you are adding, run the install command in the terminal.
 Then start the agent: 
 
 ```
