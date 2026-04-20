@@ -3,12 +3,13 @@ title:
 layout: default
 ---
 
-<img src="/jpprojects/images/images/audiobookshelf.png" class="float_img" alt="Audiobookshelf">
-<img src="/jpprojects/images/images/jellyfin.png" class="float_img" alt="jellyfin">
 
+<img src="/jpprojects/images/images/zima.png" class="float_img" alt="Zima">
+<img src="/jpprojects/images/images/audiobookshelf.png" class="float_img" alt="Audiobookshelf">
 
 ## Audiobookshelf
 
+Audiobookshelf is a self hosted library option. I picked it for it's simplicity and support for both audio books and ebooks. It supports lots of media file types, is really easy to set up and use, and looks clean enough
 
 #### 1. Install the app
 

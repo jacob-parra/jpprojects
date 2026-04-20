@@ -7,6 +7,8 @@ layout: default
 This is the timeline and evolution of my homelab. 
 
 - April 2026
+    - [Nginx](/jpprojects/proxmox/proxmoxvms/nginx)
+    - [Pi-Hole](/jpprojects/proxmox/proxmoxvms/pihole)
     - [Ventoy](/jpprojects/projects/ventoy)
     - [Obsidian LiveSync Server](/jpprojects/zima/apps/obsidian)
     - [AI](/jpprojects/proxmox/proxmoxvms/ai)
