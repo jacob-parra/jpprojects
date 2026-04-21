@@ -8,7 +8,13 @@ layout: default
 
 ## Nginx
 
-Nginx is a reverse proxy, which I use to terminate HTTPS in my lab.
+Nginx is a reverse proxy, which I use to terminate HTTPS in my lab. Rather than create a cert for every service, I used a wildcard cert that works with any service domain name. Pi-hole is used for Local DNS Records to point my domains (like notes.parra.lan or immich.home.lan) to nginx for https termination. Nginx then redirects the traffic to the appropriate service. 
+
+<div class="info">
+Every service that uses ngninx needs it's own configuration file in the nginx container, and every client device that will connect to services through ngninx need to trust the nginx Certificate Authority
+</div>
+
+These are the instructions for creating an nginx reverse proxy server.
 
 #### 1. Create the container
 
@@ -116,5 +122,4 @@ The easiest way is to output the CA (`cat /root/.local/share/mkcert/rootCA.pem`)
 
 To install the CA:
 - On Windows : Press Win + R and run certmgr.msc. In the left panel, expand Trusted Root Certification Authorities, right click Certificates. Go to All Tasks > Import. Browse to the .crt file, select Place all certificates in the following store (should be set to Trusted Root Certification Authorities) and click Finish. It should be listed as `mkcert root@ngninx`.
-- On Windows : Press win + r and type mmc, and hit ok. Go to File > Add/Remove Snap-in. Find Certificates on the left and click Add. Select Computer Account, Next and Finish.
-- On macOS: double-click → Keychain Access opens → right-click → Get Info → Trust → Always Trust
+- On macOS: double-click → Keychain Access opens → (you may need to search for it: "mkcert root@ngninx") right-click → Get Info → Expand Trust → Always Trust
