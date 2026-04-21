@@ -1,5 +1,5 @@
 ---
-title: Mint
+title: Nginx
 layout: default
 ---
 
@@ -11,7 +11,7 @@ layout: default
 Nginx is a reverse proxy, which I use to terminate HTTPS in my lab. Rather than create a cert for every service, I used a wildcard cert that works with any service domain name. Pi-hole is used for Local DNS Records to point my domains (like notes.parra.lan or immich.home.lan) to nginx for https termination. Nginx then redirects the traffic to the appropriate service. 
 
 <div class="info">
-Every service that uses ngninx needs it's own configuration file in the nginx container, and every client device that will connect to services through ngninx need to trust the nginx Certificate Authority
+Every service that uses ngninx needs it's own configuration file in the nginx container, and every client device that will connect to services through ngninx needs to trust the nginx Certificate Authority.
 </div>
 
 These are the instructions for creating an nginx reverse proxy server.
@@ -123,3 +123,4 @@ The easiest way is to output the CA (`cat /root/.local/share/mkcert/rootCA.pem`)
 To install the CA:
 - On Windows : Press Win + R and run certmgr.msc. In the left panel, expand Trusted Root Certification Authorities, right click Certificates. Go to All Tasks > Import. Browse to the .crt file, select Place all certificates in the following store (should be set to Trusted Root Certification Authorities) and click Finish. It should be listed as `mkcert root@ngninx`.
 - On macOS: double-click → Keychain Access opens → (you may need to search for it: "mkcert root@ngninx") right-click → Get Info → Expand Trust → Always Trust
+- On iPhone: I airdropped the CA file to my phone (but you can email it to yourself and download). Then in settings, I went to settings, and found a button at the top that said Profile Downloaded. There I clicked Install, put in my password and clicked install again.

@@ -11,7 +11,7 @@ layout: default
 Obsidian is a Markdown note taking app / personal knowledge base. It is heavily supported with lots of community plugins. Rather than saving and editing files in Obsidian on your machine, the LiveSync plugin lets files be edited and synced to an external database. This LiveSync Server is actually run as a CouchDB container in Zima. Obsidian is run natively on your devices and points to the server as the storage location. This keeps the file editing quick and smooth while not taking storage on your device.
 
 <div class="info">
-I did this project without HTTPS, which won't let obsidian apps on mobile connect to this LiveSync server. Maybe I will go back and change this later, but it works fine for my purposes for now.
+I did this project without HTTPS, which won't let obsidian apps on mobile connect to this LiveSync server. Maybe I will go back and change this later, but it works fine for my purposes for now. Edit: I did come back and enable https termination via <a href="https://jacob-parra.github.io/jpprojects/proxmox/proxmoxvms/nginx">Nginx</a>. This affects configuration, which I did after configuring without https first. I would recommend this, so you can make sure the bulk of the server works first. Instructions for HTTPS will be the last step.
 </div>
 
 This is how to create a LiveSync CouchDB container on ZimaOS
@@ -114,8 +114,24 @@ Click "No, never warn please", if you have are not worried about running out of 
 
 Access the settings with the settings gear at the bottom. At the bottom of the left menu, under Community Plugins click Self-hosted LiveSync server. 
 
-Go to the Sync icon tab. I enabled "Sync on Save", "Sync on Editor Save", "Sync on File Open" and "Sync on Startup".
+Test that the sync is working by writing to a file. As you type and when you save, you should see the up arrow increment in the top left.
 
 <hr>
 
-Test that the sync is working by writing to a file. As you type and when you save, you should see the up arrow increment in the top left.
+#### 7. Enable HTTPS
+
+<div class="info">
+Just in case something goes wrong, it is recommended to create a backup your files and notes before starting this process.
+</div>
+
+Be sure you have nginx configured, and a Local DNS Record (I used Pi-hole, all details are on the [nginx](/jpprojects/proxmox/proxmoxvms/nginx) project page).
+
+In the obsidian app on a client device, go to settings and in the left menu at the very bottom under Community Plugins find Self-Hosted Livesync. Navigate to the Remote Configuration tab at the top (mine had a satellite emoji). Halfway down, click Configure next to Configure Remote. Change the url to be the url that Pi-hole catches with https:// in front (i.e. https://obsidian.home.lan). Then click Test Settings and Continue. 
+
+Click "My remote server is already set up. I want to join this device". Click Restart and Fetch data.
+
+Because (all) my client devices had synced before starting this process, I clicked "The files in this Vault are almost identical to the server's" and "I understand the risks and proceed without a backup". Then click "Reset and Resume Syncronization".
+
+I clicked OK through the alert, "No, never warn" when asked about max storage size".
+
+After setting this up, be sure to redo Step 6 to make sure sync is happening when you want it to.
