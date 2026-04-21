@@ -69,7 +69,9 @@ Click Save at the bottom to apply the changes.
 
 #### 5. Create NAT rules
 
-(this step SHOULD point all DNS traffic to Pi-hole, and it worked for some VM's and Containers that didn't have explicit DNS servers, but I ended up needing to fix DHCP assignment anyways in step 6).
+<div class="info">
+This step SHOULD point all DNS traffic to Pi-hole, and it worked for some VM's and Containers that didn't have explicit DNS servers, but I ended up needing to fix DHCP assignment anyways in step 6.
+</div>
 
 We need 2 NAT rules: First, a rule to let Pi-hole send DNS traffic out to the internet, and Second, a rule that redirects all other DNS traffic not going to Pi-hole to Pi-hole.
 
@@ -124,3 +126,10 @@ In the OPNsense shell (available with option 8 in the OPNsense terminal, which y
 Other machines that had their IP address statically given may also have a static DNS server. Check each to make sure it is using Pi-hole as the DNS server.
 
 Some devices may have cached an old DNS server, and may need to be flushed in order to use Pi-hole.
+
+#### 8. Create Pi-hole redirect rule
+
+You can use Pi-hole for DNS to redirect queries to `https://servicename.lan` to specific services. This is espeically useful for services that require HTTPS through Caddy or nginx.
+
+In Pi-hole, go to `Settings > Local DNS Records` in the left menu. Under Local DNS records, fill in the Domain and Associated IP, and click the green + button to add a record. (For example, set Domain to notes.lan and Associated IP to the nginx server IP address).
+
