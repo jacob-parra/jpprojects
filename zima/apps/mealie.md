@@ -15,7 +15,7 @@ Mealie is a self-hostable cookbook. It has a great UI for organizing recipies, a
 
 In the Zima Dashboard, open the app store and search for Mealie. Click the app, click the down tab of the install button and click Custom Install.
 
-I changed the mapping to put mealie on my storage pool. Change the mapping to be `/media/<storage pool>/Mealie` to `/app/data`. You can change the zima mapping by clicking the gray folder, navigating to your storage pool, and using the create a new folder button in the bottom left. If you do this, you may need to fix the permissions on that folder with `chown 911:911 /media/Nublado/Mealie` in the Zima host terminal.
+I changed the mapping to put mealie on my storage pool. Change the mapping to be `/media/<storage pool>/Mealie` to `/app/data`. You can change the zima mapping by clicking the gray folder, navigating to your storage pool, and using the create a new folder button in the bottom left. If you do this, you may need to fix the permissions on that folder with `chown 911:911 /media/<storage pool>/Mealie` in the Zima host terminal.
 
 I recommend changing the container name at the bottom of the config menu to something like "mealie". Leave the container IP to be the same as 
 

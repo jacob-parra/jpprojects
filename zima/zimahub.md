@@ -39,4 +39,8 @@ This page serves as the a landing page for a dedicated Zima server and a variety
     <td class="pmh_logo_cell"><img src="/jpprojects/images/images/mealie.png" class="pmh_logo" alt="Mealie"></td>
     <td><a href="https://jacob-parra.github.io/jpprojects/zima/apps/mealie">Mealie</a></td>
   </tr>
+  <tr>
+    <td class="pmh_logo_cell"><img src="/jpprojects/images/images/actualbudget.png" class="pmh_logo" alt="Mealie"></td>
+    <td><a href="https://jacob-parra.github.io/jpprojects/zima/apps/actualbudget">Actual Budget</a></td>
+  </tr>
 </table>
