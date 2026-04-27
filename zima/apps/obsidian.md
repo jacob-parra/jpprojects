@@ -149,7 +149,7 @@ Click "Create Database" at the top. This will be the new users dedicated and pri
 In a terminal, create the new user:
 
 ```
-curl -X PUT http://Jacob:obsidian@192.168.10.10:5984/_users/org.couchdb.user:<USERNAME> \
+curl -X PUT http://<admin username>:<admin password>@<ip>:5984/_users/org.couchdb.user:<USERNAME> \
   -H "Content-Type: application/json" \
   -d '{"name":"<USERNAME>","password":"<PASSWORD>","roles":[],"type":"user"}'
 ```
@@ -157,7 +157,7 @@ curl -X PUT http://Jacob:obsidian@192.168.10.10:5984/_users/org.couchdb.user:<US
 Then give that user access to only their dedicated database.
 
 ```
-curl -X PUT http://Jacob:obsidian@192.168.10.10:5984/<DATABASE NAME>/_security \
+curl -X PUT http://<admin username>:<admin password>@<ip>:5984/<DATABASE NAME>/_security \
   -H "Content-Type: application/json" \
   -d '{"admins":{"names":[],"roles":[]},"members":{"names":["<USERNAME>"],"roles":[]}}'
 ```
