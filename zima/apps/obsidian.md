@@ -135,3 +135,36 @@ Because (all) my client devices had synced before starting this process, I click
 I clicked OK through the alert, "No, never warn" when asked about max storage size".
 
 After setting this up, be sure to redo Step 6 to make sure sync is happening when you want it to.
+
+<hr>
+
+#### 8. Add Multiple Users
+
+You can have distint logins to distinct databases to have multiple users sync to the same server.
+
+First, access the web console at `<host ip>:5984/_utils`.
+
+Click "Create Database" at the top. This will be the new users dedicated and private database. Give it a name and click create.
+
+In a terminal, create the new user:
+
+```
+curl -X PUT http://Jacob:obsidian@192.168.10.10:5984/_users/org.couchdb.user:<USERNAME> \
+  -H "Content-Type: application/json" \
+  -d '{"name":"<USERNAME>","password":"<PASSWORD>","roles":[],"type":"user"}'
+```
+
+Then give that user access to only their dedicated database.
+
+```
+curl -X PUT http://Jacob:obsidian@192.168.10.10:5984/<DATABASE NAME>/_security \
+  -H "Content-Type: application/json" \
+  -d '{"admins":{"names":[],"roles":[]},"members":{"names":["<USERNAME>"],"roles":[]}}'
+```
+
+When the user goes to setup the livesync server plugin, they will use the values you set:
+
+Server URL: `http://< host ip>:5984`
+Database: `<DATABASE NAME>`
+Username: `<USERNAME>`
+Password: `<PASSWORD>`
