@@ -90,8 +90,12 @@ I continue to learn and I'm looking for feedback. For questions or comments, ple
     <th>Projects</th>
   </tr>
   <tr>
-    <td class="pmh_logo_cell"><img src="/jpprojects/images/images/ollama.png" class="pmh_logo" alt=""></td>
+    <td class="pmh_logo_cell"><img src="/jpprojects/images/images/ollama.png" class="pmh_logo" alt="Ollama"></td>
     <td><a href="https://jacob-parra.github.io/jpprojects/proxmox/proxmoxvms/ai">AI</a></td>
+  </tr>
+  <tr>
+    <td class="pmh_logo_cell"><img src="/jpprojects/images/images/arch.png" class="pmh_logo" alt="arch"></td>
+    <td><a href="https://jacob-parra.github.io/jpprojects/proxmox/proxmoxvms/arch">Arch</a></td>
   </tr>
 </table>
 
