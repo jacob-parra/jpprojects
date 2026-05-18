@@ -7,6 +7,10 @@ layout: default
 
 ## Arch
 
+Arch has a reputation of being difficult to install/use. Compared to other operating systems, the extreme level of control and customization does make Arch a very granular system that requires careful attention to install properly. Arch is designed to be as minimal as possible, relying on the user to choose and install every desired package and functionality.
+
+I was guided (shout out Eason) to use `archinstall` to install a base arch system, and then installed [ml4w](https://ml4w.com), a specific tuning/flavor of arch, on top.
+
 #### 1. Create bootable drive
 
 You download an arch iso from one of the mirrors found [here](https://archlinux.org/download/#http-downloads).
@@ -19,4 +23,14 @@ On the device arch will be installed to, you have to prepare the BIOS to boot fr
 
 You should see the screen blow up with scrolling text as the arch live iso environment launches.
 
-#### 3. Set up 
+#### 3. Install with Archinstall
+
+When the boot finishes you are in a live environment, running from the usb drive, where changes wont permeate between reboots. So, you need to install arch onto the hardware disk.
+
+Run `archinstall` to run the guided installation. Navigate with the arrow keys, enter and esc. Any blank section is a section that will not have any service or package installed for it. Be especially careful with user accounts and network management.
+
+#### 4. Install ml4w
+
+#### 5. Set up snapshots
+
+Resource : [Snapshots with BTRFS](https://www.youtube.com/watch?v=V1wxgWU0j0E)

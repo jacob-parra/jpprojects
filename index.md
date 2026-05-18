@@ -95,7 +95,7 @@ I continue to learn and I'm looking for feedback. For questions or comments, ple
   </tr>
   <tr>
     <td class="pmh_logo_cell"><img src="/jpprojects/images/images/arch.png" class="pmh_logo" alt="arch"></td>
-    <td><a href="https://jacob-parra.github.io/jpprojects/proxmox/proxmoxvms/arch">Arch</a></td>
+    <td><a href="https://jacob-parra.github.io/jpprojects/projects/arch">Arch</a></td>
   </tr>
 </table>
 
