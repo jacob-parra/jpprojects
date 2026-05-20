@@ -16,6 +16,10 @@ Vaultwarden is so lightweight that it can actually be hosted as a container in P
 Creating and configuring the Vaultwarden container itself is relatively simple. However, Vaultwarden requires HTTPS, which requires SSL certificates. There are lots of ways to get these certificates that range in difficulty, from self-signed to reverse proxy distributed. I opted to use Caddy, a reverse proxy service that can manage cert rotation automatically. It's very easy to use, and can be ran in tandem with Vaultwarden in Docker. It's a good setup
 </div>
 
+<div class="info">
+I cam back to this project and redid it WITHOUT Caddy, instead using nginx for TLS/HTTPS termination.
+</div>
+
 #### 1. Add the Container Template
 
 Proxmox is cool, and has a list of a bunch of popular container readily available for download. 
@@ -180,3 +184,15 @@ Install the Cert on iPhone:
 - Search Profile Downloaded
 - Tap install, use password, and install
 - Go to General->about->Certificate Trust Settings, enable the cert and hit continue
+
+<hr>
+
+#### Safely upgrading the Vaultwarden server.
+
+The Vaultwarden browser extension is very particular about matching version types with the Vaultwarden container/server, and won't work unless they match. If the browser extension is updated you need to update the Vaultwarden container/server version to rematch.
+
+To upgrade the server, first back up all current data with `cp -r /opt/vaultwarden/vw-data /opt/vaultwarden/vw-data.backup-$(date +%Y%m%d)`.
+
+Then, while in `/opt/vaultwarden`, run `docker-compose pull` and `docker-compose up -d` to pull the latest version and run it.
+
+You can make sure it worked by checking the logs with `docker compose logs --tail 50`.

@@ -31,6 +31,8 @@ Run `archinstall` to run the guided installation. Navigate with the arrow keys, 
 
 #### 4. Install ml4w
 
+Shortcuts : 
+
 #### 5. Set up snapshots
 
 Resource : [Snapshots with BTRFS](https://www.youtube.com/watch?v=V1wxgWU0j0E)
