@@ -17,7 +17,7 @@ Creating and configuring the Vaultwarden container itself is relatively simple. 
 </div>
 
 <div class="info">
-I cam back to this project and redid it WITHOUT Caddy, instead using nginx for TLS/HTTPS termination.
+I came back to this project and redid it WITHOUT Caddy, instead using nginx for TLS/HTTPS termination.
 </div>
 
 #### 1. Add the Container Template
