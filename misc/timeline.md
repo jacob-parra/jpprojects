@@ -6,8 +6,12 @@ layout: default
 
 This is the timeline and evolution of my homelab. 
 
+- June 2026
+    - [Minecraft](/jpprojects/proxmox/proxmoxvms/minecraft)
 - May 2026
     - [Arch](/jpprojects/projects/keepass)
+    - [Actual Budget](/jpprojects/zima/apps/actualbudget)
+    - [Mealie](/jpprojects/zima/apps/mealie)
 - April 2026
     - [Nginx](/jpprojects/proxmox/proxmoxvms/nginx)
     - [Pi-Hole](/jpprojects/proxmox/proxmoxvms/pihole)

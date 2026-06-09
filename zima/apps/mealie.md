@@ -1,5 +1,5 @@
 ---
-title: Jellyfin
+title: Mealie
 layout: default
 ---
 

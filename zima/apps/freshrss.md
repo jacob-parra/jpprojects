@@ -1,10 +1,10 @@
 ---
-title: Jellyfin
+title: FreshRSS
 layout: default
 ---
 
 <img src="/jpprojects/images/images/zima.png" class="float_img" alt="Zima">
-<img src="/jpprojects/images/images/freshrss.png" class="float_img" alt="Fresh RSS">
+<img src="/jpprojects/images/images/fresh.png" class="float_img" alt="Fresh RSS">
 
 
 ## Fresh RSS
