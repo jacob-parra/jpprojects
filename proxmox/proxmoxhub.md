@@ -52,4 +52,8 @@ This page serves as the a landing page for a dedicated Proxmox server and a vari
     <td class="pmh_logo_cell"><img src="/jpprojects/images/images/nginx.png" class="pmh_logo" alt="Nginx"></td>
     <td><a href="https://jacob-parra.github.io/jpprojects/proxmox/proxmoxvms/nginx">Nginx</a></td>
   </tr>
+  <tr>
+    <td class="pmh_logo_cell"><img src="/jpprojects/images/images/minecraft.png" class="pmh_logo" alt="Minecraft"></td>
+    <td><a href="https://jacob-parra.github.io/jpprojects/proxmox/proxmoxvms/mincraft">Minecraft</a></td>
+  </tr>
 </table>
