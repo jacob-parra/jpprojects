@@ -47,9 +47,9 @@ After the container appears under the Proxmox Server/Node, start it (click it, r
 Make sure everything is up to date with `apt update && apt upgrade -y`. Then install some base dependencies with `apt install -y screen ufw curl`.
 
 Install Java 25:
-- curl -s https://apt.corretto.aws/corretto.key | gpg --dearmor -o /usr/share/keyrings/corretto.gpg
-- echo "deb [signed-by=/usr/share/keyrings/corretto.gpg] https://apt.corretto.aws stable main" > /etc/apt/sources.list.d/corretto.list
-- apt update && apt install -y java-25-amazon-corretto-jdk
+- `curl -s https://apt.corretto.aws/corretto.key | gpg --dearmor -o /usr/share/keyrings/corretto.gpg`
+- `echo "deb [signed-by=/usr/share/keyrings/corretto.gpg] https://apt.corretto.aws stable main" > /etc/apt/sources.list.d/corretto.list`
+- `apt update && apt install -y java-25-amazon-corretto-jdk`
 
 Verify it worked with `java -version`. It should show Java 25 as installed.
 
@@ -63,13 +63,13 @@ UFW is easy. Port 25565 is the default Minecraft port:
 #### 4. Install Fabric and Minecraft
 
 Create a Minecraft Directory
-- mkdir -p /opt/minecraft && cd /opt/minecraft
+- `mkdir -p /opt/minecraft && cd /opt/minecraft`
 
 Download latest Fabric installer
-- wget https://maven.fabricmc.net/net/fabricmc/fabric-installer/1.0.1/fabric-installer-1.0.1.jar
+- `wget https://maven.fabricmc.net/net/fabricmc/fabric-installer/1.0.1/fabric-installer-1.0.1.jar`
 
 Install for Minecraft 26.1 (or whatever version you want).
-- java -jar fabric-installer-1.0.1.jar server -mcversion 26.1 -loader 0.18.4 -downloadMinecraft
+- `java -jar fabric-installer-1.0.1.jar server -mcversion 26.1 -loader 0.18.4 -downloadMinecraft`
 
 #### 5. Accept the EULA
 Run `echo "eula=true" > /opt/minecraft/eula.txt`
@@ -124,11 +124,17 @@ The server is started with `screen -S minecraft` or `/opt/minecraft/start.sh`. "
 
 The server can also be started directly (without screen): `java -Xms1G -Xmx3G -jar fabric-server-launch.jar nogui`.
 
-If an old screen session is stuck, it can be killed before starting again: `screen -S minecraft -X quit`.
+If an old screen session is stuck, it can be killed before starting again: `screen -S minecraft -X quit`. 
+
+Live console output can be seen anytime: `journalctl -u minecraft -f`.
 
 <hr>
 
 #### 10. Enable a Service
+
+<div class="info">
+Before you do this, be sure there is not an instance of the server running already, otherwise there will be some funky errors.
+</div>
 
 To not have to worry about keeping the server up manually, a service can be set to start the server on boot. That way, if something goes wrong, the container can just be restarted and the server will boot.
 
@@ -144,10 +150,10 @@ After=network.target
 [Service]
 User=root
 WorkingDirectory=/opt/minecraft
-ExecStart=/usr/bin/java -Xms2G -Xmx6G -jar fabric-server-launch.jar nogui
-ExecStop=/bin/kill -SIGINT $MAINPID
+ExecStart=/usr/bin/java --enable-native-access=ALL-UNNAMED -Xms2G -Xmx6G -jar fabric-server-launch.jar nogui
 Restart=on-failure
 RestartSec=10
+StandardInput=null
 
 [Install]
 WantedBy=multi-user.target
@@ -156,13 +162,13 @@ WantedBy=multi-user.target
 Save and finish with Ctrl+O and Ctrl+x
 
 - Reload systemd so it sees the new service
-    - systemctl daemon-reload
+    - `systemctl daemon-reload`
 
 - Enable it so it starts on boot
-    - systemctl enable minecraft
+    - `systemctl enable minecraft`
 
 - Start it now
-    - systemctl start minecraft
+    - `systemctl start minecraft`
 
 Check that it is running with `systemctl status minecraft`. You should see `active (running)` in green.
 
@@ -173,13 +179,15 @@ Lithium improves game logic for servers, which will increase the performcance an
 First, check that a mods folder exists: `ls /opt/minecraft/`.
 If it doesn't, create it: `mkdir /opt/minecraft/mods`.
 
-Then, find the correct Lithium version on [Modrinth](https://modrinth.com/mod/lithium?version=26.1&loader=fabric), and get the donwload link that matches your Minecraft and Fabric versions.
+Then, find the correct Lithium version on [Modrinth](https://modrinth.com/mod/lithium?version=26.1&loader=fabric), and get the donwload link that matches your Minecraft and Fabric versions. If something breaks when restarting, make sure you got the right version.
 
 Download it to the server:
 
 ```
 cd /opt/minecraft/mods
-wget -O lithium.jar "https://cdn.modrinth.com/data/.../lithium-fabric-xxx.jar"
+wget -O lithium.jar "<Lithium Download Link>"
 ```
 
 Then restart the server (`systemctl restart minecraft`) and check that it is working (`journalctl -u minecraft -f`). You should see a line mentioning Lithium.
+
+I recommend enabling Start on Boot for the container itself in Proxmox. This is found by clicking the container in the left menu, going to options, clicking Start at boot, clicking Edit at the top, and enabling.
