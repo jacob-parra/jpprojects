@@ -64,14 +64,18 @@ lxc.cap.drop:
 
 Ctrl + O and Ctrl + X to save and leave.
 
+#### 4. Enable SSH
+
+Configs need to be set in order to SSH or SCP to this container.
+
+Access the config file: `nano /etc/ssh/sshd_config`.
+
+Find and change or add this line: `PermitRootLogin yes`.
 
 ### Part 2 : Docker
 
-#### 1. Final configs
 
-Selecting the container, click on the Console. Sign in as `root` with the password from the last section.
-
-#### 2. Install Docker
+#### 1. Install Docker
 
 This is where the copy and pasting is going to be very handy.
 
@@ -111,7 +115,7 @@ The container may come without `tee`. Run `apt install coreutils sudo -y` to ins
 
 
 
-#### 3. Finishing Touches
+#### 2. Finishing Touches
 
 First, check that auto-start is enabled (which is the default, but good to check).
     - `sudo systemctl enable docker`

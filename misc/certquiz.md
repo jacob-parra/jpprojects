@@ -12,4 +12,18 @@ Certquiz is a self hosted web app that runs in Docker. I have it running in a De
 
 Details for deploying a Debian container with Docker installed in Proxmox can be found [here](/jpprojects/proxmox/proxmoxvms/docker).
 
-#### 2. 
+#### 2. Download Certquiz
+
+The zip file is available here.
+
+Use scp to move the zip to the container (run this command from the downloads directory): `scp certquiz.zip root@<container ip>:`.
+
+Install the unzip utility with `apt install unzip` and unzip: `unzip certquiz.zip`.
+
+#### 3. Build and Deploy
+
+First, generate a secure token with wich login cookies will be signed: ``. Copy the random string that command produces.
+
+Move into the new certquiz directory: `cd certquiz`.
+
+Edit the yaml file (``) and put the random string here:
