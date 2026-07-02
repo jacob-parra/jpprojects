@@ -6,153 +6,112 @@ layout: default
 <img src="/jpprojects/images/images/proxmox.png" class="float_img" alt="Proxmox">
 <img src="/jpprojects/images/images/docker.png" class="float_img" alt="Docker">
 
-## Docker VM
+## Docker Container
 
-Docker is one of, if not the most popular containerization platform. It's open source and free to use, used to create and manage containers (low resource, lightweight, very fast "VMs"). Thing is, Docker is not, itself, an operating system. So for this machine, a lightweight, CLI only install of Debian is used as the host environmnet for Docker. This adds a dimension of complication and locks the machine to CLI only in exchange for being very lightweight and fast.
+Docker is one of, if not the most popular containerization platform. It's open source and free to use, used to create and manage containers (low resource, lightweight, very fast "VMs"). Thing is, Docker is not, itself, an operating system. So for this machine, a lightweight, CLI only install of Debian is used as the host environmnet for Docker. This adds a dimension of complication and locks the container to CLI only in exchange for being very lightweight and fast.
 
 This page is in 2 parts: first for creating the Debian VM and then installing and using Docker.
 
 <hr>
 
-### Part 1 : Debian CLI VM
+### Part 1 : Debian Container
 
-#### 1. Download the Debian ISO
+#### 1. Download the Debian Template
 
-We will be using Debian 12 <a href="https://cdimage.debian.org/cdimage/archive/12.0.0/amd64/iso-cd/">(debian-12.0.0-amd64-netinst.iso)</a>
+Expand your server in the left menu, and click on the server storage, probably called `local`. Go to CT Templates, and click Templates at the top.
 
-#### 2. Upload the ISO
+Search for `debian-12-standard` template, download it, and wait for it to finish. You will see it listed if successful.
 
-- Access the Proxmox Web UI
-- Click on your node (on the left side, under "Datacenter")
-- Select the "local" storage option
-- Go to "ISO Images"
-- Click "Upload" on the top left
-- Select the Ubuntu ISO from the last step
-- Wait for the upload to complete, then close the upload window. It will be very fast as the ISO is only about half a Gigabite.
+#### 2. Create the Container
 
-Make sure you see the iso listed.
-
-#### 3. Create the VM
-
-This has a lot of steps, but there is *some* room for error. These configurations are organized by section/tab:
+Click the blue `Create CT` button in the top right and set these configurations:
 
 - General
-    - Leave the default VM ID
-    - Set a name (something like docker-01, or debian-01.)
-    - Click "Next"
-- OS
-    - ISO Image: select the Debian ISO
-    - Keep "Guest OS" as "Linux"
-    - Version: 6.x - 2.6 Kernal
-    - Click "Next"
-- System
-    - BIOS : OVMF (UEFI)
-    - Machine : q35
-    - SCSI Controller: VirtIO SCSI
-    - QEMU Guest Agent: Checked
-    - Click "Next"
+    - Set the Container ID
+    - Set the hostname
+    - Set and confirm the root password
+    - Uncheck Unprivileged container
+- Template
+    - Set the Template to the Debian template from the last step
 - Disks
-    - Bus/Device : VirtIO Block
-    - Storage : local-lvm (or whatever is available)
-    - Disk size : 32 GB minimum, suggested 45 GB +
-    - Discard : Check the box
-    - Click "Next"
-- CPU
-    - Cores : 2
-    - Type : host (scroll down, it's probably on the bottom)
+    - 32 GB is plenty, but this may depend on what you want to deploy in this container
+- Cores
+    - 1 is probably fine, but this may depend on what you want to deploy in this container
 - Memory
-    - Set 4096 (it's listed in MiB)
-    - Click "Next"
+    - 1024 is probably fine, but this may depend on what you want to deploy in this container
 - Network
-    - Bridge: vmbr0
-    - Model: VirtIO (paravirtualized)
-    - Click "Next"
+    - Set an IP address
+    - Set a Gateway
+- DNS
+    - Leave as use host settings
 - Confirm
-    - Make sure everything is right
-    - Check the "Start after created" box
-    - Click Finish
+    - Check that everything is ok and click finish at the bottom
 
-#### 4. Finish the Installation
+Give the container a moment to spin up, you will see it in the left menu listed under the server.
 
-Follow these steps for post-creation installation options. Most are pretty predictable, but some are not. Safest to just follow along.
+#### 3. Additional Configs
 
-- Enter on first "Graphical Install" option
-- Set language
-- Set region
-- Set Keyboard
-- Set host name (like `debianvm`) debiandockervm
-- Leave domain blank, unless you know what you are doing
-- Set user name
-- Set username
-- Set user password
-- Set time zone
-- Press enter on default "Guided - use entire disk"
-- Keep the default disk and continue
-- Keep the default "All files in one partition"
-- Review the partition configurations and continue
-- Click "Yes" for "Write the changes to disks"
-- Wait for the installation to finish
-- Keep the default no and continue
-- Set your mirror region
-- Keep the default deb.debian.org archive mirror and continue
-- Keep no for "Participate in the package usage survey" and continue
-- Uncheck both Debian desktop envirnoment AND GNOME, and check SSH server, and keep standard system utilities checked
-- Wait for the system to finish installing, it can take a while
-- Hit continue to reboot, and then sign in
+In the server (not the container you just made, the server the container is in), access the Shell. Run this command to access the containers config (the CTID is listed by the container name in the left menu): `nano /etc/pve/lxc/<CTID>.conf`. 
 
-All done! Finally. 
+Add these lines in the config file: 
 
-#### 5. Install the QEMU Guest Agent
+```
+features: nesting=1,keyctl=1
+lxc.apparmor.profile: unconfined
+lxc.cgroup.devices.allow: a
+lxc.cap.drop:
+```
 
-See the [Proxmox Scripting project page](/jpprojects/proxmox/scripting), step 2, for instructions on how to do this.
-
-#### 6. Install OpenSSH
-
-See [OpenSSH project page](/jpprojects/proxmox/openssh) for instructions on how to do this.
+Ctrl + O and Ctrl + X to save and leave.
 
 
-<hr>
+### Part 2 : Docker
 
-### Part 2 : Docker CLI
+#### 1. Final configs
 
-#### 1. SSH in
-
-SSH in, as these steps require lots of copy and pasting, easiest done from SSH rather than directly in the Proxmox Web GUI. Log in as root, or a user with root priviledge, or as a normal user and then `su` to a user with `sudo`.
-
-<div class="info">
-Remeber, this is done with `ssh username@ip`. Find the Debian VM's IP address with `ip a`, it will likely be the last one listed.
-</div>
+Selecting the container, click on the Console. Sign in as `root` with the password from the last section.
 
 #### 2. Install Docker
 
 This is where the copy and pasting is going to be very handy.
 
 - Update : 
-    - `sudo apt update`
-    - `sudo apt install ca-certificates curl gnupg -y`
+```
+apt update
+apt upgrade -y
+apt install -y ca-certificates curl gnupg
+```
 - Add Docker's GPG key:
-    - `sudo install -m 0755 -d /etc/apt/keyrings curl -fsSL https://download.docker.com/linux/debian/gpg | \`
-    - `sudo gpg --dearmor -o /etc/apt/keyrings/docker.gpg`
-    - `sudo chmod a+r /etc/apt/keyrings/docker.gpg`
+```
+install -m 0755 -d /etc/apt/keyrings
+
+curl -fsSL https://download.docker.com/linux/debian/gpg | gpg --dearmor -o /etc/apt/keyrings/docker.gpg
+
+chmod a+r /etc/apt/keyrings/docker.gpg
+```
 - Add the Docker Repo:
-    - `echo \ "deb [arch=$(dpkg --print-architecture) \ signed-by=/etc/apt keyrings/docker.gpg] \ https://download.docker.com/linux/debian \ $(. /etc/os-release && echo "$VERSION_CODENAME") stable" | \`
-    - `sudo tee /etc/apt/sources.list.d/docker.list > /dev/null`
+```
+echo \
+  "deb [arch=$(dpkg --print-architecture) signed-by=/etc/apt/keyrings/docker.gpg] \
+  https://download.docker.com/linux/debian \
+  $(. /etc/os-release && echo "$VERSION_CODENAME") stable" \
+  | tee /etc/apt/sources.list.d/docker.list > /dev/null
+```
+- Install Docker
+```
+apt update
+apt install -y docker-ce docker-ce-cli containerd.io docker-buildx-plugin docker-compose-plugin
+```
+
+Make sure that everything worked with `docker --version`.
 
 <div class="info">
-The VM may come without `tee`. Run `apt install coreutils sudo -y` to install it.
+The container may come without `tee`. Run `apt install coreutils sudo -y` to install it.
 </div>
 
-- Install Docker:
-    - Update again : `sudo apt update`
-    - `sudo apt install docker-ce docker-ce-cli containerd.io \docker-buildx-plugin docker-compose-plugin -y`
 
-#### 3. Allow user to run Docker
 
-This allows the current user to run Docker without `sudo`. Run `newgrp docker`, then `sudo usermod -aG docker $USER`.
-
-Test that everything is working by running `docker run hello-world`. Output should be see a message that says `Hello from Docker!`.
-
-#### 4. Finishing touches
+#### 3. Finishing Touches
 
 First, check that auto-start is enabled (which is the default, but good to check).
     - `sudo systemctl enable docker`
@@ -160,7 +119,7 @@ First, check that auto-start is enabled (which is the default, but good to check
 
 Second, organize the Docker stuff for a clean layout:
     - Make a Docker directory : `sudo mkdir -p /opt/docker`
-    - Switch owner of the directory : `sudo chown -R $USER:$USER /opt/docker`
+
 
 <hr>
 
