@@ -7,6 +7,7 @@ layout: default
 This is the timeline and evolution of my homelab. 
 
 - June 2026
+    - [Certquiz](/jpprojects/misc/certquiz)
     - [Minecraft](/jpprojects/proxmox/proxmoxvms/minecraft)
 - May 2026
     - [Arch](/jpprojects/projects/keepass)
