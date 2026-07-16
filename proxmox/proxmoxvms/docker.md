@@ -118,8 +118,8 @@ The container may come without `tee`. Run `apt install coreutils sudo -y` to ins
 #### 2. Finishing Touches
 
 First, check that auto-start is enabled (which is the default, but good to check).
-    - `sudo systemctl enable docker`
-    - `sudo systemctl enable containerd`
+    - `systemctl enable docker`
+    - `systemctl enable containerd`
 
 Second, organize the Docker stuff for a clean layout:
     - Make a Docker directory : `sudo mkdir -p /opt/docker`
