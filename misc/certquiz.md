@@ -26,4 +26,4 @@ First, generate a secure token with wich login cookies will be signed: ``. Copy 
 
 Move into the new certquiz directory: `cd certquiz`.
 
-Edit the yaml file (``) and put the random string here:
+Edit the yaml file (``) and put the random string here: Please tell me this worked
