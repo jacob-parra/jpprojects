@@ -84,14 +84,7 @@ Back on the proxmox server, login with `root` user and password. This is a termi
 
 Proxmox comes with the standard OpenSSH server. SSH in with `root@192.168.x.x` from another computer on the LAN for remote access.
 
-#### 8. Stop using the Enterprise Repo
 
-This is necessary before updating or installing apps. The exact steps vary between versions so some extra googling may be necessary.
-
-- Run `mv /etc/apt/sources.list.d/pve-enterprise.sources /etc/apt/sources.list.d pve-enterprise.sources.disabled` or 
-`mv /etc/apt/sources.list.d/ceph.sources /etc/apt/sources.list.d/ceph.sources.disabled`. This renames the enterprise repo file, effectively removing Proxmox Access to it and preventing unallowed IPs from being blocked.
-- Create the non-enterprise repo file with `nano /etc/apt/sources.list.d/pve-no-subscription.list`. Put `deb http://download.proxmox.com/debian/pve trixie pve-no-subscription` in there.
-
-#### 9. Create VMs
+#### 8. Create VMs
 
 Visit the [Proxmox Hub](/jpprojects/proxmox/proxmoxhub) to see documentation for a variety of VMs.

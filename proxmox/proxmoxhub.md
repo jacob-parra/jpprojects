@@ -8,12 +8,13 @@ layout: default
 This page serves as the a landing page for a dedicated Proxmox server and a variety of Virtual Machine configurations.
 
 1. [Proxmox Server](/jpprojects/proxmox/proxmox) Project Page
-2. [Tailscale on Proxmox](/jpprojects/proxmox/tailscale)
-3. [Proxmox Server Downtime Scripting](/jpprojects/proxmox/scripting)
-4. [OpenSSH on VMs](/jpprojects/proxmox/openssh)
-5. [Migration](/jpprojects/proxmox/migration) between servers
-6. [Manage VM's from CLI](/jpprojects/proxmox/cli)
-7. [Clustering](/jpprojects/proxmox/cluster)
+2. [Disable Enterprise Repo](/jpprojects/proxmox/noenterprise)
+3. [Tailscale on Proxmox](/jpprojects/proxmox/tailscale)
+4. [Proxmox Server Downtime Scripting](/jpprojects/proxmox/scripting)
+5. [OpenSSH on VMs](/jpprojects/proxmox/openssh)
+6. [Migration](/jpprojects/proxmox/migration) between servers
+7. [Manage VM's from CLI](/jpprojects/proxmox/cli)
+8. [Clustering](/jpprojects/proxmox/cluster)
 
 <table>
   <tr>
