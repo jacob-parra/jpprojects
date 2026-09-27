@@ -235,10 +235,19 @@ Give it a minute to start, and then check the logs to make sure the server start
 
 #### 13. Updating your Minecraft Client
 
-This is how to update your game on both Windows and Mac.
+This is how to update your game on both Windows and Mac. The steps are very similar but have differences.
 
 **Windows**
 
+Download the latest Fabric version (here)[https://fabricmc.net/use/installer/]. Install the app, then use it and download the latest version.
+
+Download the latest version of Sodium (here)[https://modrinth.com/mod/sodium]. Click the download button and use the Install Manually section (be sure to select Fabric as the platform).
+
+Next you need to move the Sodium download to the right folder. Do Windows+R and go to `%appdata%\.minecraft\mods\` Delete the current (old) Sodium file in there and drag and drop the new (latest) Sodium file into this file.
+
+Delete or rename the current (old) Sodium file in there and drag and drop the new (latest) Sodium file into this file.
+
+Finally, launch the game. It should download the update automatically, and you can select the latest Fabric version in the version control menu on the left.
 
 **Mac**
 
@@ -248,6 +257,6 @@ Then, download the latest Fabric version (here)[https://fabricmc.net/use/install
 
 Then you need to download the latest version of Sodium (here)[https://modrinth.com/mod/sodium]. Click the download button and use the Install Manually section (be sure to select Fabric as the platform).
 
-Next you need to move the Sodium download to the right folder. In a Finder window, do Command + Shift + G and search for this file path: `~/Library/Application Support/minecraft/mods`. Delete the current (old) Sodium file in there and drag and drop the new (latest) Sodium file into this file.
+Next you need to move the Sodium download to the right folder. In a Finder window, do Command + Shift + G and search for this file path: `~/Library/Application Support/minecraft/mods`. Delete or rename the current (old) Sodium file in there and drag and drop the new (latest) Sodium file into this file.
 
 Finally, launch the game. It should download the update automatically, and you can select the latest Fabric version in the version control menu on the left.
